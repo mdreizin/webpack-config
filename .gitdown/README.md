@@ -10,23 +10,23 @@ Helps to load, extend and merge webpack configs
 `webpack.config.js`
 
 ```javascript
-{"gitdown": "include", "file": ".gitdown/webpack.config.js"}
+{"gitdown": "include", "file": "webpack.config.js"}
 ```
 
 `webpack.base.config.js`
 
 ```javascript
-{"gitdown": "include", "file": ".gitdown/webpack.base.config.js"}
+{"gitdown": "include", "file": "webpack.base.config.js"}
 ```
 
 `webpack.dev.config.js`
 
 ```javascript
-{"gitdown": "include", "file": ".gitdown/webpack.dev.config.js"}
+{"gitdown": "include", "file": "webpack.dev.config.js"}
 ```
 
 `webpack.prod.config.js`
 
 ```javascript
-{"gitdown": "include", "file": ".gitdown/webpack.prod.config.js"}
+{"gitdown": "include", "file": "webpack.prod.config.js"}
 ```

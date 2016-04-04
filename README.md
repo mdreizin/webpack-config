@@ -1,28 +1,38 @@
-[![NPM version](http://img.shields.io/npm/v/webpack-config.svg?style=flat)](https://www.npmjs.org/package/webpack-config) [![Travis build status](http://img.shields.io/travis/mdreizin/webpack-config/master.svg?style=flat)](https://travis-ci.org/mdreizin/webpack-config) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/mdreizin/webpack-config?svg=true&branch=master)](https://ci.appveyor.com/project/mdreizin/webpack-config) [![Code Climate](https://codeclimate.com/github/mdreizin/webpack-config/badges/gpa.svg)](https://codeclimate.com/github/mdreizin/webpack-config) [![Code Climate](https://codeclimate.com/github/mdreizin/webpack-config/badges/coverage.svg)](https://codeclimate.com/github/mdreizin/webpack-config) [![Dependency Status](https://david-dm.org/mdreizin/webpack-config.svg?style=flat)](https://david-dm.org/mdreizin/webpack-config) [![Dependency Status](https://david-dm.org/mdreizin/webpack-config/dev-status.svg?style=flat)](https://david-dm.org/mdreizin/webpack-config#info=devDependencies)
+[![NPM version](http://img.shields.io/npm/v/webpack-config.svg?style=flat-square)](https://www.npmjs.org/package/webpack-config) [![Travis build status](http://img.shields.io/travis/mdreizin/webpack-config/es6.svg?style=flat-square)](https://travis-ci.org/mdreizin/webpack-config) [![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/es6.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/es6) [![Code Climate GPA](https://img.shields.io/codeclimate/github/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config) [![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config) [![Dependency Status](https://img.shields.io/david/mdreizin/webpack-config.svg?style=flat-square)](https://david-dm.org/mdreizin/webpack-config) [![Development Dependency Status](https://img.shields.io/david/dev/mdreizin/webpack-config.svg?style=flat-square)](https://david-dm.org/mdreizin/webpack-config#info=devDependencies)
 
 [webpack](https://github.com/webpack/webpack)-config
 ====================================================
 
 Helps to load, extend and merge webpack configs
 
-<h2 id="documentation">Documentation</h2>
-
-For API docs please see the [documentation page](https://github.com/mdreizin/webpack-config/blob/master/docs/API.md)!
-
 <h2 id="samples">Samples</h2>
 
-`docs/samples/conf/webpack.base.config.js`
+`webpack.config.js`
 
 ```javascript
-'use strict';
+import {
+    Config,
+    ConfigEnvironment
+} from 'webpack-config';
 
-var path = require('path'),
-    BowerPlugin = require('bower-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    ComponentPlugin = require('component-webpack-plugin'),
-    WebpackConfig = require('webpack-config');
+ConfigEnvironment.INSTANCE.setAll({
+    env: () => process.env.WEBPACK_ENV || process.env.NODE_ENV
+});
 
-module.exports = new WebpackConfig().merge({
+export default new Config().extend('./conf/webpack.[env].config.js');
+
+```
+
+`webpack.base.config.js`
+
+```javascript
+import path from 'path';
+import BowerPlugin from 'bower-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import ComponentPlugin from 'component-webpack-plugin';
+import Config from 'webpack-config';
+
+export default new Config().merge({
     output: {
         filename: '[name].js'
     },
@@ -81,15 +91,13 @@ module.exports = new WebpackConfig().merge({
 
 ```
 
-`docs/samples/conf/webpack.dev.config.js`
+`webpack.dev.config.js`
 
 ```javascript
-'use strict';
+import webpack from 'webpack';
+import Config from 'webpack-config';
 
-var webpack = require('webpack'),
-    WebpackConfig = require('webpack-config');
-
-module.exports = new WebpackConfig().extend('./conf/webpack.base.config.js').merge({
+export default new Config().extend('./conf/webpack.base.config.js').merge({
     filename: __filename,
     debug: true,
     devtool: '#source-map',
@@ -116,16 +124,14 @@ module.exports = new WebpackConfig().extend('./conf/webpack.base.config.js').mer
 
 ```
 
-`docs/samples/conf/webpack.prod.config.js`
+`webpack.prod.config.js`
 
 ```javascript
-'use strict';
+import webpack from 'webpack';
+import Config from 'webpack-config';
 
-var webpack = require('webpack'),
-    WebpackConfig = require('webpack-config');
-
-module.exports = new WebpackConfig().extend({
-    './conf/webpack.dev.config.js': function(config) {
+export default new Config().extend({
+    './conf/webpack.dev.config.js': config => {
         delete config.debug;
         delete config.devtool;
         delete config.output.pathinfo;
@@ -148,22 +154,5 @@ module.exports = new WebpackConfig().extend({
         })
     ]
 });
-
-```
-
-`docs/samples/webpack.config.js`
-
-```javascript
-'use strict';
-
-var WebpackConfig = require('webpack-config');
-
-WebpackConfig.environment.setAll({
-    env: function() {
-        return process.env.WEBPACK_ENV || process.env.NODE_ENV;
-    }
-});
-
-module.exports = new WebpackConfig().extend('./conf/webpack.[env].config.js');
 
 ```
