@@ -1,5 +1,8 @@
-'use strict';
+import Config from '../../src/Config';
 
-module.exports = {
-    foo: 'foo2'
-};
+export default new Config().merge({
+    filename: __filename,
+    tags: [
+        'config2'
+    ]
+}).extend('./test/fixtures/webpack.3.config.js', './test/fixtures/webpack.4.config.js');

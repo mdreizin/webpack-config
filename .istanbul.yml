@@ -1,0 +1,5 @@
+reporting:
+    print: summary
+    reports:
+        - lcov
+    dir: ./coverage

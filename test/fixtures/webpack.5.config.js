@@ -1,12 +1,8 @@
-'use strict';
+import Config from '../../src/Config';
 
-var WebpackConfig = require('../../index');
-
-module.exports = new WebpackConfig().extend('./test/fixtures/webpack.4.config.js').merge({
-    debug: false,
-    resolve: {
-        alias: {
-            config: './test/fixtures/webpack.5.config.js'
-        }
-    }
+export default new Config().merge({
+    filename: __filename,
+    tags: [
+        'config5'
+    ]
 });

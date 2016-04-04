@@ -76,3 +76,12 @@ crashlytics.properties
 crashlytics-build.properties
 ### ESLint template
 .eslintcache
+### Yeoman template
+node_modules/
+bower_components/
+*.log
+
+build/
+dist/
+### JSDoc template
+docs/

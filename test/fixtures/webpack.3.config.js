@@ -1,15 +1,8 @@
-'use strict';
+import Config from '../../src/Config';
 
-var webpack = require('webpack');
-
-module.exports = {
-    debug: true,
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin()
-    ],
-    resolve: {
-        alias: {
-            config: './webpack.3.config.js'
-        }
-    }
-};
+export default new Config().merge({
+    filename: __filename,
+    tags: [
+        'config3'
+    ]
+}).extend('./test/fixtures/webpack.5.config.js');

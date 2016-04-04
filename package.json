@@ -1,21 +1,21 @@
 {
   "name": "webpack-config",
   "description": "Helps to load, extend and merge webpack configs",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "index.js",
-    "lib/"
+    "dist/",
+    "src/"
   ],
   "scripts": {
-    "clean": "rm -rf ./coverage",
-    "lint": "eslint --cache ./",
-    "pretest": "npm run lint",
-    "test": "node ./jasmine.js",
-    "precover": "npm run lint",
-    "cover": "istanbul cover jasmine JASMINE_CONFIG_PATH=./jasmine.json",
+    "clean": "rm -rf ./dist && rm -rf ./coverage && rm -rf ./docs",
+    "lint": "eslint ./ --cache",
+    "test": "babel-node ./jasmine.js",
+    "build": "babel ./src --out-dir ./dist --source-maps",
+    "cover": "babel-node ./node_modules/.bin/babel-istanbul cover jasmine JASMINE_CONFIG_PATH=./jasmine.json",
     "codeclimate": "codeclimate-test-reporter < ./coverage/lcov.info",
-    "docs": "gulp docs",
-    "postpublish": "publish-latest -a 'package.json README.md docs/API.md'",
+    "gitdown": "gitdown ./.gitdown/README.md --output-file ./README.md",
+    "jsdoc": "jsdoc ./src -c ./jsdoc.json",
+    "gh-pages": "./.github/gh-pages.sh",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -33,24 +33,25 @@
   },
   "homepage": "https://github.com/mdreizin/webpack-config",
   "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-eslint": "^6.0.2",
+    "babel-istanbul": "^0.7.0",
+    "babel-plugin-transform-builtin-extend": "^1.1.0",
+    "babel-plugin-transform-runtime": "^6.6.0",
+    "babel-preset-es2015": "^6.6.0",
     "codeclimate-test-reporter": "^0.3.1",
     "coding-style": "mdreizin/coding-style",
-    "eslint": "^2.1.0",
-    "fs-extra": "^0.26.5",
-    "gitdown": "1.3.0",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-jsdoc-to-markdown": "^1.2.1",
-    "istanbul": "^0.4.2",
+    "eslint": "^2.6.0",
+    "gitdown": "^2.4.2",
     "jasmine": "^2.4.1",
     "jasmine-spec-reporter": "^2.4.0",
-    "publish-latest": "^1.1.2",
-    "run-sequence": "^1.1.5",
+    "jsdoc": "^3.4.0",
     "semantic-release": "^4.3.5",
-    "travis-after-all": "^1.4.4",
     "webpack": "^1.12.13"
   },
   "dependencies": {
-    "lodash": "^4.5.0"
+    "babel-runtime": "^6.6.1",
+    "lodash": "^4.5.0",
+    "recursive-iterator": "^2.0.0"
   }
 }

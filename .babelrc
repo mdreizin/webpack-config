@@ -1,0 +1,17 @@
+{
+  "presets": [
+    "es2015"
+  ],
+  "plugins": [
+    ["babel-plugin-transform-builtin-extend", {
+      "globals": [
+        "Array"
+      ]
+    }],
+    "transform-runtime"
+  ],
+  "ignore": [
+    "node_modules/",
+    "/wallaby/"
+  ]
+}

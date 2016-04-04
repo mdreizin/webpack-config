@@ -1,13 +1,12 @@
-'use strict';
+import Jasmine from 'jasmine';
+import SpecReporter from 'jasmine-spec-reporter';
 
-var Jasmine = require('jasmine'),
-    SpecReporter = require('jasmine-spec-reporter');
+const JASMINE_CONFIG_PATH = './jasmine.json';
 
-var JASMINE_CONFIG_PATH = './jasmine.json',
-    jasmine = new Jasmine();
+let jasmine = new Jasmine();
 
 jasmine.configureDefaultReporter({
-    print: function() {}
+    print: () => {}
 });
 jasmine.addReporter(new SpecReporter());
 jasmine.loadConfigFile(JASMINE_CONFIG_PATH);
