@@ -2,12 +2,7 @@ import {
     isFunction,
     isUndefined
 } from 'lodash';
-
-/**
- * @private
- * @type {WeakMap}
- */
-const INSTANCE = new WeakMap();
+import ConfigServiceFactory from './ConfigServiceFactory';
 
 /**
  * @extends {Map}
@@ -53,11 +48,7 @@ class ConfigEnvironment extends Map {
      * @type {ConfigEnvironment}
      */
     static get INSTANCE() {
-        if (!INSTANCE.has(this)) {
-            INSTANCE.set(this, new ConfigEnvironment(Object.entries(process.env)));
-        }
-
-        return INSTANCE.get(this);
+        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigEnvironment(Object.entries(process.env)));
     }
 }
 

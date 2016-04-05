@@ -4,6 +4,7 @@ import {
 import ConfigPathResolver from './ConfigPathResolver';
 import ConfigCache from './ConfigCache';
 import ConfigFactory from './ConfigFactory';
+import ConfigServiceFactory from './ConfigServiceFactory';
 
 /**
  * @private
@@ -16,12 +17,6 @@ const PATH_RESOLVER = new WeakMap();
  * @type {WeakMap}
  */
 const CACHE = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const INSTANCE = new WeakMap();
 
 /**
  * @class
@@ -77,11 +72,7 @@ class ConfigLoader {
      * @type {ConfigLoader}
      */
     static get INSTANCE() {
-        if (!INSTANCE.has(this)) {
-            INSTANCE.set(this, new ConfigLoader(ConfigPathResolver.INSTANCE, ConfigCache.INSTANCE));
-        }
-
-        return INSTANCE.get(this);
+        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigLoader(ConfigPathResolver.INSTANCE, ConfigCache.INSTANCE));
     }
 }
 

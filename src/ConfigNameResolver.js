@@ -3,6 +3,7 @@ import {
 } from 'lodash';
 import ConfigEnvironment from './ConfigEnvironment';
 import ConfigPatternCache from './ConfigPatternCache';
+import ConfigServiceFactory from './ConfigServiceFactory';
 
 /**
 * @private
@@ -15,12 +16,6 @@ const ENVIRONMENT = new WeakMap();
  * @type {WeakMap}
  */
 const PATTERN_CACHE = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const INSTANCE = new WeakMap();
 
 class ConfigNameResolver {
     /**
@@ -70,11 +65,7 @@ class ConfigNameResolver {
      * @type {ConfigNameResolver}
      */
     static get INSTANCE() {
-        if (!INSTANCE.has(this)) {
-            INSTANCE.set(this, new ConfigNameResolver(ConfigEnvironment.INSTANCE, ConfigPatternCache.INSTANCE));
-        }
-
-        return INSTANCE.get(this);
+        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigNameResolver(ConfigEnvironment.INSTANCE, ConfigPatternCache.INSTANCE));
     }
 }
 

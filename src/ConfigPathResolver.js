@@ -2,18 +2,13 @@ import {
     resolve
 } from 'path';
 import ConfigNameResolver from './ConfigNameResolver';
+import ConfigServiceFactory from './ConfigServiceFactory';
 
 /**
  * @private
  * @type {WeakMap}
  */
 const NAME_RESOLVER = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const INSTANCE = new WeakMap();
 
 class ConfigPathResolver {
     /**
@@ -52,11 +47,7 @@ class ConfigPathResolver {
      * @type {ConfigPathResolver}
      */
     static get INSTANCE() {
-        if (!INSTANCE.has(this)) {
-            INSTANCE.set(this, new ConfigPathResolver(ConfigNameResolver.INSTANCE));
-        }
-
-        return INSTANCE.get(this);
+        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigPathResolver(ConfigNameResolver.INSTANCE));
     }
 }
 

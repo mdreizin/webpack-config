@@ -13,6 +13,7 @@ import {
 } from 'lodash';
 import ConfigLoader from './ConfigLoader';
 import ConfigPathResolver from './ConfigPathResolver';
+import ConfigServiceFactory from './ConfigServiceFactory';
 
 /**
  * @private
@@ -25,12 +26,6 @@ const LOADER = new WeakMap();
  * @type {WeakMap}
  */
 const PATH_RESOLVER = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const INSTANCE = new WeakMap();
 
 class ConfigFinder {
     /**
@@ -88,11 +83,7 @@ class ConfigFinder {
      * @type {ConfigFinder}
      */
     static get INSTANCE() {
-        if (!INSTANCE.has(this)) {
-            INSTANCE.set(this, new ConfigFinder(ConfigLoader.INSTANCE, ConfigPathResolver.INSTANCE));
-        }
-
-        return INSTANCE.get(this);
+        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigFinder(ConfigLoader.INSTANCE, ConfigPathResolver.INSTANCE));
     }
 }
 

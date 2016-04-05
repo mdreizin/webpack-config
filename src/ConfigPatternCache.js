@@ -1,6 +1,7 @@
 import {
     escapeRegExp
 } from 'lodash';
+import ConfigServiceFactory from './ConfigServiceFactory';
 
 /**
  * @private
@@ -13,12 +14,6 @@ const BEGIN_TAG = '[';
  * @type {String}
  */
 const END_TAG = ']';
-
-/**
- * @private
- * @type {WeakMap}
- */
-const INSTANCE = new WeakMap();
 
 /**
  * @extends {Map}
@@ -56,11 +51,7 @@ class ConfigPatternCache extends Map {
      * @type {ConfigPatternCache}
      */
     static get INSTANCE() {
-        if (!INSTANCE.has(this)) {
-            INSTANCE.set(this, new ConfigPatternCache());
-        }
-
-        return INSTANCE.get(this);
+        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigPatternCache());
     }
 }
 

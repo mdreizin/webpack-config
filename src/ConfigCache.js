@@ -1,4 +1,5 @@
 import ConfigEnvironment from './ConfigEnvironment';
+import ConfigServiceFactory from './ConfigServiceFactory';
 
 /**
  * @private
@@ -11,12 +12,6 @@ const PERSISTENT = 'WEBPACK_CONFIG_CACHE';
  * @type {WeakMap}
  */
 const ENVIRONMENT = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const INSTANCE = new WeakMap();
 
 /**
  * @private
@@ -88,11 +83,7 @@ class ConfigCache extends Map {
      * @type {ConfigCache}
      */
     static get INSTANCE() {
-        if (!INSTANCE.has(this)) {
-            INSTANCE.set(this, new ConfigCache(ConfigEnvironment.INSTANCE));
-        }
-
-        return INSTANCE.get(this);
+        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigCache(ConfigEnvironment.INSTANCE));
     }
 }
 
