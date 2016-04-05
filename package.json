@@ -47,6 +47,7 @@
     "jasmine-spec-reporter": "^2.4.0",
     "jsdoc": "^3.4.0",
     "semantic-release": "^4.3.5",
+    "travis-after-all": "^1.4.4",
     "webpack": "^1.12.13"
   },
   "dependencies": {
