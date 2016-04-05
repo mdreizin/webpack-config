@@ -1,4 +1,13 @@
-languages:
-  JavaScript: true
+engines:
+  eslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - javascript
+ratings:
+  paths:
+    - '**.js"'
 exclude_paths:
   - 'node_modules/**'
