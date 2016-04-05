@@ -22,9 +22,6 @@ const DEPENDENCY_TREE = 'DEPENDENCY_TREE';
  */
 let evalValue = (value, context) => isFunction(value) ? value.call(context, context) : value;
 
-/**
- * @class
- */
 class Config {
     /**
      * @readonly

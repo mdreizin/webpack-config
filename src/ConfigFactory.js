@@ -5,9 +5,6 @@ import {
 import Config from './Config';
 import ConfigList from './ConfigList';
 
-/**
- * @class
- */
 class ConfigFactory {
     /**
      * @param {Function|Object|Object[]} value
