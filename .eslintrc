@@ -1,8 +1,8 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "./node_modules/coding-style/base/eslintrc.json",
-    "./node_modules/coding-style/node-es6/eslintrc.json"
+    "./node_modules/mdreizin-coding-style/base/eslintrc.json",
+    "./node_modules/mdreizin-coding-style/node-es6/eslintrc.json"
   ],
   "rules": {
     "valid-jsdoc": ["error", {
