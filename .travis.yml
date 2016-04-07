@@ -24,4 +24,5 @@ script:
   - npm run clean
   - npm run lint
   - npm run cover
-after_script: [ "${TRAVIS_BRANCH}" = "master" ] && .travis/after-all.sh
+after_script:
+  - '[ "${TRAVIS_BRANCH}" = "master" ] && .travis/after-all.sh || false'
