@@ -11,6 +11,12 @@ describe('Config', () => {
         config = new Config();
     });
 
+    describe('.FILENAME', () => {
+        it('should be defined', () => {
+            expect(Config.FILENAME).toBeTruthy();
+        });
+    });
+
     describe('#defaults()', () => {
         it('should not add extra `values`', () => {
             let date1 = new Date(),

@@ -136,6 +136,14 @@ class Config {
     static initWith(...values) {
         return new Config().merge(...values);
     }
+
+    /**
+     * @readonly
+     * @type {String}
+     */
+    static get FILENAME() {
+        return 'webpack.config.js';
+    }
 }
 
 export default Config;
