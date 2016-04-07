@@ -25,4 +25,4 @@ script:
   - npm run lint
   - npm run cover
 after_script:
-  - '[ "${TRAVIS_BRANCH}" = "master" ] && .travis/after-all.sh || false'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && .travis/after-all.sh || false'
