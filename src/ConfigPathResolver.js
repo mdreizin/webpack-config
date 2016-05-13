@@ -2,7 +2,7 @@ import {
     resolve
 } from 'path';
 import ConfigNameResolver from './ConfigNameResolver';
-import ConfigServiceFactory from './ConfigServiceFactory';
+import ConfigServiceLocator from './ConfigServiceLocator';
 
 /**
  * @private
@@ -47,7 +47,7 @@ class ConfigPathResolver {
      * @type {ConfigPathResolver}
      */
     static get INSTANCE() {
-        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigPathResolver(ConfigNameResolver.INSTANCE));
+        return ConfigServiceLocator.getOrCreate(this, () => new ConfigPathResolver(ConfigNameResolver.INSTANCE));
     }
 }
 

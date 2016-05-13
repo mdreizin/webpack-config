@@ -2,7 +2,7 @@ import {
     isFunction,
     isUndefined
 } from 'lodash';
-import ConfigServiceFactory from './ConfigServiceFactory';
+import ConfigServiceLocator from './ConfigServiceLocator';
 
 /**
  * @extends {Map}
@@ -48,7 +48,7 @@ class ConfigEnvironment extends Map {
      * @type {ConfigEnvironment}
      */
     static get INSTANCE() {
-        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigEnvironment(Object.entries(process.env)));
+        return ConfigServiceLocator.getOrCreate(this, () => new ConfigEnvironment(Object.entries(process.env)));
     }
 }
 

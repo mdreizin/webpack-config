@@ -4,19 +4,19 @@
  */
 const INSTANCE = new WeakMap();
 
-class ConfigServiceFactory {
+class ConfigServiceLocator {
     /**
      * @param {*} key
-     * @param {Function} value
+     * @param {Function} factory
      * @returns {*}
      */
-    static createInstanceOnce(key, value) {
+    static getOrCreate(key, factory) {
         if (!INSTANCE.has(key)) {
-            INSTANCE.set(key, value());
+            INSTANCE.set(key, factory());
         }
 
         return INSTANCE.get(key);
     }
 }
 
-export default ConfigServiceFactory;
+export default ConfigServiceLocator;

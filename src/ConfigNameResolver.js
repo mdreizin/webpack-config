@@ -3,7 +3,7 @@ import {
 } from 'lodash';
 import ConfigEnvironment from './ConfigEnvironment';
 import ConfigPatternCache from './ConfigPatternCache';
-import ConfigServiceFactory from './ConfigServiceFactory';
+import ConfigServiceLocator from './ConfigServiceLocator';
 
 /**
 * @private
@@ -65,7 +65,7 @@ class ConfigNameResolver {
      * @type {ConfigNameResolver}
      */
     static get INSTANCE() {
-        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigNameResolver(ConfigEnvironment.INSTANCE, ConfigPatternCache.INSTANCE));
+        return ConfigServiceLocator.getOrCreate(this, () => new ConfigNameResolver(ConfigEnvironment.INSTANCE, ConfigPatternCache.INSTANCE));
     }
 }
 

@@ -13,7 +13,7 @@ import {
 } from 'lodash';
 import ConfigLoader from './ConfigLoader';
 import ConfigPathResolver from './ConfigPathResolver';
-import ConfigServiceFactory from './ConfigServiceFactory';
+import ConfigServiceLocator from './ConfigServiceLocator';
 
 /**
  * @private
@@ -83,7 +83,7 @@ class ConfigFinder {
      * @type {ConfigFinder}
      */
     static get INSTANCE() {
-        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigFinder(ConfigLoader.INSTANCE, ConfigPathResolver.INSTANCE));
+        return ConfigServiceLocator.getOrCreate(this, () => new ConfigFinder(ConfigLoader.INSTANCE, ConfigPathResolver.INSTANCE));
     }
 }
 

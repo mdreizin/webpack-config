@@ -1,7 +1,7 @@
 import {
     escapeRegExp
 } from 'lodash';
-import ConfigServiceFactory from './ConfigServiceFactory';
+import ConfigServiceLocator from './ConfigServiceLocator';
 
 /**
  * @private
@@ -51,7 +51,7 @@ class ConfigPatternCache extends Map {
      * @type {ConfigPatternCache}
      */
     static get INSTANCE() {
-        return ConfigServiceFactory.createInstanceOnce(this, () => new ConfigPatternCache());
+        return ConfigServiceLocator.getOrCreate(this, () => new ConfigPatternCache());
     }
 }
 
