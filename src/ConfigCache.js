@@ -12,6 +12,12 @@ const PERSISTENT_KEY = 'WEBPACK_CONFIG_CACHE';
 
 /**
  * @private
+ * @type {String}
+ */
+const ES_MODULE_KEY = '__esModule';
+
+/**
+ * @private
  * @type {WeakMap}
  */
 const ENVIRONMENT = new WeakMap();
@@ -71,7 +77,7 @@ class ConfigCache extends Map {
             value = require(key);
         }
 
-        return get(value, '__esModule', false) ? value.default : value;
+        return get(value, ES_MODULE_KEY, false) ? value.default : value;
     }
 
     /**
