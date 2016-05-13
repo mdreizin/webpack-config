@@ -1,3 +1,6 @@
+import {
+    get
+} from 'lodash';
 import ConfigEnvironment from './ConfigEnvironment';
 import ConfigServiceFactory from './ConfigServiceFactory';
 
@@ -5,20 +8,13 @@ import ConfigServiceFactory from './ConfigServiceFactory';
  * @private
  * @type {String}
  */
-const PERSISTENT = 'WEBPACK_CONFIG_CACHE';
+const PERSISTENT_KEY = 'WEBPACK_CONFIG_CACHE';
 
 /**
  * @private
  * @type {WeakMap}
  */
 const ENVIRONMENT = new WeakMap();
-
-/**
- * @private
- * @param {*} value
- * @returns {*}
- */
-let evalValue = value => value.__esModule === true ? value.default : value; // eslint-disable-line
 
 /**
  * @extends {Map}
@@ -45,14 +41,14 @@ class ConfigCache extends Map {
      * @type {Boolean}
      */
     get persistent() {
-        return this.environment.getOrDefault(PERSISTENT, true) === true;
+        return this.environment.getOrDefault(PERSISTENT_KEY, true) === true;
     }
 
     /**
      * @param {Boolean} value
      */
     set persistent(value) {
-        this.environment.set(PERSISTENT, value);
+        this.environment.set(PERSISTENT_KEY, value);
     }
 
     /**
@@ -75,7 +71,7 @@ class ConfigCache extends Map {
             value = require(key);
         }
 
-        return evalValue(value);
+        return get(value, '__esModule', false) ? value.default : value;
     }
 
     /**
