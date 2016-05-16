@@ -51,7 +51,9 @@ class ConfigLoader {
      * @returns {Config|ConfigList}
      */
     loadConfig(filename) {
-        let config = this.cache.get(this.pathResolver.resolvePath(filename));
+        filename = this.pathResolver.resolvePath(filename);
+
+        let config = this.cache.get(filename);
 
         if (config) {
             config = ConfigFactory.createConfig(config);
