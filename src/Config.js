@@ -42,6 +42,7 @@ class Config {
      * // ./test/fixtures/webpack.3.config.js
      * // ./test/fixtures/webpack.5.config.js
      * // ./test/fixtures/webpack.4.config.js
+     * @description Keeps information about configs which have been loaded via {@link Config#extend}
      * @readonly
      * @type {ConfigDependency}
      */
@@ -69,6 +70,7 @@ class Config {
      *         debug: true
      *     };
      * });
+     * @description Adds `values` if they are missing
      * @param {...(Object|Function)} values
      * @returns {Config}
      */
@@ -99,6 +101,7 @@ class Config {
      *         debug: true
      *     };
      * });
+     * @description Merges `values`
      * @param {...(Object|Function)} values
      * @returns {Config}
      */
@@ -120,7 +123,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * export default new Config().extend('./webpack.config.js');
+     * export default new Config().extend('./test/fixtures/webpack.1.config.js');
      * @example
      * import Config from 'webpack-config';
      *
@@ -129,8 +132,8 @@ class Config {
      * import Config from 'webpack-config';
      *
      * export default new Config().extend({
-     *    './webpack.config.js': config => {
-     *        delete config.debug;
+     *    './test/fixtures/webpack.1.config.js': config => {
+     *        delete config.tags;
      *
      *        return config;
      *    }
@@ -139,8 +142,8 @@ class Config {
      * import Config from 'webpack-config';
      *
      * export default new Config().extend({
-     *    './webpack.config.js': [config => {
-     *        delete config.debug;
+     *    './test/fixtures/webpack.1.config.js': [config => {
+     *        delete config.tags;
      *
      *        return config;
      *    }, config => {
@@ -149,8 +152,9 @@ class Config {
      *        return config;
      *    }]
      * });
+     * @description Helps to extend config using local file or shareable config file which should be hosted under `node_modules`
      * @param {...(String|Object<String,Function>|Object<String,Function[]>)} values
-     * @returns {Config|ConfigList}
+     * @returns {Config}
      */
     extend(...values) {
         let map = ConfigTransform.initWith(...values);
@@ -198,6 +202,7 @@ class Config {
      *
      * console.log(config.clone());
      * // Config { debug: true }
+     * @description Creates copy of {@link Config}
      * @returns {Config}
      */
     clone() {
@@ -216,6 +221,7 @@ class Config {
      *
      * console.log(config.toObject());
      * // Object { debug: true }
+     * @description Returns plain `Object` representation of {@link Config}
      * @returns {Object}
      */
     toObject() {
@@ -233,6 +239,7 @@ class Config {
     }
 
     /**
+     * Initializes new {@link Config} with specific `values`
      * @param {...Object} values
      * @returns {Config}
      */
