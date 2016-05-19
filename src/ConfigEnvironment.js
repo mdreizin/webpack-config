@@ -27,7 +27,7 @@ class ConfigEnvironment extends Map {
      * @returns {*}
      */
     valueOf(key) {
-        let value = this.get(key);
+        const value = this.get(key);
 
         return isFunction(value) ? value.call(this, this) : value;
     }
@@ -38,7 +38,7 @@ class ConfigEnvironment extends Map {
      * @returns {*}
      */
     getOrDefault(key, defaultValue) {
-        let value = this.valueOf(key);
+        const value = this.valueOf(key);
 
         return isUndefined(value) ? defaultValue : value;
     }

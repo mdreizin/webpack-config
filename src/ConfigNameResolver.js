@@ -48,8 +48,8 @@ class ConfigNameResolver {
      * @returns {String}
      */
     resolveName(filename) {
-        for (let key of this.environment.keys()) {
-            let pattern = this.patternCache.getOrSet(key),
+        for (const key of this.environment.keys()) {
+            const pattern = this.patternCache.getOrSet(key),
                 value = this.environment.valueOf(key);
 
             if (!isUndefined(value)) {

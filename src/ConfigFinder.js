@@ -71,7 +71,7 @@ class ConfigFinder {
             return this.loader.loadConfig(filename);
         }
 
-        let paths = dirname(filename).split(sep);
+        const paths = dirname(filename).split(sep);
 
         filename = join(dropRight(paths).join(sep), basename(filename));
 

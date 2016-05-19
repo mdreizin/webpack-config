@@ -74,8 +74,8 @@ class Config {
     extend(...values) {
         let map = ConfigTransform.initWith(...values);
 
-        for (let [key, value] of map.entries()) {
-            let config = ConfigLoader.INSTANCE.loadConfig(key);
+        for (const [key, value] of map.entries()) {
+            const config = ConfigLoader.INSTANCE.loadConfig(key);
 
             if (config instanceof Config) {
                 this.dependencyTree.children.push(config.dependencyTree);
@@ -83,7 +83,7 @@ class Config {
                 let prevConfig = config.clone();
 
                 value.forEach(x => {
-                    let currConfig = x.call(this, prevConfig);
+                    const currConfig = x.call(this, prevConfig);
 
                     if (!isObject(currConfig)) {
                         prevConfig = {};
@@ -116,9 +116,9 @@ class Config {
      * @returns {Object}
      */
     toObject() {
-        let properties = {};
+        const properties = {};
 
-        for (let [key, value] of Object.entries(this)) {
+        for (const [key, value] of Object.entries(this)) {
             if (this.hasOwnProperty(key)) {
                 properties[key] = value;
             }

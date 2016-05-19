@@ -49,7 +49,7 @@ class ConfigTransform extends Map {
             throw new ReferenceError(`\`${value}\` is not \`Function\``);
         }
 
-        let values = this.has(key) ? this.get(key) : [];
+        const values = this.has(key) ? this.get(key) : [];
 
         if (this.has(key)) {
             values.pop();
@@ -69,7 +69,7 @@ class ConfigTransform extends Map {
             if (isString(obj)) {
                 this.set(obj);
             } else if (isObject(obj)) {
-                for (let [key, value] of Object.entries(obj)) {
+                for (const [key, value] of Object.entries(obj)) {
                     if (Array.isArray(value)) {
                         value.filter(isFunction).forEach(x => this.set(key, x));
                     } else if (isFunction(value)) {
