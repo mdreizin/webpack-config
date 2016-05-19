@@ -23,10 +23,13 @@ const ES_MODULE_KEY = '__esModule';
 const ENVIRONMENT = new WeakMap();
 
 /**
+ * @class
+ * @classdesc Please set `WEBPACK_CONFIG_CACHE` environment variable to `false` to make it not persistent or just use {@link ConfigCache#persistent}
  * @extends {Map}
  */
 class ConfigCache extends Map {
     /**
+     * @constructor
      * @param {ConfigEnvironment} environment
      */
     constructor(environment) {

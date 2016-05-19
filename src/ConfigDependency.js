@@ -12,8 +12,13 @@ const ROOT = new WeakMap();
  */
 const CHILDREN = new WeakMap();
 
+/**
+ * Supports {@link https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols|iteration protocols} via {@link ConfigDependencyIterator}
+ * @class
+ */
 class ConfigDependency {
     /**
+     * @constructor
      * @param {Config} root
      * @param {ConfigDependency[]} children
      */

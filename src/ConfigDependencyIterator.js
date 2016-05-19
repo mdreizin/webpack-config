@@ -1,10 +1,17 @@
 import RecursiveIterator from 'recursive-iterator';
 
 /**
- * @extends {RecursiveIterator}
+ * @external RecursiveIterator
+ * @see https://github.com/nervgh/recursive-iterator
+ */
+
+/**
+ * @class
+ * @extends {external:RecursiveIterator}
  */
 class ConfigDependencyIterator extends RecursiveIterator {
     /**
+     * @constructor
      * @param {ConfigDependency} root
      * @param {Number} [bypassMode=0]
      * @param {Boolean} [ignoreCircular=true]

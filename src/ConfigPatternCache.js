@@ -16,7 +16,9 @@ const BEGIN_TAG = '[';
 const END_TAG = ']';
 
 /**
+ * @class
  * @extends {Map}
+ * @private
  */
 class ConfigPatternCache extends Map {
     /**

@@ -27,8 +27,12 @@ const LOADER = new WeakMap();
  */
 const PATH_RESOLVER = new WeakMap();
 
+/**
+ * @class
+ */
 class ConfigFinder {
     /**
+     * @constructor
      * @param {ConfigLoader} loader
      * @param {ConfigPathResolver} pathResolver
      */

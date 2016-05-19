@@ -18,6 +18,9 @@ const PATH_RESOLVER = new WeakMap();
  */
 const CACHE = new WeakMap();
 
+/**
+ * @class
+ */
 class ConfigLoader {
     /**
      * @constructor

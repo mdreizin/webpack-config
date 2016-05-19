@@ -5,6 +5,7 @@ import {
 import ConfigServiceLocator from './ConfigServiceLocator';
 
 /**
+ * @class
  * @extends {Map}
  */
 class ConfigEnvironment extends Map {

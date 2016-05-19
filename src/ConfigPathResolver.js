@@ -10,8 +10,12 @@ import ConfigServiceLocator from './ConfigServiceLocator';
  */
 const NAME_RESOLVER = new WeakMap();
 
+/**
+ * @class
+ */
 class ConfigPathResolver {
     /**
+     * @constructor
      * @param {ConfigNameResolver} nameResolver
      */
     constructor(nameResolver) {

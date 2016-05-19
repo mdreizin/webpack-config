@@ -34,7 +34,9 @@ let CLEANUP_TRANSFORM = config => {
 };
 
 /**
+ * @class
  * @extends {Map}
+ * @private
  */
 class ConfigTransform extends Map {
     /**

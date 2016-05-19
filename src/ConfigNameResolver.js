@@ -17,8 +17,12 @@ const ENVIRONMENT = new WeakMap();
  */
 const PATTERN_CACHE = new WeakMap();
 
+/**
+ * @class
+ */
 class ConfigNameResolver {
     /**
+     * @constructor
      * @param {ConfigEnvironment} environment
      * @param {ConfigPatternCache} patternCache
      */

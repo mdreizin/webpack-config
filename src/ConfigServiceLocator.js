@@ -4,6 +4,10 @@
  */
 const INSTANCE = new WeakMap();
 
+/**
+ * @class
+ * @private
+ */
 class ConfigServiceLocator {
     /**
      * @param {*} key

@@ -1,6 +1,7 @@
 import Config from './Config';
 
 /**
+ * @class
  * @extends {Array}
  */
 class ConfigList extends Array {
