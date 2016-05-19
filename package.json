@@ -15,7 +15,7 @@
     "codeclimate": "codeclimate-test-reporter < ./coverage/lcov.info",
     "gitdown": "gitdown ./.gitdown/README.md --output-file ./README.md",
     "jsdoc": "jsdoc ./src -c ./jsdoc.json",
-    "gh-pages": "./.github/gh-pages.sh",
+    "gh-pages": "gh-pages -r https://${GH_TOKEN}@github.com/mdreizin/webpack-config.git -d docs",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -43,6 +43,7 @@
     "eslint": "^2.6.0",
     "eslint-config-mdreizin": "^1.1.1",
     "eslint-plugin-babel": "^3.1.0",
+    "gh-pages": "^0.11.0",
     "gitdown": "^2.4.2",
     "jasmine": "^2.4.1",
     "jasmine-spec-reporter": "^2.4.0",
