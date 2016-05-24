@@ -97,7 +97,7 @@ describe('Config', () => {
             ]);
         });
 
-        it('should extend via `String`', () => {
+        it('should extend using `String`', () => {
             config.extend('./test/fixtures/webpack.1.config.js');
 
             expect(config.toObject()).toEqual({
@@ -111,7 +111,7 @@ describe('Config', () => {
             });
         });
 
-        it('should extend via `Object<String,Function>`', () => {
+        it('should extend using `Object<String,Function>`', () => {
             config.extend({
                 './test/fixtures/webpack.1.config.js': x => {
                     expect(x).toEqual(jasmine.any(Config));
@@ -131,7 +131,7 @@ describe('Config', () => {
             });
         });
 
-        it('should extend via `Object<String,Function[]>`', () => {
+        it('should extend using `Object<String,Function[]>`', () => {
             config.extend({
                 './test/fixtures/webpack.1.config.js': [
                     x => {

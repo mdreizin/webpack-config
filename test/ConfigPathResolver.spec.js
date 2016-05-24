@@ -26,13 +26,13 @@ describe('ConfigNameResolver', () => {
     });
 
     describe('#resolvePath()', () => {
-        it('should resolve `filename` via `path.resolve()`', () => {
+        it('should resolve `filename` using `path.resolve()`', () => {
             let filename = pathResolver.resolvePath('webpack.config.js');
 
             expect(filename).toEqual(resolve('webpack.config.js'));
         });
 
-        it('should resolve `filename` via `require.resolve()`', () => {
+        it('should resolve `filename` using `require.resolve()`', () => {
             let filename = pathResolver.resolvePath('lodash');
 
             expect(filename).toEqual(require.resolve('lodash'));
