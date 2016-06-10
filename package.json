@@ -46,7 +46,7 @@
     "gh-pages": "^0.11.0",
     "gitdown": "^2.4.8",
     "jasmine": "^2.4.1",
-    "jasmine-spec-reporter": "^2.4.0",
+    "jasmine-spec-reporter": "^2.5.0",
     "jsdoc": "^3.4.0",
     "semantic-release": "^4.3.5",
     "travis-after-all": "^1.4.4"
