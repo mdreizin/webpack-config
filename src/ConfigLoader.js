@@ -4,7 +4,7 @@ import {
 import ConfigPathResolver from './ConfigPathResolver';
 import ConfigCache from './ConfigCache';
 import ConfigFactory from './ConfigFactory';
-import ConfigServiceLocator from './ConfigServiceLocator';
+import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -73,7 +73,7 @@ class ConfigLoader {
      * @type {ConfigLoader}
      */
     static get INSTANCE() {
-        return ConfigServiceLocator.getOrCreate(this, () => new ConfigLoader(ConfigPathResolver.INSTANCE, ConfigCache.INSTANCE));
+        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigLoader(ConfigPathResolver.INSTANCE, ConfigCache.INSTANCE));
     }
 }
 

@@ -1,7 +1,7 @@
 import {
     template
 } from 'lodash';
-import ConfigServiceLocator from './ConfigServiceLocator';
+import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -92,7 +92,7 @@ class ConfigPatternCache extends Map {
      * @type {ConfigPatternCache}
      */
     static get INSTANCE() {
-        return ConfigServiceLocator.getOrCreate(this, () => new ConfigPatternCache());
+        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigPatternCache());
     }
 }
 

@@ -5,6 +5,7 @@ import ConfigLoader from './ConfigLoader';
 import ConfigFinder from './ConfigFinder';
 import ConfigEnvironment from './ConfigEnvironment';
 import ConfigPatternCache from './ConfigPatternCache';
+import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @module webpack-config
@@ -46,5 +47,9 @@ export {
     /**
      * @type {ConfigEnvironment}
      */
-    ConfigEnvironment
+    ConfigEnvironment,
+    /**
+     * @type {ConfigRegistry}
+     */
+    ConfigRegistry
 };

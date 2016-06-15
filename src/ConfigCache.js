@@ -2,7 +2,7 @@ import {
     get
 } from 'lodash';
 import ConfigEnvironment from './ConfigEnvironment';
-import ConfigServiceLocator from './ConfigServiceLocator';
+import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -96,7 +96,7 @@ class ConfigCache extends Map {
      * @type {ConfigCache}
      */
     static get INSTANCE() {
-        return ConfigServiceLocator.getOrCreate(this, () => new ConfigCache(ConfigEnvironment.INSTANCE));
+        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigCache(ConfigEnvironment.INSTANCE));
     }
 }
 

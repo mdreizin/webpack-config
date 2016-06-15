@@ -1,6 +1,6 @@
 import ConfigEnvironment from './ConfigEnvironment';
 import ConfigPatternCache from './ConfigPatternCache';
-import ConfigServiceLocator from './ConfigServiceLocator';
+import ConfigRegistry from './ConfigRegistry';
 
 /**
 * @private
@@ -63,7 +63,7 @@ class ConfigNameResolver {
      * @type {ConfigNameResolver}
      */
     static get INSTANCE() {
-        return ConfigServiceLocator.getOrCreate(this, () => new ConfigNameResolver(ConfigEnvironment.INSTANCE, ConfigPatternCache.INSTANCE));
+        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigNameResolver(ConfigEnvironment.INSTANCE, ConfigPatternCache.INSTANCE));
     }
 }
 

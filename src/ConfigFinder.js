@@ -14,7 +14,7 @@ import {
 } from 'glob';
 import glob2base from 'glob2base';
 import ConfigPathResolver from './ConfigPathResolver';
-import ConfigServiceLocator from './ConfigServiceLocator';
+import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -95,7 +95,7 @@ class ConfigFinder {
      * @type {ConfigFinder}
      */
     static get INSTANCE() {
-        return ConfigServiceLocator.getOrCreate(this, () => new ConfigFinder(ConfigPathResolver.INSTANCE));
+        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigFinder(ConfigPathResolver.INSTANCE));
     }
 }
 
