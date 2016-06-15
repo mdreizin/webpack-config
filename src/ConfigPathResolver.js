@@ -10,6 +10,34 @@ import ConfigServiceLocator from './ConfigServiceLocator';
  */
 const NAME_RESOLVER = new WeakMap();
 
+/* eslint-disable valid-jsdoc */
+/**
+ * @private
+ * @type {Function[]}
+ */
+const DEFAULT_RESOLVERS = [
+    /**
+     * `require('<npm-module-name>')`
+     * @param {String} filename
+     * @returns {String}
+     */
+    filename => require.resolve(filename),
+
+    /**
+     * `path.resolve('<file-name>')`
+     * @param {String} filename
+     * @returns {String}
+     */
+    filename => resolve(filename)
+];
+/* eslint-enable valid-jsdoc */
+
+/**
+ * @private
+ * @type {WeakMap}
+ */
+const RESOLVERS = new WeakMap();
+
 /**
  * @class
  */
@@ -17,9 +45,11 @@ class ConfigPathResolver {
     /**
      * @constructor
      * @param {ConfigNameResolver} nameResolver
+     * @param {Function[]} [resolvers]
      */
-    constructor(nameResolver) {
+    constructor(nameResolver, resolvers = DEFAULT_RESOLVERS) {
         NAME_RESOLVER.set(this, nameResolver);
+        RESOLVERS.set(this, resolvers);
     }
 
     /**
@@ -31,17 +61,25 @@ class ConfigPathResolver {
     }
 
     /**
+     * @readonly
+     * @type {Function[]}
+     */
+    get resolvers() {
+        return RESOLVERS.get(this);
+    }
+
+    /**
      * @param {String} filename
      * @returns {String}
      */
     resolvePath(filename) {
         filename = this.nameResolver.resolveName(filename);
 
-        try {
-            filename = require.resolve(filename);
-        } catch (e) {
-            filename = resolve(filename);
-        }
+        this.resolvers.forEach(resolver => {
+            try {
+                filename = resolver(filename);
+            } catch (e) {} // eslint-disable-line no-empty
+        });
 
         return filename;
     }
