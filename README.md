@@ -1,6 +1,6 @@
 [![NPM version](http://img.shields.io/npm/v/webpack-config.svg?style=flat-square)](https://www.npmjs.org/package/webpack-config)
-[![Travis build status](http://img.shields.io/travis/mdreizin/webpack-config/master.svg?style=flat-square)](https://travis-ci.org/mdreizin/webpack-config)
-[![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/master.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/master)
+[![Travis build status](http://img.shields.io/travis/mdreizin/webpack-config/develop.svg?style=flat-square)](https://travis-ci.org/mdreizin/webpack-config)
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/develop.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/develop)
 [![Code Climate GPA](https://img.shields.io/codeclimate/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config)
 [![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config)
 [![Dependency Status](https://img.shields.io/david/mdreizin/webpack-config.svg?style=flat-square)](https://david-dm.org/mdreizin/webpack-config)
@@ -14,6 +14,10 @@
 - [x] Supports environment variables under `#extend()` method
 - [x] Supports shareable configs
 
+<h2 id="webpack-config-changelog">Changelog</h2>
+
+Details changes for each release are documented in the [release notes](https://github.com/mdreizin/webpack-config/releases) and also in the [wiki page](https://github.com/mdreizin/webpack-config/wiki/Changelog).
+
 <h2 id="webpack-config-shareable-configs">Shareable Configs</h2>
 
 You can publish your configs to `npm` using `webpack-config-` prefix for package name.
@@ -21,9 +25,9 @@ You can publish your configs to `npm` using `webpack-config-` prefix for package
 When you call `#extend()` method you may omit that prefix:
 
 ```javascript
-import WebpackConfig from 'webpack-config';
+import Config from 'webpack-config';
 
-export default new WebpackConfig().extend(
+export default new Config().extend(
     'mdreizin/base',
     'mdreizin/css',
     'mdreizin/html',
@@ -38,12 +42,9 @@ export default new WebpackConfig().extend(
 `./webpack.config.js`
 
 ```javascript
-import {
-    Config,
-    ConfigEnvironment
-} from 'webpack-config';
+import Config, { environment } from 'webpack-config';
 
-ConfigEnvironment.INSTANCE.setAll({
+environment.setAll({
     env: () => process.env.NODE_ENV
 });
 
