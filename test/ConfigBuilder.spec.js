@@ -1,11 +1,36 @@
-import Config from '../src/Config';
-import ConfigList from '../src/ConfigList';
+import ConfigLoader from '../src/ConfigLoader';
+import ConfigEnvironment from '../src/ConfigEnvironment';
+import ConfigNameResolver from '../src/ConfigNameResolver';
+import ConfigPatternCache from '../src/ConfigPatternCache';
+import ConfigPathResolver from '../src/ConfigPathResolver';
+import ConfigCache from '../src/ConfigCache';
+import ConfigFactory from '../src/ConfigFactory';
 import ConfigBuilder from '../src/ConfigBuilder';
 
 describe('ConfigBuilder', () => {
+    let environment,
+        nameResolver,
+        pathResolver,
+        cache,
+        loader,
+        patternCache,
+        factory,
+        builder;
+
+    beforeEach(() => {
+        environment = new ConfigEnvironment();
+        patternCache = new ConfigPatternCache();
+        nameResolver = new ConfigNameResolver(environment, patternCache);
+        pathResolver = new ConfigPathResolver(nameResolver);
+        cache = new ConfigCache(environment);
+        loader = new ConfigLoader(pathResolver, cache);
+        factory = new ConfigFactory(loader);
+        builder = new ConfigBuilder(factory);
+    });
+
     describe('#merge()', () => {
         it('should merge `values`', () => {
-            const config = new ConfigBuilder().merge({
+            const config = builder.merge({
                 foo: {
                     bar: 'bar1'
                 },
@@ -23,7 +48,7 @@ describe('ConfigBuilder', () => {
 
     describe('#defaults()', () => {
         it('should not add extra `values`', () => {
-            const config = new ConfigBuilder().merge({
+            const config = builder.merge({
                 foo: 'foo1'
             }).defaults({
                 foo: 'foo2',
@@ -39,7 +64,7 @@ describe('ConfigBuilder', () => {
 
     describe('#extend()', () => {
         it('should extend using `String`', () => {
-            const config = new ConfigBuilder().extend('./test/fixtures/webpack.1.config.js').build();
+            const config = builder.extend('./test/fixtures/webpack.1.config.js').build();
 
             expect(config.toObject()).toEqual({
                 tags: [
@@ -55,12 +80,12 @@ describe('ConfigBuilder', () => {
 
     describe('#copyOf()', () => {
         it('should do copy of `Config`', () => {
-            const config = new ConfigBuilder().merge({
+            const config = builder.merge({
                 foo: 'bar1'
-            }).copyOf(Config.initWith({
+            }).copyOf({
                 foo: 'bar2',
                 bar: 'foo1'
-            })).build();
+            }).build();
 
             expect(config.toObject()).toEqual({
                 foo: 'bar1',
@@ -69,23 +94,23 @@ describe('ConfigBuilder', () => {
         });
 
         it('should do copy of `ConfigList`', () => {
-            const config = new ConfigBuilder().copyOf(ConfigList.initWith([{
+            const config = builder.copyOf([{
                 foo: 'foo1',
                 bar: 'bar1'
-            }])).merge({
+            }]).merge({
                 foo: 'foo2'
             }).build();
 
-            expect(config).toEqual(ConfigList.initWith([{
+            expect(config.map(x => x.toObject())).toEqual([{
                 foo: 'foo2',
                 bar: 'bar1'
-            }]));
+            }]);
         });
     });
 
     describe('#applyHooks()', () => {
         it('should apply hooks for `Config`', () => {
-            const config = new ConfigBuilder().merge({
+            const config = builder.merge({
                 foo: 'foo1',
                 bar: 'bar1'
             }).applyHooks({
@@ -101,19 +126,19 @@ describe('ConfigBuilder', () => {
         });
 
         it('should apply hooks for `ConfigList`', () => {
-            const config = new ConfigBuilder().copyOf(ConfigList.initWith([{
+            const config = builder.copyOf([{
                 foo: 'foo1',
                 bar: 'bar1'
-            }])).applyHooks({
+            }]).applyHooks({
                 foo: () => 'foo2',
                 bar: 'bar2',
                 x: () => {}
             }).build();
 
-            expect(config).toEqual(ConfigList.initWith([{
+            expect(config.map(x => x.toObject())).toEqual([{
                 foo: 'foo2',
                 bar: 'bar2'
-            }]));
+            }]);
         });
     });
 });

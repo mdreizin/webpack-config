@@ -8,7 +8,6 @@ import {
     get,
     has
 } from 'lodash';
-import ConfigLoader from './ConfigLoader';
 import ConfigExtendTransform from './ConfigExtendTransform';
 import ConfigDependency from './ConfigDependency';
 
@@ -39,6 +38,12 @@ const DEPENDENCY_TREE = 'DEPENDENCY_TREE';
 
 /**
  * @private
+ * @type {WeakMap}
+ */
+const LOADER = new WeakMap();
+
+/**
+ * @private
  * @param {Object|Function} value
  * @param {Config} context
  * @returns {*}
@@ -49,6 +54,23 @@ const evalValue = (value, context) => isFunction(value) ? value.call(context, co
  * @class
  */
 class Config {
+    /**
+     * @constructor
+     * @param {ConfigLoader} loader
+     */
+    constructor(loader) {
+        LOADER.set(this, loader);
+    }
+
+    /**
+     * @protected
+     * @readonly
+     * @type {ConfigLoader}
+     */
+    get loader() {
+        return LOADER.get(this);
+    }
+
     /**
      * @example
      * import Config from 'webpack-config';
@@ -98,8 +120,8 @@ class Config {
      * @returns {Config}
      */
     defaults(...values) {
-        for (let value of Object.values(values)) {
-            let properties = evalValue(value, this);
+        for (const value of Object.values(values)) {
+            const properties = evalValue(value, this);
 
             defaultsDeep(this, properties);
         }
@@ -129,8 +151,8 @@ class Config {
      * @returns {Config}
      */
     merge(...values) {
-        for (let value of Object.values(values)) {
-            let properties = evalValue(value, this);
+        for (const value of Object.values(values)) {
+            const properties = evalValue(value, this);
 
             mergeWith(this, properties, (x, y) => { // eslint-disable-line consistent-return
                 if (Array.isArray(x)) {
@@ -189,7 +211,7 @@ class Config {
         const map = ConfigExtendTransform.initWith(...values);
 
         for (const [key, value] of map.entries()) {
-            const config = ConfigLoader.INSTANCE.loadConfig(key);
+            const config = this.loader.loadConfig(key);
 
             if (config instanceof Config) {
                 this.dependencyTree.children.push(config.dependencyTree);
@@ -206,7 +228,7 @@ class Config {
                     }
 
                     if (!(prevConfig instanceof Config)) {
-                        prevConfig = Config.initWith(prevConfig);
+                        prevConfig = new Config(this.loader).merge(prevConfig);
                     }
                 });
 
@@ -235,7 +257,7 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        return Config.initWith(this.toObject());
+        return new Config(this.loader).merge(this.toObject());
     }
 
     /**
@@ -349,15 +371,6 @@ class Config {
      */
     toJSON() {
         return this.toObject();
-    }
-
-    /**
-     * Initializes new {@link Config} with specific `values`
-     * @param {...Object} values
-     * @returns {Config}
-     */
-    static initWith(...values) {
-        return new Config().merge(...values);
     }
 
     /**

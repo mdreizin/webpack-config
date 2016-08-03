@@ -7,12 +7,6 @@ describe('ConfigEnvironment', () => {
         environment = new ConfigEnvironment();
     });
 
-    describe('.INSTANCE', () => {
-        it('should return instance of `ConfigEnvironment`', () => {
-            expect(ConfigEnvironment.INSTANCE).toEqual(jasmine.any(ConfigEnvironment));
-        });
-    });
-
     describe('#setAll()', () => {
         it('should add `Object`', () => {
             environment.setAll({
@@ -57,6 +51,10 @@ describe('ConfigEnvironment', () => {
     describe('#getOrDefault()', () => {
         it('should return `defaultValue` when `#valueOf()` returns `undefined`', () => {
             expect(environment.getOrDefault('foo', 'bar')).toEqual('bar');
+
+            environment.set('foo', 'foo');
+
+            expect(environment.getOrDefault('foo', 'bar')).toEqual('foo');
         });
     });
 });

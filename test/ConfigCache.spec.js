@@ -15,15 +15,9 @@ describe('ConfigCache', () => {
         cache = new ConfigCache(environment);
     });
 
-    describe('.INSTANCE', () => {
-        it('should return instance of `ConfigEnvironment`', () => {
-            expect(ConfigCache.INSTANCE).toEqual(jasmine.any(ConfigCache));
-        });
-    });
-
     describe('#get()', () => {
         it('should return same configs when `persistent` is `true`', () => {
-            let config1 = cache.get(FILENAME),
+            const config1 = cache.get(FILENAME),
                 config2 = cache.get(FILENAME);
 
             cache.persistent = true;
@@ -32,11 +26,11 @@ describe('ConfigCache', () => {
         });
 
         it('should return different configs when `persistent` is `false`', () => {
-            let config1 = cache.get(FILENAME);
+            const config1 = cache.get(FILENAME);
 
             cache.persistent = false;
 
-            let config2 = cache.get(FILENAME);
+            const config2 = cache.get(FILENAME);
 
             expect(config1).not.toBe(config2);
         });

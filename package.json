@@ -46,6 +46,7 @@
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-eslint": "^6.1.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-istanbul": "^1.0.3",
     "babel-plugin-transform-builtin-extend": "^1.1.0",
     "babel-plugin-transform-runtime": "^6.9.0",
@@ -66,6 +67,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.9.0",
+    "constitute": "^1.6.2",
     "glob": "^7.0.3",
     "glob2base": "0.0.12",
     "lodash": "^4.13.1",

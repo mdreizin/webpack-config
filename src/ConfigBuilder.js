@@ -1,8 +1,6 @@
 import {
     isFunction
 } from 'lodash';
-import Config from './Config';
-import ConfigFactory from './ConfigFactory';
 
 /**
  * @private
@@ -18,6 +16,12 @@ const PENDING_CONFIG = new WeakMap();
 
 /**
  * @private
+ * @type {WeakMap}
+ */
+const FACTORY = new WeakMap();
+
+/**
+ * @private
  * @param {String} path
  * @param {*|Function} hook
  * @param {Config} current
@@ -27,30 +31,33 @@ const PENDING_CONFIG = new WeakMap();
 const evalHook = (path, hook, current, previous) => isFunction(hook) ? hook(path, current, previous) : hook;
 
 /**
- * @private
- * @param {WeakMap} map
- * @param {*} context
- * @returns {Config}
- */
-const getOrSetConfig = (map, context) => {
-    if (!map.has(context)) {
-        map.set(context, new Config());
-    }
-
-    return map.get(context);
-};
-
-/**
  * @class
  */
 class ConfigBuilder {
+    /**
+     * @constructor
+     * @param {ConfigFactory} factory
+     */
+    constructor(factory) {
+        FACTORY.set(this, factory);
+    }
+
+    /**
+     * @private
+     * @readonly
+     * @type {ConfigFactory}
+     */
+    get factory() {
+        return FACTORY.get(this);
+    }
+
     /**
      * @private
      * @readonly
      * @type {Config|ConfigList}
      */
     get config() {
-        return getOrSetConfig(CONFIG, this);
+        return this.getOrSetConfig(CONFIG);
     }
 
     /**
@@ -58,7 +65,20 @@ class ConfigBuilder {
      * @type {Config}
      */
     get pendingConfig() {
-        return getOrSetConfig(PENDING_CONFIG, this);
+        return this.getOrSetConfig(PENDING_CONFIG);
+    }
+
+    /**
+     * @private
+     * @param {WeakMap} map
+     * @returns {Config}
+     */
+    getOrSetConfig(map) {
+        if (!map.has(this)) {
+            map.set(this, this.factory.createConfig({}));
+        }
+
+        return map.get(this);
     }
 
     /**
@@ -66,7 +86,7 @@ class ConfigBuilder {
      * @returns {ConfigBuilder}
      */
     copyOf(value) {
-        CONFIG.set(this, ConfigFactory.createConfig(value));
+        CONFIG.set(this, this.factory.createConfig(value));
 
         return this;
     }
@@ -142,7 +162,7 @@ class ConfigBuilder {
             value = this.config.clone().merge(this.pendingConfig).toObject();
         }
 
-        const config = ConfigFactory.createConfig(value);
+        const config = this.factory.createConfig(value);
 
         PENDING_CONFIG.delete(this);
         CONFIG.set(this, config);

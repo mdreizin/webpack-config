@@ -14,6 +14,10 @@
 - [x] Supports environment variables under `#extend()` method
 - [x] Supports shareable configs
 
+## Changelog
+
+Details changes for each release are documented in the [release notes]({"gitdown": "gitinfo", "name": "url"}/releases) and also in the [wiki page]({"gitdown": "gitinfo", "name": "url"}/wiki/Changelog).
+
 ## Shareable Configs
 
 You can publish your configs to `npm` using `webpack-config-` prefix for package name.

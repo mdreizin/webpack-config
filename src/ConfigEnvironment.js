@@ -2,7 +2,6 @@ import {
     isFunction,
     isUndefined
 } from 'lodash';
-import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @class
@@ -42,14 +41,6 @@ class ConfigEnvironment extends Map {
         const value = this.valueOf(key);
 
         return isUndefined(value) ? defaultValue : value;
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigEnvironment}
-     */
-    static get INSTANCE() {
-        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigEnvironment(Object.entries(process.env)));
     }
 }
 

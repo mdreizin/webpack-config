@@ -1,8 +1,6 @@
 import {
     get
 } from 'lodash';
-import ConfigEnvironment from './ConfigEnvironment';
-import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -39,6 +37,7 @@ class ConfigCache extends Map {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigEnvironment}
      */
@@ -56,12 +55,12 @@ class ConfigCache extends Map {
     /**
      * @example
      * import {
-     *   ConfigCache
+     *   cache
      * } from 'webpack-config';
      *
-     * ConfigCache.INSTANCE.persistent = false;
+     * cache.persistent = false;
      * @example
-     * WEBPACK_CONFIG_CACHE=false npm run build
+     * WEBPACK_CONFIG_CACHE=false ...
      * @param {Boolean} value
      */
     set persistent(value) {
@@ -89,14 +88,6 @@ class ConfigCache extends Map {
         }
 
         return get(value, ES_MODULE_KEY, false) ? value.default : value;
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigCache}
-     */
-    static get INSTANCE() {
-        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigCache(ConfigEnvironment.INSTANCE));
     }
 }
 

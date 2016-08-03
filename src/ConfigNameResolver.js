@@ -1,7 +1,3 @@
-import ConfigEnvironment from './ConfigEnvironment';
-import ConfigPatternCache from './ConfigPatternCache';
-import ConfigRegistry from './ConfigRegistry';
-
 /**
 * @private
 * @type {WeakMap}
@@ -21,14 +17,15 @@ class ConfigNameResolver {
     /**
      * @constructor
      * @param {ConfigEnvironment} environment
-     * @param {ConfigPatternCache} [patternCache]
+     * @param {ConfigPatternCache} patternCache
      */
-    constructor(environment, patternCache = new ConfigPatternCache()) {
+    constructor(environment, patternCache) {
         ENVIRONMENT.set(this, environment);
         PATTERN_CACHE.set(this, patternCache);
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigEnvironment}
      */
@@ -37,6 +34,7 @@ class ConfigNameResolver {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigPatternCache}
      */
@@ -56,14 +54,6 @@ class ConfigNameResolver {
         }
 
         return this.patternCache.eval(value, options);
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigNameResolver}
-     */
-    static get INSTANCE() {
-        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigNameResolver(ConfigEnvironment.INSTANCE, ConfigPatternCache.INSTANCE));
     }
 }
 

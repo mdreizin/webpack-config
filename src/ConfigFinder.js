@@ -13,8 +13,6 @@ import {
     Glob
 } from 'glob';
 import glob2base from 'glob2base';
-import ConfigPathResolver from './ConfigPathResolver';
-import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -45,6 +43,7 @@ class ConfigFinder {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigPathResolver}
      */
@@ -88,14 +87,6 @@ class ConfigFinder {
         pattern = this.pathResolver.resolve(pattern);
 
         return sync(pattern, GLOB_OPTIONS).map(filename => this.pathResolver.resolve(filename));
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigFinder}
-     */
-    static get INSTANCE() {
-        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigFinder(ConfigPathResolver.INSTANCE));
     }
 }
 

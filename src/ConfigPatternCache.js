@@ -1,7 +1,6 @@
 import {
     template
 } from 'lodash';
-import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -38,6 +37,12 @@ class ConfigPatternCache extends Map {
     }
 
     /**
+     * @example
+     * import {
+     *   patternCache
+     * } from 'webpack-config';
+     *
+     * patternCache.interpolate = /{([\s\S]+?)}/g;
      * @param {RegExp} value
      */
     set interpolate(value) {
@@ -85,14 +90,6 @@ class ConfigPatternCache extends Map {
         return template(value, {
             interpolate: this.interpolate
         });
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigPatternCache}
-     */
-    static get INSTANCE() {
-        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigPatternCache());
     }
 }
 

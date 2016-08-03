@@ -7,12 +7,6 @@ describe('ConfigPatternCache', () => {
         patternCache = new ConfigPatternCache();
     });
 
-    describe('.INSTANCE', () => {
-        it('should return instance of `ConfigPatternCache`', () => {
-            expect(ConfigPatternCache.INSTANCE).toEqual(jasmine.any(ConfigPatternCache));
-        });
-    });
-
     describe('#set()', () => {
         it('should always add compiled `Function`', () => {
             patternCache.set('foo', 'foo');
@@ -25,8 +19,8 @@ describe('ConfigPatternCache', () => {
 
     describe('#getOrSet()', () => {
         it('should `.compile` to `Function` once', () => {
-            let value1 = patternCache.getOrSet('value');
-            let value2 = patternCache.getOrSet('value');
+            const value1 = patternCache.getOrSet('value'),
+                value2 = patternCache.getOrSet('value');
 
             expect(value1).toBe(value2);
             expect(value1).toEqual(value2);

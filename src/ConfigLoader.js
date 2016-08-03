@@ -1,10 +1,7 @@
 import {
     isString
 } from 'lodash';
-import ConfigPathResolver from './ConfigPathResolver';
-import ConfigCache from './ConfigCache';
 import ConfigFactory from './ConfigFactory';
-import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -19,6 +16,12 @@ const PATH_RESOLVER = new WeakMap();
 const CACHE = new WeakMap();
 
 /**
+ * @private
+ * @type {WeakMap}
+ */
+const FACTORY = new WeakMap();
+
+/**
  * @class
  */
 class ConfigLoader {
@@ -30,9 +33,11 @@ class ConfigLoader {
     constructor(pathResolver, cache) {
         PATH_RESOLVER.set(this, pathResolver);
         CACHE.set(this, cache);
+        FACTORY.set(this, new ConfigFactory(this));
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigPathResolver}
      */
@@ -41,11 +46,21 @@ class ConfigLoader {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigCache}
      */
     get cache() {
         return CACHE.get(this);
+    }
+
+    /**
+     * @protected
+     * @readonly
+     * @type {ConfigFactory}
+     */
+    get factory() {
+        return FACTORY.get(this);
     }
 
     /**
@@ -58,7 +73,7 @@ class ConfigLoader {
         let config = this.cache.get(filename);
 
         if (config) {
-            config = ConfigFactory.createConfig(config);
+            config = this.factory.createConfig(config);
         }
 
         if (config && !isString(config.filename)) {
@@ -66,14 +81,6 @@ class ConfigLoader {
         }
 
         return config;
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigLoader}
-     */
-    static get INSTANCE() {
-        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigLoader(ConfigPathResolver.INSTANCE, ConfigCache.INSTANCE));
     }
 }
 

@@ -15,6 +15,7 @@
         "Array"
       ]
     }],
+    "add-module-exports",
     "transform-runtime"
   ],
   "ignore": [

@@ -1,3 +1,3 @@
-import Config from '../../src/Config';
+import Config from '../../src';
 
 export default new Config().merge({});

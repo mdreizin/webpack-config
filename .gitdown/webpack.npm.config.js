@@ -1,6 +1,6 @@
-import WebpackConfig from 'webpack-config';
+import Config from 'webpack-config';
 
-export default new WebpackConfig().extend(
+export default new Config().extend(
     'mdreizin/base',
     'mdreizin/css',
     'mdreizin/html',

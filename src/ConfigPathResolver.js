@@ -5,8 +5,6 @@ import {
 import {
     resolve
 } from 'path';
-import ConfigNameResolver from './ConfigNameResolver';
-import ConfigRegistry from './ConfigRegistry';
 
 /**
  * @private
@@ -82,6 +80,7 @@ class ConfigPathResolver {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigNameResolver}
      */
@@ -90,6 +89,7 @@ class ConfigPathResolver {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {Function[]}
      */
@@ -115,14 +115,6 @@ class ConfigPathResolver {
         }
 
         return value;
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigPathResolver}
-     */
-    static get INSTANCE() {
-        return ConfigRegistry.INSTANCE.getOrSet(this, () => new ConfigPathResolver(ConfigNameResolver.INSTANCE));
     }
 }
 

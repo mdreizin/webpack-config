@@ -6,37 +6,34 @@ import ConfigEnvironment from '../src/ConfigEnvironment';
 import ConfigNameResolver from '../src/ConfigNameResolver';
 import ConfigPathResolver from '../src/ConfigPathResolver';
 import ConfigCache from '../src/ConfigCache';
+import ConfigPatternCache from '../src/ConfigPatternCache';
 
 describe('ConfigLoader', () => {
     let environment,
         nameResolver,
         pathResolver,
         cache,
-        loader;
+        loader,
+        patternCache;
 
     beforeEach(() => {
         environment = new ConfigEnvironment();
-        nameResolver = new ConfigNameResolver(environment);
+        patternCache = new ConfigPatternCache();
+        nameResolver = new ConfigNameResolver(environment, patternCache);
         pathResolver = new ConfigPathResolver(nameResolver);
         cache = new ConfigCache(environment);
         loader = new ConfigLoader(pathResolver, cache);
     });
 
-    describe('.INSTANCE', () => {
-        it('should return instance of `ConfigLoader`', () => {
-            expect(ConfigLoader.INSTANCE).toEqual(jasmine.any(ConfigLoader));
-        });
-    });
-
     describe('#loadConfig()', () => {
         it('should load config', () => {
-            let config = loader.loadConfig('./test/fixtures/webpack.1.config.js');
+            const config = loader.loadConfig('./test/fixtures/webpack.1.config.js');
 
             expect(config).toEqual(jasmine.any(Object));
         });
 
         it('should set `filename` when absent', () => {
-            let config = loader.loadConfig('./test/fixtures/webpack.6.config.js');
+            const config = loader.loadConfig('./test/fixtures/webpack.6.config.js');
 
             expect(config.filename).toEqual(resolve('./test/fixtures/webpack.6.config.js'));
         });

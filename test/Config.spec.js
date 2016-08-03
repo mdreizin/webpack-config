@@ -2,13 +2,31 @@ import {
     resolve
 } from 'path';
 import Config from '../src/Config';
+import ConfigLoader from '../src/ConfigLoader';
+import ConfigEnvironment from '../src/ConfigEnvironment';
+import ConfigNameResolver from '../src/ConfigNameResolver';
+import ConfigPatternCache from '../src/ConfigPatternCache';
+import ConfigPathResolver from '../src/ConfigPathResolver';
+import ConfigCache from '../src/ConfigCache';
 import ConfigDependency from '../src/ConfigDependency';
 
 describe('Config', () => {
-    let config;
+    let environment,
+        nameResolver,
+        pathResolver,
+        patternCache,
+        cache,
+        loader,
+        config;
 
     beforeEach(() => {
-        config = new Config();
+        environment = new ConfigEnvironment();
+        patternCache = new ConfigPatternCache();
+        nameResolver = new ConfigNameResolver(environment, patternCache);
+        pathResolver = new ConfigPathResolver(nameResolver);
+        cache = new ConfigCache(environment);
+        loader = new ConfigLoader(pathResolver, cache);
+        config = new Config(loader);
     });
 
     describe('.FILENAME', () => {
@@ -19,7 +37,7 @@ describe('Config', () => {
 
     describe('#defaults()', () => {
         it('should not add extra `values`', () => {
-            let date1 = new Date(),
+            const date1 = new Date(),
                 date2 = new Date();
 
             config.merge({
@@ -78,13 +96,13 @@ describe('Config', () => {
 
     describe('#extend()', () => {
         it('should have `dependencyTree`', () => {
-            let paths = [];
+            const paths = [];
 
             config.extend('./test/fixtures/webpack.1.config.js');
 
             expect(config.dependencyTree).toEqual(jasmine.any(ConfigDependency));
 
-            for (let {node} of config.dependencyTree) {
+            for (const {node} of config.dependencyTree) {
                 paths.push(node.root.filename);
             }
 
@@ -173,7 +191,7 @@ describe('Config', () => {
                 foo1: 'foo1'
             });
 
-            let clone = config.clone();
+            const clone = config.clone();
 
             expect(config).not.toBe(clone);
             expect(clone).toEqual(jasmine.any(Config));
@@ -248,22 +266,6 @@ describe('Config', () => {
             config.set('foo', 1);
 
             expect(JSON.stringify(config)).toEqual('{"foo":1}');
-        });
-    });
-
-    describe('.initWith()', () => {
-        it('should return `Config`', () => {
-            config = Config.initWith({
-                foo1: 'foo1'
-            }, {
-                foo2: 'foo2'
-            });
-
-            expect(config).toEqual(jasmine.any(Config));
-            expect(config.toObject()).toEqual({
-                foo1: 'foo1',
-                foo2: 'foo2'
-            });
         });
     });
 });

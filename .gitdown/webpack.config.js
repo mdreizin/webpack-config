@@ -1,9 +1,6 @@
-import {
-    Config,
-    ConfigEnvironment
-} from 'webpack-config';
+import Config, { environment } from 'webpack-config';
 
-ConfigEnvironment.INSTANCE.setAll({
+environment.setAll({
     env: () => process.env.NODE_ENV
 });
 
