@@ -1,31 +1,10 @@
-import ConfigLoader from '../src/ConfigLoader';
-import ConfigEnvironment from '../src/ConfigEnvironment';
-import ConfigNameResolver from '../src/ConfigNameResolver';
-import ConfigPatternCache from '../src/ConfigPatternCache';
-import ConfigPathResolver from '../src/ConfigPathResolver';
-import ConfigCache from '../src/ConfigCache';
-import ConfigFactory from '../src/ConfigFactory';
-import ConfigBuilder from '../src/ConfigBuilder';
+import TestFactory from './helpers/TestFactory';
 
 describe('ConfigBuilder', () => {
-    let environment,
-        nameResolver,
-        pathResolver,
-        cache,
-        loader,
-        patternCache,
-        factory,
-        builder;
+    let builder;
 
     beforeEach(() => {
-        environment = new ConfigEnvironment();
-        patternCache = new ConfigPatternCache();
-        nameResolver = new ConfigNameResolver(environment, patternCache);
-        pathResolver = new ConfigPathResolver(nameResolver);
-        cache = new ConfigCache(environment);
-        loader = new ConfigLoader(pathResolver, cache);
-        factory = new ConfigFactory(loader);
-        builder = new ConfigBuilder(factory);
+        builder = TestFactory.createConfigBuilder();
     });
 
     describe('#merge()', () => {

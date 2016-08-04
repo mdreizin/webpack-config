@@ -1,10 +1,10 @@
-import ConfigEnvironment from '../src/ConfigEnvironment';
+import TestFactory from './helpers/TestFactory';
 
 describe('ConfigEnvironment', () => {
     let environment;
 
     beforeEach(() => {
-        environment = new ConfigEnvironment();
+        environment = TestFactory.createConfigEnvironment();
     });
 
     describe('#setAll()', () => {

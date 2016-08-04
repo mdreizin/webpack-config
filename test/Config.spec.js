@@ -2,31 +2,14 @@ import {
     resolve
 } from 'path';
 import Config from '../src/Config';
-import ConfigLoader from '../src/ConfigLoader';
-import ConfigEnvironment from '../src/ConfigEnvironment';
-import ConfigNameResolver from '../src/ConfigNameResolver';
-import ConfigPatternCache from '../src/ConfigPatternCache';
-import ConfigPathResolver from '../src/ConfigPathResolver';
-import ConfigCache from '../src/ConfigCache';
 import ConfigDependency from '../src/ConfigDependency';
+import TestFactory from './helpers/TestFactory';
 
 describe('Config', () => {
-    let environment,
-        nameResolver,
-        pathResolver,
-        patternCache,
-        cache,
-        loader,
-        config;
+    let config;
 
     beforeEach(() => {
-        environment = new ConfigEnvironment();
-        patternCache = new ConfigPatternCache();
-        nameResolver = new ConfigNameResolver(environment, patternCache);
-        pathResolver = new ConfigPathResolver(nameResolver);
-        cache = new ConfigCache(environment);
-        loader = new ConfigLoader(pathResolver, cache);
-        config = new Config(loader);
+        config = TestFactory.createConfig();
     });
 
     describe('.FILENAME', () => {

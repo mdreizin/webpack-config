@@ -1,16 +1,12 @@
-import ConfigEnvironment from '../src/ConfigEnvironment';
-import ConfigNameResolver from '../src/ConfigNameResolver';
-import ConfigPatternCache from '../src/ConfigPatternCache';
+import TestFactory from './helpers/TestFactory';
 
 describe('ConfigNameResolver', () => {
     let environment,
-        nameResolver,
-        patternCache;
+        nameResolver;
 
     beforeEach(() => {
-        environment = new ConfigEnvironment();
-        patternCache = new ConfigPatternCache();
-        nameResolver = new ConfigNameResolver(environment, patternCache);
+        nameResolver = TestFactory.createConfigNameResolver();
+        environment = nameResolver.environment;
     });
 
     describe('#resolve()', () => {

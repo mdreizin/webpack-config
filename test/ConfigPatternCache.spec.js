@@ -1,10 +1,10 @@
-import ConfigPatternCache from '../src/ConfigPatternCache';
+import TestFactory from './helpers/TestFactory';
 
 describe('ConfigPatternCache', () => {
     let patternCache;
 
     beforeEach(() => {
-        patternCache = new ConfigPatternCache();
+        patternCache = TestFactory.createConfigPatternCache();
     });
 
     describe('#set()', () => {

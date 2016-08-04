@@ -1,25 +1,13 @@
 import {
     resolve
 } from 'path';
-import ConfigEnvironment from '../src/ConfigEnvironment';
-import ConfigNameResolver from '../src/ConfigNameResolver';
-import ConfigPathResolver from '../src/ConfigPathResolver';
-import ConfigFinder from '../src/ConfigFinder';
-import ConfigPatternCache from '../src/ConfigPatternCache';
+import TestFactory from './helpers/TestFactory';
 
 describe('ConfigFinder', () => {
-    let environment,
-        nameResolver,
-        pathResolver,
-        finder,
-        patternCache;
+    let finder;
 
     beforeEach(() => {
-        environment = new ConfigEnvironment();
-        patternCache = new ConfigPatternCache();
-        nameResolver = new ConfigNameResolver(environment, patternCache);
-        pathResolver = new ConfigPathResolver(nameResolver);
-        finder = new ConfigFinder(pathResolver);
+        finder = TestFactory.createConfigFinder();
     });
 
     describe('#findConfigs()', () => {

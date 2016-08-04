@@ -1,28 +1,13 @@
 import {
     resolve
 } from 'path';
-import ConfigLoader from '../src/ConfigLoader';
-import ConfigEnvironment from '../src/ConfigEnvironment';
-import ConfigNameResolver from '../src/ConfigNameResolver';
-import ConfigPathResolver from '../src/ConfigPathResolver';
-import ConfigCache from '../src/ConfigCache';
-import ConfigPatternCache from '../src/ConfigPatternCache';
+import TestFactory from './helpers/TestFactory';
 
 describe('ConfigLoader', () => {
-    let environment,
-        nameResolver,
-        pathResolver,
-        cache,
-        loader,
-        patternCache;
+    let loader;
 
     beforeEach(() => {
-        environment = new ConfigEnvironment();
-        patternCache = new ConfigPatternCache();
-        nameResolver = new ConfigNameResolver(environment, patternCache);
-        pathResolver = new ConfigPathResolver(nameResolver);
-        cache = new ConfigCache(environment);
-        loader = new ConfigLoader(pathResolver, cache);
+        loader = TestFactory.createConfigLoader();
     });
 
     describe('#loadConfig()', () => {

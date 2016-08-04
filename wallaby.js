@@ -2,7 +2,8 @@ export default wallaby => {
     return {
         files: [
             'src/**/*.js',
-            'test/fixtures/**/*.js'
+            'test/fixtures/**/*.js',
+            'test/helpers/**/*.js'
         ],
         tests: [
             'test/**/*.spec.js'
