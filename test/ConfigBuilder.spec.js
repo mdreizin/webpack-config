@@ -90,34 +90,34 @@ describe('ConfigBuilder', () => {
     describe('#applyHooks()', () => {
         it('should apply hooks for `Config`', () => {
             const config = builder.merge({
-                foo: 'foo1',
-                bar: 'bar1'
+                foo: 'foo1'
             }).applyHooks({
-                foo: () => 'foo2',
-                bar: 'bar2',
-                x: () => {}
+                foo: 'bar1'
             }).build();
 
             expect(config.toObject()).toEqual({
-                foo: 'foo2',
-                bar: 'bar2'
+                foo: 'bar1'
             });
         });
 
         it('should apply hooks for `ConfigList`', () => {
             const config = builder.copyOf([{
-                foo: 'foo1',
                 bar: 'bar1'
             }]).applyHooks({
-                foo: () => 'foo2',
-                bar: 'bar2',
-                x: () => {}
+                bar: () => 'foo1'
             }).build();
 
             expect(config.map(x => x.toObject())).toEqual([{
-                foo: 'foo2',
-                bar: 'bar2'
+                bar: 'foo1'
             }]);
+        });
+
+        it('should not fill missing properties', () => {
+            const config = builder.copyOf({}).applyHooks({
+                bar: 'foo1'
+            }).build();
+
+            expect(config.toObject()).toEqual({});
         });
     });
 });
