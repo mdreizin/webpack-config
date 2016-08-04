@@ -34,7 +34,7 @@ describe('ConfigFactory', () => {
             });
         });
 
-        it('should create `MultiConfig` from `Object[]`', () => {
+        it('should create `ConfigList` from `Object[]`', () => {
             const configs = factory.createConfig([{
                 foo: 'foo1'
             }]);
