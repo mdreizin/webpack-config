@@ -112,7 +112,7 @@ describe('ConfigBuilder', () => {
             }]);
         });
 
-        it('should not fill missing properties', () => {
+        it('should not apply hooks for missing properties', () => {
             const config = builder.copyOf({}).applyHooks({
                 bar: 'foo1'
             }).build();
