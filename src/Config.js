@@ -19,11 +19,7 @@ import ConfigDependency from './ConfigDependency';
  */
 
 /**
- * @typedef {Object|ConfigTransform} ConfigDefaultsOptions
- */
-
-/**
- * @typedef {Object|ConfigTransform} ConfigMergeOptions
+ * @typedef {Object|ConfigTransform} ConfigOptions
  */
 
 /**
@@ -116,7 +112,7 @@ class Config {
      *     };
      * });
      * @description Adds `values` if they are missing
-     * @param {...ConfigDefaultsOptions} values
+     * @param {...ConfigOptions} values
      * @returns {Config}
      */
     defaults(...values) {
@@ -147,7 +143,7 @@ class Config {
      *     };
      * });
      * @description Merges `values`
-     * @param {...ConfigMergeOptions} values
+     * @param {...ConfigOptions} values
      * @returns {Config}
      */
     merge(...values) {
@@ -204,7 +200,7 @@ class Config {
      *    }]
      * });
      * @description Helps to extend config using local file or shareable config file which should be hosted under `node_modules`
-     * @param {...ConfigExtendTransform} values
+     * @param {...ConfigExtendOptions} values
      * @returns {Config}
      */
     extend(...values) {
