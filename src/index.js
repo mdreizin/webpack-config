@@ -8,21 +8,27 @@ import ConfigPatternCache from './ConfigPatternCache';
 import ConfigNameResolver from './ConfigNameResolver';
 import ConfigPathResolver from './ConfigPathResolver';
 import ConfigFactory from './ConfigFactory';
-import container from './container';
+import ConfigContainer from './ConfigContainer';
+
+/**
+ * @private
+ * @type {ConfigContainer}
+ */
+const container = new ConfigContainer();
 
 /**
  * Proxy class which automatically fills {@link Config} constructor dependencies
  * @class
  * @extends {Config}
  */
-const ConfigProxy = container.proxyClass(ConfigBase);
+const ConfigProxy = container.proxy(ConfigBase);
 
 /**
  * Proxy class which automatically fills {@link ConfigBuilder} constructor dependencies
  * @class
  * @extends {ConfigBuilder}
  */
-const ConfigBuilderProxy = container.proxyClass(ConfigBuilderBase);
+const ConfigBuilderProxy = container.proxy(ConfigBuilderBase);
 
 /**
  * @module webpack-config
@@ -85,39 +91,39 @@ export {
 /**
  * @type {ConfigEnvironment}
  */
-export const environment = container.constitute(ConfigEnvironment);
+export const environment = container.resolve(ConfigEnvironment);
 
 /**
  * @type {ConfigCache}
  */
-export const cache = container.constitute(ConfigCache);
+export const cache = container.resolve(ConfigCache);
 
 /**
  * @type {ConfigPatternCache}
  */
-export const patternCache = container.constitute(ConfigPatternCache);
+export const patternCache = container.resolve(ConfigPatternCache);
 
 /**
  * @type {ConfigNameResolver}
  */
-export const nameResolver = container.constitute(ConfigNameResolver);
+export const nameResolver = container.resolve(ConfigNameResolver);
 
 /**
  * @type {ConfigNameResolver}
  */
-export const pathResolver = container.constitute(ConfigPathResolver);
+export const pathResolver = container.resolve(ConfigPathResolver);
 
 /**
  * @type {ConfigLoader}
  */
-export const loader = container.constitute(ConfigLoader);
+export const loader = container.resolve(ConfigLoader);
 
 /**
  * @type {ConfigFinder}
  */
-export const finder = container.constitute(ConfigFinder);
+export const finder = container.resolve(ConfigFinder);
 
 /**
  * @type {ConfigFactory}
  */
-export const factory = container.constitute(ConfigFactory);
+export const factory = container.resolve(ConfigFactory);
