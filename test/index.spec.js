@@ -22,53 +22,34 @@ import {
 } from '../src';
 
 describe('Module', () => {
-    it('should export `Config`', () => {
-        expect(ConfigProxy).toBeTruthy();
-        expect(new ConfigProxy()).toEqual(jasmine.any(Config));
+    const proxies = [
+            [ConfigProxy, Config],
+            [ConfigBuilderProxy, ConfigBuilder]
+        ],
+        classes = [
+            [ConfigEnvironment, environment],
+            [ConfigCache, cache],
+            [ConfigPatternCache, patternCache],
+            [ConfigNameResolver, nameResolver],
+            [ConfigPathResolver, pathResolver],
+            [ConfigLoader, loader],
+            [ConfigFinder, finder],
+            [ConfigFactory, factory]
+        ];
+
+    proxies.forEach(proxy => {
+        it(`should export \`${proxy[1].name}\``, () => {
+            const Proxy = proxy[0];
+
+            expect(Proxy).toBeTruthy();
+            expect(new Proxy()).toEqual(jasmine.any(proxy[1]));
+        });
     });
 
-    it('should export `ConfigEnvironment`', () => {
-        expect(ConfigEnvironment).toBeTruthy();
-        expect(environment).toEqual(jasmine.any(ConfigEnvironment));
-    });
-
-    it('should export `ConfigCache`', () => {
-        expect(ConfigCache).toBeTruthy();
-        expect(cache).toEqual(jasmine.any(ConfigCache));
-    });
-
-    it('should export `ConfigPatternCache`', () => {
-        expect(ConfigPatternCache).toBeTruthy();
-        expect(patternCache).toEqual(jasmine.any(ConfigPatternCache));
-    });
-
-    it('should export `ConfigNameResolver`', () => {
-        expect(ConfigNameResolver).toBeTruthy();
-        expect(nameResolver).toEqual(jasmine.any(ConfigNameResolver));
-    });
-
-    it('should export `ConfigPathResolver`', () => {
-        expect(ConfigPathResolver).toBeTruthy();
-        expect(pathResolver).toEqual(jasmine.any(ConfigPathResolver));
-    });
-
-    it('should export `ConfigLoader`', () => {
-        expect(ConfigLoader).toBeTruthy();
-        expect(loader).toEqual(jasmine.any(ConfigLoader));
-    });
-
-    it('should export `ConfigFinder`', () => {
-        expect(ConfigFinder).toBeTruthy();
-        expect(finder).toEqual(jasmine.any(ConfigFinder));
-    });
-
-    it('should export `ConfigFactory`', () => {
-        expect(ConfigFactory).toBeTruthy();
-        expect(factory).toEqual(jasmine.any(ConfigFactory));
-    });
-
-    it('should export `ProxyConfigBuilder`', () => {
-        expect(ConfigBuilderProxy).toBeTruthy();
-        expect(new ConfigBuilderProxy()).toEqual(jasmine.any(ConfigBuilder));
+    classes.forEach(cls => {
+        it(`should export \`${cls[0].name}\``, () => {
+            expect(cls[0]).toBeTruthy();
+            expect(cls[1]).toEqual(jasmine.any(cls[0]));
+        });
     });
 });
