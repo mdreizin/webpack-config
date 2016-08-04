@@ -109,14 +109,14 @@ describe('ConfigBuilder', () => {
                 foo: 'foo1',
                 bar: 'bar1'
             }]).applyHooks({
-                foo: () => 'foo2',
-                bar: 'bar2',
+                foo: () => 'foo3',
+                bar: 'bar3',
                 x: () => {}
             }).build();
 
             expect(config.map(x => x.toObject())).toEqual([{
-                foo: 'foo2',
-                bar: 'bar2'
+                foo: 'foo3',
+                bar: 'bar3'
             }]);
         });
     });
