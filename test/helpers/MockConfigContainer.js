@@ -5,6 +5,7 @@ import ConfigContainer from '../../src/ConfigContainer';
 import ConfigPatternCache from '../../src/ConfigPatternCache';
 import ConfigEnvironment from '../../src/ConfigEnvironment';
 import ConfigNameResolver from '../../src/ConfigNameResolver';
+import ConfigPathResolver from '../../src/ConfigPathResolver';
 
 /**
  * @class
@@ -22,6 +23,9 @@ class MockConfigContainer extends ConfigContainer {
         container.bindClass(ConfigNameResolver, ConfigNameResolver, Transient.with([
             ConfigEnvironment,
             ConfigPatternCache
+        ]));
+        container.bindClass(ConfigPathResolver, ConfigPathResolver, Transient.with([
+            ConfigNameResolver
         ]));
     }
 }
