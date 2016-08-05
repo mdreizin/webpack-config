@@ -1,11 +1,16 @@
-import TestFactory from './helpers/TestFactory';
+import ConfigNameResolver from '../src/ConfigNameResolver';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('ConfigNameResolver', () => {
-    let environment,
-        nameResolver;
+    let container = new MockConfigContainer(),
+        /**
+         * @type {ConfigNameResolver}
+         */
+        nameResolver,
+        environment;
 
     beforeEach(() => {
-        nameResolver = TestFactory.createConfigNameResolver();
+        nameResolver = container.resolve(ConfigNameResolver);
         environment = nameResolver.environment;
     });
 
