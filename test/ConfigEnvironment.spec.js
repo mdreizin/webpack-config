@@ -1,10 +1,15 @@
-import TestFactory from './helpers/TestFactory';
+import ConfigEnvironment from '../src/ConfigEnvironment';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('ConfigEnvironment', () => {
-    let environment;
+    let container = new MockConfigContainer(),
+        /**
+         * @type {ConfigEnvironment}
+         */
+        environment;
 
     beforeEach(() => {
-        environment = TestFactory.createConfigEnvironment();
+        environment = container.resolve(ConfigEnvironment);
     });
 
     describe('#setAll()', () => {
