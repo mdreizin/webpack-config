@@ -1,13 +1,18 @@
 import {
     resolve
 } from 'path';
-import TestFactory from './helpers/TestFactory';
+import ConfigFinder from '../src/ConfigFinder';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('ConfigFinder', () => {
-    let finder;
+    let container = new MockConfigContainer(),
+        /**
+         * @type {ConfigFinder}
+         */
+        finder;
 
     beforeEach(() => {
-        finder = TestFactory.createConfigFinder();
+        finder = container.resolve(ConfigFinder);
     });
 
     describe('#findConfigs()', () => {
