@@ -1,15 +1,20 @@
 import {
     resolve
 } from 'path';
-import TestFactory from './helpers/TestFactory';
+import ConfigCache from '../src/ConfigCache';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('ConfigCache', () => {
     const FILENAME = resolve('./test/fixtures/webpack.1.config.js');
 
-    let cache;
+    let container = new MockConfigContainer(),
+        /**
+         * @type {ConfigCache}
+         */
+        cache;
 
     beforeEach(() => {
-        cache = TestFactory.createConfigCache();
+        cache = container.resolve(ConfigCache);
     });
 
     describe('#get()', () => {
