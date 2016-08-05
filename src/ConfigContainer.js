@@ -48,6 +48,7 @@ class ConfigContainer {
     setUp() {
         const container = this.container;
 
+        container.bindValue(ConfigContainer, this);
         container.bindValue(ConfigEnvironment, new ConfigEnvironment(Object.entries(process.env)));
         container.bindClass(ConfigCache, ConfigCache, [
             ConfigEnvironment
@@ -62,13 +63,14 @@ class ConfigContainer {
         ]);
         container.bindClass(ConfigLoader, ConfigLoader, [
             ConfigPathResolver,
-            ConfigCache
+            ConfigCache,
+            ConfigFactory
         ]);
         container.bindClass(ConfigFinder, ConfigFinder, [
             ConfigPathResolver
         ]);
         container.bindClass(ConfigFactory, ConfigFactory, [
-            ConfigLoader
+            ConfigContainer
         ]);
         container.bindClass(Config, Config, Transient.with([
             ConfigLoader

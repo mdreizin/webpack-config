@@ -25,6 +25,7 @@ class MockConfigContainer extends ConfigContainer {
     setUp() {
         const container = this.container;
 
+        container.bindValue(ConfigContainer, this);
         container.bindClass(ConfigPatternCache, ConfigPatternCache, Transient.with([]));
         container.bindClass(ConfigEnvironment, ConfigEnvironment, Transient.with([]));
         container.bindClass(ConfigNameResolver, ConfigNameResolver, Transient.with([
@@ -39,10 +40,11 @@ class MockConfigContainer extends ConfigContainer {
         ]));
         container.bindClass(ConfigLoader, ConfigLoader, Transient.with([
             ConfigPathResolver,
-            ConfigCache
+            ConfigCache,
+            ConfigFactory
         ]));
         container.bindClass(ConfigFactory, ConfigFactory, Transient.with([
-            ConfigLoader
+            ConfigContainer
         ]));
         container.bindClass(ConfigFinder, ConfigFinder, Transient.with([
             ConfigPathResolver

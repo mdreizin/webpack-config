@@ -9,7 +9,7 @@ import ConfigList from './ConfigList';
  * @private
  * @type {WeakMap}
  */
-const LOADER = new WeakMap();
+const CONTAINER = new WeakMap();
 
 /**
  * @class
@@ -17,18 +17,29 @@ const LOADER = new WeakMap();
 class ConfigFactory {
     /**
      * @constructor
-     * @param {ConfigLoader} loader
+     * @param {ConfigContainer} container
      */
-    constructor(loader) {
-        LOADER.set(this, loader);
+    constructor(container) {
+        CONTAINER.set(this, container);
     }
 
     /**
      * @readonly
-     * @type {ConfigLoader}
+     * @type {ConfigContainer}
      */
-    get loader() {
-        return LOADER.get(this);
+    get container() {
+        return CONTAINER.get(this);
+    }
+
+    /**
+     * @private
+     * @param {Object} options
+     * @returns {Config}
+     */
+    initWith(options) {
+        const config = this.container.resolve(Config);
+
+        return config.merge(options);
     }
 
     /**
@@ -43,9 +54,9 @@ class ConfigFactory {
         }
 
         if (Array.isArray(value)) {
-            config = ConfigList.from(value, x => new Config(this.loader).merge(x));
+            config = ConfigList.from(value, x => this.initWith(x));
         } else if (isObject(value)) {
-            config = new Config(this.loader).merge(value);
+            config = this.initWith(value);
         }
 
         return config;
