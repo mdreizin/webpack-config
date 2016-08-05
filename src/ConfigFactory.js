@@ -24,7 +24,6 @@ class ConfigFactory {
     }
 
     /**
-     * @protected
      * @readonly
      * @type {ConfigLoader}
      */
