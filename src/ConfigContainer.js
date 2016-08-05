@@ -12,6 +12,7 @@ import ConfigLoader from './ConfigLoader';
 import ConfigFinder from './ConfigFinder';
 import ConfigFactory from './ConfigFactory';
 import ConfigBuilder from './ConfigBuilder';
+import ConfigOptionsResolver from './ConfigOptionsResolver';
 
 /**
  * @private
@@ -75,6 +76,9 @@ class ConfigContainer {
         container.bindClass(ConfigBuilder, ConfigBuilder, Transient.with([
             ConfigFactory
         ]));
+        container.bindClass(ConfigOptionsResolver, ConfigOptionsResolver, [
+            ConfigNameResolver
+        ]);
     }
 
     /**

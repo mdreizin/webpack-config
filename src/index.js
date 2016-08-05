@@ -9,6 +9,7 @@ import ConfigNameResolver from './ConfigNameResolver';
 import ConfigPathResolver from './ConfigPathResolver';
 import ConfigFactory from './ConfigFactory';
 import ConfigContainer from './ConfigContainer';
+import ConfigOptionsResolver from './ConfigOptionsResolver';
 
 /**
  * @private
@@ -85,7 +86,12 @@ export {
     /**
      * @type {ConfigFactory}
      */
-    ConfigFactory
+    ConfigFactory,
+
+    /**
+     * @type {ConfigOptionsResolver}
+     */
+    ConfigOptionsResolver
 };
 
 /**
@@ -127,3 +133,8 @@ export const finder = container.resolve(ConfigFinder);
  * @type {ConfigFactory}
  */
 export const factory = container.resolve(ConfigFactory);
+
+/**
+ * @type {ConfigOptionsResolver}
+ */
+export const optionsResolver = container.resolve(ConfigOptionsResolver);

@@ -8,6 +8,7 @@ import ConfigCache from '../../src/ConfigCache';
 import ConfigFactory from '../../src/ConfigFactory';
 import ConfigBuilder from '../../src/ConfigBuilder';
 import ConfigFinder from '../../src/ConfigFinder';
+import ConfigOptionsResolver from '../../src/ConfigOptionsResolver';
 
 class TestFactory {
     /**
@@ -94,6 +95,15 @@ class TestFactory {
         const loader = TestFactory.createConfigLoader();
 
         return new Config(loader);
+    }
+
+    /**
+     * @return {ConfigOptionsResolver}
+     */
+    static createConfigOptionsResolver() {
+        const nameResolver = TestFactory.createConfigNameResolver();
+
+        return new ConfigOptionsResolver(nameResolver);
     }
 }
 

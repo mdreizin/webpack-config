@@ -11,6 +11,7 @@ import {
     ConfigFinder,
     ConfigFactory,
     ConfigBuilder as ConfigBuilderProxy,
+    ConfigOptionsResolver,
     environment,
     cache,
     patternCache,
@@ -18,7 +19,8 @@ import {
     pathResolver,
     loader,
     finder,
-    factory
+    factory,
+    optionsResolver
 } from '../src';
 
 describe('Module', () => {
@@ -34,7 +36,8 @@ describe('Module', () => {
             [ConfigPathResolver, pathResolver],
             [ConfigLoader, loader],
             [ConfigFinder, finder],
-            [ConfigFactory, factory]
+            [ConfigFactory, factory],
+            [ConfigOptionsResolver, optionsResolver]
         ];
 
     proxies.forEach(proxy => {
