@@ -37,7 +37,6 @@ class ConfigLoader {
     }
 
     /**
-     * @protected
      * @readonly
      * @type {ConfigPathResolver}
      */
@@ -46,7 +45,6 @@ class ConfigLoader {
     }
 
     /**
-     * @protected
      * @readonly
      * @type {ConfigCache}
      */
@@ -55,7 +53,6 @@ class ConfigLoader {
     }
 
     /**
-     * @protected
      * @readonly
      * @type {ConfigFactory}
      */

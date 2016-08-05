@@ -1,13 +1,18 @@
 import {
     resolve
 } from 'path';
-import TestFactory from './helpers/TestFactory';
+import ConfigLoader from '../src/ConfigLoader';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('ConfigLoader', () => {
-    let loader;
+    let container = new MockConfigContainer(),
+        /**
+         * @type {ConfigLoader}
+         */
+        loader;
 
     beforeEach(() => {
-        loader = TestFactory.createConfigLoader();
+        loader = container.resolve(ConfigLoader);
     });
 
     describe('#loadConfig()', () => {
