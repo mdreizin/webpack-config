@@ -10,6 +10,7 @@ import ConfigCache from '../../src/ConfigCache';
 import ConfigLoader from '../../src/ConfigLoader';
 import ConfigFactory from '../../src/ConfigFactory';
 import ConfigFinder from '../../src/ConfigFinder';
+import Config from '../../src/Config';
 
 /**
  * @class
@@ -43,6 +44,9 @@ class MockConfigContainer extends ConfigContainer {
         ]));
         container.bindClass(ConfigFinder, ConfigFinder, Transient.with([
             ConfigPathResolver
+        ]));
+        container.bindClass(Config, Config, Transient.with([
+            ConfigLoader
         ]));
     }
 }

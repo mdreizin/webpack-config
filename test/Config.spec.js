@@ -3,13 +3,17 @@ import {
 } from 'path';
 import Config from '../src/Config';
 import ConfigDependency from '../src/ConfigDependency';
-import TestFactory from './helpers/TestFactory';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('Config', () => {
-    let config;
+    let container = new MockConfigContainer(),
+        /**
+         * @type {Config}
+         */
+        config;
 
     beforeEach(() => {
-        config = TestFactory.createConfig();
+        config = container.resolve(Config);
     });
 
     describe('.FILENAME', () => {

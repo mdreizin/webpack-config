@@ -59,7 +59,6 @@ class Config {
     }
 
     /**
-     * @protected
      * @readonly
      * @type {ConfigLoader}
      */
