@@ -12,6 +12,7 @@ import ConfigFactory from '../../src/ConfigFactory';
 import ConfigFinder from '../../src/ConfigFinder';
 import Config from '../../src/Config';
 import ConfigBuilder from '../../src/ConfigBuilder';
+import ConfigOptionsResolver from '../../src/ConfigOptionsResolver';
 
 /**
  * @class
@@ -51,6 +52,9 @@ class MockConfigContainer extends ConfigContainer {
         ]));
         container.bindClass(ConfigBuilder, ConfigBuilder, Transient.with([
             ConfigFactory
+        ]));
+        container.bindClass(ConfigOptionsResolver, ConfigOptionsResolver, Transient.with([
+            ConfigNameResolver
         ]));
     }
 }

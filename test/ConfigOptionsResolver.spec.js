@@ -1,14 +1,22 @@
 import Config from '../src/Config';
-import TestFactory from './helpers/TestFactory';
+import ConfigOptionsResolver from '../src/ConfigOptionsResolver';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('ConfigOptionsResolver', () => {
-    let config,
+    let container = new MockConfigContainer(),
+        /**
+         * @type {Config}
+         */
+        config,
+        /**
+         * @type {ConfigOptionsResolver}
+         */
         optionsResolver,
         environment;
 
     beforeEach(() => {
-        config = TestFactory.createConfig();
-        optionsResolver = TestFactory.createConfigOptionsResolver();
+        config = container.resolve(Config);
+        optionsResolver = container.resolve(ConfigOptionsResolver);
         environment = optionsResolver.nameResolver.environment;
     });
 

@@ -34,7 +34,6 @@ class ConfigOptionsResolver {
     }
 
     /**
-     * @protected
      * @readonly
      * @type {ConfigNameResolver}
      */
