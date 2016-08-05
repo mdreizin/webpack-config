@@ -1,7 +1,5 @@
 import {
-    isFunction,
     isObject,
-    mergeWith,
     set,
     unset,
     get,
@@ -51,11 +49,9 @@ const DEFAULTS_COMMAND = new WeakMap();
 
 /**
  * @private
- * @param {Object|Function} value
- * @param {Config} context
- * @returns {*}
+ * @type {WeakMap}
  */
-const evalValue = (value, context) => isFunction(value) ? value.call(context, context) : value;
+const MERGE_COMMAND = new WeakMap();
 
 /**
  * @class
@@ -66,11 +62,13 @@ class Config {
      * @param {ConfigLoader} loader
      * @param {ConfigFactory} factory
      * @param {ConfigDefaultsCommand} defaultsCommand
+     * @param {ConfigMergeCommand} mergeCommand
      */
-    constructor(loader, factory, defaultsCommand) {
+    constructor(loader, factory, defaultsCommand, mergeCommand) {
         LOADER.set(this, loader);
         FACTORY.set(this, factory);
         DEFAULTS_COMMAND.set(this, defaultsCommand);
+        MERGE_COMMAND.set(this, mergeCommand);
     }
 
     /**
@@ -95,6 +93,14 @@ class Config {
      */
     get defaultsCommand() {
         return DEFAULTS_COMMAND.get(this);
+    }
+
+    /**
+     * @readonly
+     * @type {ConfigMergeCommand}
+     */
+    get mergeCommand() {
+        return MERGE_COMMAND.get(this);
     }
 
     /**
@@ -176,13 +182,7 @@ class Config {
      */
     merge(...values) {
         for (const value of Object.values(values)) {
-            const properties = evalValue(value, this);
-
-            mergeWith(this, properties, (x, y) => { // eslint-disable-line consistent-return
-                if (Array.isArray(x)) {
-                    return x.concat(y);
-                }
-            });
+            this.mergeCommand.execute(this, value);
         }
 
         return this;
@@ -281,7 +281,7 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        return this.factory.createConfig({}).merge(this.toObject());
+        return new Config(this.loader, this.factory, this.defaultsCommand, this.mergeCommand).merge(this.toObject());
     }
 
     /**

@@ -14,6 +14,7 @@ import ConfigFactory from './ConfigFactory';
 import ConfigBuilder from './ConfigBuilder';
 import ConfigOptionsResolver from './ConfigOptionsResolver';
 import ConfigDefaultsCommand from './ConfigDefaultsCommand';
+import ConfigMergeCommand from './ConfigMergeCommand';
 
 /**
  * @private
@@ -76,7 +77,8 @@ class ConfigContainer {
         container.bindClass(Config, Config, Transient.with([
             ConfigLoader,
             ConfigFactory,
-            ConfigDefaultsCommand
+            ConfigDefaultsCommand,
+            ConfigMergeCommand
         ]));
         container.bindClass(ConfigBuilder, ConfigBuilder, Transient.with([
             ConfigFactory
@@ -85,6 +87,9 @@ class ConfigContainer {
             ConfigNameResolver
         ]);
         container.bindClass(ConfigDefaultsCommand, ConfigDefaultsCommand, [
+            ConfigOptionsResolver
+        ]);
+        container.bindClass(ConfigMergeCommand, ConfigMergeCommand, [
             ConfigOptionsResolver
         ]);
     }
