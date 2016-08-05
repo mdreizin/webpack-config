@@ -1,10 +1,15 @@
-import TestFactory from './helpers/TestFactory';
+import ConfigBuilder from '../src/ConfigBuilder';
+import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('ConfigBuilder', () => {
-    let builder;
+    let container = new MockConfigContainer(),
+        /**
+         * @type {ConfigBuilder}
+         */
+        builder;
 
     beforeEach(() => {
-        builder = TestFactory.createConfigBuilder();
+        builder = container.resolve(ConfigBuilder);
     });
 
     describe('#merge()', () => {

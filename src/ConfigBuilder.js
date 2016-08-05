@@ -43,7 +43,6 @@ class ConfigBuilder {
     }
 
     /**
-     * @private
      * @readonly
      * @type {ConfigFactory}
      */
