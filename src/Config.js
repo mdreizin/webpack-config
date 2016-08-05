@@ -1,7 +1,6 @@
 import {
     isFunction,
     isObject,
-    defaultsDeep,
     mergeWith,
     set,
     unset,
@@ -40,6 +39,18 @@ const LOADER = new WeakMap();
 
 /**
  * @private
+ * @type {WeakMap}
+ */
+const FACTORY = new WeakMap();
+
+/**
+ * @private
+ * @type {WeakMap}
+ */
+const DEFAULTS_COMMAND = new WeakMap();
+
+/**
+ * @private
  * @param {Object|Function} value
  * @param {Config} context
  * @returns {*}
@@ -53,9 +64,13 @@ class Config {
     /**
      * @constructor
      * @param {ConfigLoader} loader
+     * @param {ConfigFactory} factory
+     * @param {ConfigDefaultsCommand} defaultsCommand
      */
-    constructor(loader) {
+    constructor(loader, factory, defaultsCommand) {
         LOADER.set(this, loader);
+        FACTORY.set(this, factory);
+        DEFAULTS_COMMAND.set(this, defaultsCommand);
     }
 
     /**
@@ -64,6 +79,22 @@ class Config {
      */
     get loader() {
         return LOADER.get(this);
+    }
+
+    /**
+     * @readonly
+     * @type {ConfigFactory}
+     */
+    get factory() {
+        return FACTORY.get(this);
+    }
+
+    /**
+     * @readonly
+     * @type {ConfigDefaultsCommand}
+     */
+    get defaultsCommand() {
+        return DEFAULTS_COMMAND.get(this);
     }
 
     /**
@@ -116,9 +147,7 @@ class Config {
      */
     defaults(...values) {
         for (const value of Object.values(values)) {
-            const properties = evalValue(value, this);
-
-            defaultsDeep(this, properties);
+            this.defaultsCommand.execute(this, value);
         }
 
         return this;
@@ -223,7 +252,7 @@ class Config {
                     }
 
                     if (!(prevConfig instanceof Config)) {
-                        prevConfig = new Config(this.loader).merge(prevConfig);
+                        prevConfig = this.factory.createConfig(prevConfig);
                     }
                 });
 
@@ -252,7 +281,7 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        return new Config(this.loader).merge(this.toObject());
+        return this.factory.createConfig({}).merge(this.toObject());
     }
 
     /**

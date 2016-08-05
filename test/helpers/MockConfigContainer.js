@@ -13,6 +13,7 @@ import ConfigFinder from '../../src/ConfigFinder';
 import Config from '../../src/Config';
 import ConfigBuilder from '../../src/ConfigBuilder';
 import ConfigOptionsResolver from '../../src/ConfigOptionsResolver';
+import ConfigDefaultsCommand from '../../src/ConfigDefaultsCommand';
 
 /**
  * @class
@@ -50,13 +51,18 @@ class MockConfigContainer extends ConfigContainer {
             ConfigPathResolver
         ]));
         container.bindClass(Config, Config, Transient.with([
-            ConfigLoader
+            ConfigLoader,
+            ConfigFactory,
+            ConfigDefaultsCommand
         ]));
         container.bindClass(ConfigBuilder, ConfigBuilder, Transient.with([
             ConfigFactory
         ]));
         container.bindClass(ConfigOptionsResolver, ConfigOptionsResolver, Transient.with([
             ConfigNameResolver
+        ]));
+        container.bindClass(ConfigDefaultsCommand, ConfigDefaultsCommand, Transient.with([
+            ConfigOptionsResolver
         ]));
     }
 }
