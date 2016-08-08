@@ -122,17 +122,13 @@ describe('ConfigExtendCommand', () => {
                     expect(x).toEqual(jasmine.any(Config));
 
                     return {
-                        tags: [
-                            'custom-config1'
-                        ]
+                        foo: 'foo1'
                     };
                 }
             });
 
             expect(config.toObject()).toEqual({
-                tags: [
-                    'custom-config1'
-                ]
+                foo: 'foo1'
             });
         });
 
@@ -146,28 +142,22 @@ describe('ConfigExtendCommand', () => {
                         expect(x).toEqual(jasmine.any(Config));
 
                         return {
-                            tags: [
-                                'custom-config1'
-                            ]
+                            foo: 'foo1'
                         };
                     },
                     x => {
                         expect(x).toEqual(jasmine.any(Config));
 
                         return x.merge({
-                            tags: [
-                                'custom-config2'
-                            ]
+                            bar: 'bar1'
                         });
                     }
                 ]
             });
 
             expect(config.toObject()).toEqual({
-                tags: [
-                    'custom-config1',
-                    'custom-config2'
-                ]
+                foo: 'foo1',
+                bar: 'bar1'
             });
         });
     });
