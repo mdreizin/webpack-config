@@ -24,34 +24,34 @@ describe('ConfigStringResolver', () => {
             });
         });
 
-        it('should resolve `[foo1]` with `foo1`', () => {
-            const filename = stringResolver.resolve('webpack.[foo1].config.js');
+        /**
+         * @private
+         * @param {String} before
+         * @param {String} after
+         * @returns {String}
+         */
+        const resolve = (before, after) => {
+            expect(stringResolver.resolve(before)).toEqual(after);
+        };
 
-            expect(filename).toEqual('webpack.foo1.config.js');
+        it('should resolve `[foo1]` with `foo1`', () => {
+            resolve('webpack.[foo1].config.js', 'webpack.foo1.config.js');
         });
 
         it('should resolve `[bar1]` with `bar1`', () => {
-            const filename = stringResolver.resolve('webpack.[bar1].config.js');
-
-            expect(filename).toEqual('webpack.bar1.config.js');
+            resolve('webpack.[bar1].config.js', 'webpack.bar1.config.js');
         });
 
         it('should resolve `[foo2]` with `foo2', () => {
-            const filename = stringResolver.resolve('webpack.[foo2].config.js');
-
-            expect(filename).toEqual('webpack.foo2.config.js');
+            resolve('webpack.[foo2].config.js', 'webpack.foo2.config.js');
         });
 
         it('should resolve `[bar2]` with `foo2', () => {
-            const filename = stringResolver.resolve('webpack.[bar2].config.js');
-
-            expect(filename).toEqual('webpack.foo2.config.js');
+            resolve('webpack.[bar2].config.js', 'webpack.foo2.config.js');
         });
 
         it('should not resolve `unknown` variables', () => {
-            const filename = stringResolver.resolve('webpack.[name].config.js');
-
-            expect(filename).toEqual('webpack.[name].config.js');
+            resolve('webpack.[name].config.js', 'webpack.[name].config.js');
         });
     });
 });
