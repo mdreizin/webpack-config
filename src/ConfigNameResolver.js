@@ -25,6 +25,7 @@ class ConfigNameResolver {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigEnvironment}
      */
@@ -33,6 +34,7 @@ class ConfigNameResolver {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigPatternCache}
      */

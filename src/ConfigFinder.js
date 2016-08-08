@@ -43,6 +43,7 @@ class ConfigFinder {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigPathResolver}
      */

@@ -80,6 +80,7 @@ class ConfigPathResolver {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {ConfigNameResolver}
      */
@@ -88,6 +89,7 @@ class ConfigPathResolver {
     }
 
     /**
+     * @protected
      * @readonly
      * @type {Function[]}
      */
