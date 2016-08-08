@@ -18,31 +18,28 @@ describe('ConfigMergeCommand', () => {
     });
 
     describe('#execute()', () => {
-        it('should execute successfully for `Object~>Object`', () => {
-            command.execute(config, {
-                foo: {
-                    bar: 'bar1'
-                }
-            });
-            command.execute(config, {
-                foo: {
-                    bar: 'bar2'
-                }
-            });
+        it('should execute successfully for `Function~>(Config|Undefined)`', () => {
             command.execute(config, x => {
                 expect(x).toBe(config);
 
                 return {
                     foo: {
-                        bar: 'bar3'
+                        bar: 'fn1'
                     }
                 };
             });
             command.execute(config, () => {});
+            command.execute(config, () => {
+                return {
+                    foo: {
+                        bar: 'fn2'
+                    }
+                };
+            });
 
             expect(config.toObject()).toEqual({
                 foo: {
-                    bar: 'bar3'
+                    bar: 'fn2'
                 }
             });
         });
@@ -50,62 +47,52 @@ describe('ConfigMergeCommand', () => {
         it('should execute successfully for `Object~>Object`', () => {
             command.execute(config, {
                 foo: {
-                    bar: 'bar1'
+                    bar: 'obj1'
                 }
             });
             command.execute(config, {
                 foo: {
-                    bar: 'bar2'
+                    bar: 'obj2'
                 }
             });
-            command.execute(config, x => {
-                expect(x).toBe(config);
-
-                return {
-                    foo: {
-                        bar: 'bar3'
-                    }
-                };
-            });
-            command.execute(config, () => {});
 
             expect(config.toObject()).toEqual({
                 foo: {
-                    bar: 'bar3'
+                    bar: 'obj2'
                 }
             });
         });
 
         it('should execute successfully for `Object[]~>Object[]`', () => {
             command.execute(config, {
-                arr: ['foo']
+                arr: ['arr1']
             });
             command.execute(config, {
-                arr: ['bar']
+                arr: ['arr2']
             });
 
             expect(config.toObject()).toEqual({
-                arr: ['foo', 'bar']
+                arr: ['arr1', 'arr2']
             });
         });
 
         it('should execute successfully for `Object[]~>Object`', () => {
             command.execute(config, {
                 arr: [{
-                    foo: 'bar1'
+                    foo: 'arr1'
                 }]
             });
             command.execute(config, {
                 arr: {
-                    foo: 'bar1'
+                    foo: 'arr2'
                 }
             });
 
             expect(config.toObject()).toEqual({
                 arr: [{
-                    foo: 'bar1'
+                    foo: 'arr1'
                 }, {
-                    foo: 'bar1'
+                    foo: 'arr2'
                 }]
             });
         });
@@ -113,20 +100,20 @@ describe('ConfigMergeCommand', () => {
         it('should execute successfully for `Object~>Object[]`', () => {
             command.execute(config, {
                 obj: {
-                    foo: 'foo1'
+                    foo: 'obj1'
                 }
             });
             command.execute(config, {
                 obj: [{
-                    bar: 'bar1'
+                    bar: 'obj2'
                 }]
             });
 
             expect(config.toObject()).toEqual({
                 obj: [{
-                    foo: 'foo1'
+                    foo: 'obj1'
                 }, {
-                    bar: 'bar1'
+                    bar: 'obj2'
                 }]
             });
         });
