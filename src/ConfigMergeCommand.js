@@ -1,5 +1,6 @@
 import {
-    mergeWith
+    mergeWith,
+    isObject
 } from 'lodash';
 import ConfigCommand from './ConfigCommand';
 
@@ -15,8 +16,12 @@ class ConfigMergeCommand extends ConfigCommand {
         const value = this.optionsResolver.resolve(config, options);
 
         mergeWith(config, value, (x, y) => { // eslint-disable-line consistent-return
-            if (Array.isArray(x)) {
-                return x.concat(y);
+            if (Array.isArray(x) && Array.isArray(y)) {
+                return [...x, ...y];
+            } else if (Array.isArray(x) && isObject(y)) {
+                return [...x, y];
+            } else if (isObject(x) && Array.isArray(y)) {
+                return [x, ...y];
             }
         });
     }
