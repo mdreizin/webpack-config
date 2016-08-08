@@ -37,7 +37,6 @@ class ConfigCache extends Map {
     }
 
     /**
-     * @protected
      * @readonly
      * @type {ConfigEnvironment}
      */
