@@ -7,6 +7,7 @@ import DEFAULT_TRANSFORM from '../src/ConfigDefaultTransform';
 import CLEANUP_TRANSFORM from '../src/ConfigCleanupTransform';
 import ConfigDependency from '../src/ConfigDependency';
 import MockConfigContainer from './helpers/MockConfigContainer';
+import getConfigDependencyTree from './helpers/getConfigDependencyTree';
 
 describe('ConfigExtendCommand', () => {
     let container = new MockConfigContainer(),
@@ -84,13 +85,9 @@ describe('ConfigExtendCommand', () => {
 
     describe('#execute()', () => {
         it('should add `dependencyTree` property', () => {
-            const paths = [];
-
             command.execute(config, './test/fixtures/webpack.1.config.js');
 
-            for (const {node} of config.dependencyTree) {
-                paths.push(node.root.filename);
-            }
+            const paths = getConfigDependencyTree(config);
 
             expect(config.dependencyTree).toEqual(jasmine.any(ConfigDependency));
             expect(paths).toEqual([
