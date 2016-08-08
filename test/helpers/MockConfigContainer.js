@@ -15,6 +15,7 @@ import ConfigBuilder from '../../src/ConfigBuilder';
 import ConfigOptionsResolver from '../../src/ConfigOptionsResolver';
 import ConfigDefaultsCommand from '../../src/ConfigDefaultsCommand';
 import ConfigMergeCommand from '../../src/ConfigMergeCommand';
+import ConfigExtendCommand from '../../src/ConfigExtendCommand';
 
 /**
  * @class
@@ -52,10 +53,10 @@ class MockConfigContainer extends ConfigContainer {
             ConfigPathResolver
         ]));
         container.bindClass(Config, Config, Transient.with([
-            ConfigLoader,
             ConfigFactory,
             ConfigDefaultsCommand,
-            ConfigMergeCommand
+            ConfigMergeCommand,
+            ConfigExtendCommand
         ]));
         container.bindClass(ConfigBuilder, ConfigBuilder, Transient.with([
             ConfigFactory
@@ -68,6 +69,11 @@ class MockConfigContainer extends ConfigContainer {
         ]));
         container.bindClass(ConfigMergeCommand, ConfigMergeCommand, Transient.with([
             ConfigOptionsResolver
+        ]));
+        container.bindClass(ConfigExtendCommand, ConfigExtendCommand, Transient.with([
+            ConfigOptionsResolver,
+            ConfigLoader,
+            ConfigFactory
         ]));
     }
 }

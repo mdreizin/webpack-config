@@ -1,27 +1,10 @@
 import {
-    isObject,
     set,
     unset,
     get,
     has
 } from 'lodash';
-import ConfigExtendTransform from './ConfigExtendTransform';
 import ConfigDependency from './ConfigDependency';
-
-/**
- * @function
- * @name ConfigTransform
- * @param {Config} config
- * @returns {*}
- */
-
-/**
- * @typedef {Object|ConfigTransform} ConfigOptions
- */
-
-/**
- * @typedef {String|Object<String,ConfigTransform>|Object<String,ConfigTransform[]>} ConfigExtendOptions
- */
 
 /**
  * @private
@@ -54,21 +37,27 @@ const DEFAULTS_COMMAND = new WeakMap();
 const MERGE_COMMAND = new WeakMap();
 
 /**
+ * @private
+ * @type {WeakMap}
+ */
+const EXTEND_COMMAND = new WeakMap();
+
+/**
  * @class
  */
 class Config {
     /**
      * @constructor
-     * @param {ConfigLoader} loader
      * @param {ConfigFactory} factory
      * @param {ConfigDefaultsCommand} defaultsCommand
      * @param {ConfigMergeCommand} mergeCommand
+     * @param {ConfigExtendCommand} extendCommand
      */
-    constructor(loader, factory, defaultsCommand, mergeCommand) {
-        LOADER.set(this, loader);
+    constructor(factory, defaultsCommand, mergeCommand, extendCommand) {
         FACTORY.set(this, factory);
         DEFAULTS_COMMAND.set(this, defaultsCommand);
         MERGE_COMMAND.set(this, mergeCommand);
+        EXTEND_COMMAND.set(this, extendCommand);
     }
 
     /**
@@ -101,6 +90,14 @@ class Config {
      */
     get mergeCommand() {
         return MERGE_COMMAND.get(this);
+    }
+
+    /**
+     * @readonly
+     * @type {ConfigExtendCommand}
+     */
+    get extendCommand() {
+        return EXTEND_COMMAND.get(this);
     }
 
     /**
@@ -228,38 +225,12 @@ class Config {
      *    }]
      * });
      * @description Helps to extend config using local file or shareable config file which should be hosted under `node_modules`
-     * @param {...ConfigExtendOptions} values
+     * @param {...ConfigExtendPossibleOptions} values
      * @returns {Config}
      */
     extend(...values) {
-        const map = ConfigExtendTransform.initWith(...values);
-
-        for (const [key, value] of map.entries()) {
-            const config = this.loader.loadConfig(key);
-
-            if (config instanceof Config) {
-                this.dependencyTree.children.push(config.dependencyTree);
-
-                let prevConfig = config.clone();
-
-                value.forEach(x => {
-                    const currConfig = x.call(this, prevConfig);
-
-                    if (!isObject(currConfig)) {
-                        prevConfig = {};
-                    } else {
-                        prevConfig = currConfig;
-                    }
-
-                    if (!(prevConfig instanceof Config)) {
-                        prevConfig = this.factory.createConfig(prevConfig);
-                    }
-                });
-
-                if (prevConfig instanceof Config) {
-                    this.merge(prevConfig.toObject());
-                }
-            }
+        for (const value of Object.values(values)) {
+            this.extendCommand.execute(this, value);
         }
 
         return this;
@@ -281,7 +252,7 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        return new Config(this.loader, this.factory, this.defaultsCommand, this.mergeCommand).merge(this.toObject());
+        return new Config(this.factory, this.defaultsCommand, this.mergeCommand, this.extendCommand).merge(this.toObject());
     }
 
     /**

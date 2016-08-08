@@ -8,7 +8,7 @@ import RecursiveIterator from 'recursive-iterator';
  * @function
  * @name ConfigTransform
  * @param {Config} config
- * @returns {*}
+ * @returns {Config|Object}
  */
 
 /**
