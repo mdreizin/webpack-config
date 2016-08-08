@@ -2,10 +2,14 @@ import ConfigDependency from '../src/ConfigDependency';
 import ConfigProxy from '../src';
 
 describe('ConfigProxy', () => {
+    let config;
+
+    beforeEach(() => {
+        config = new ConfigProxy();
+    });
+
     describe('#merge()', () => {
         it('should do merge successfully', () => {
-            const config = new ConfigProxy();
-
             config.merge({
                 foo: 'foo1',
                 bar: 'bar1'
@@ -20,8 +24,6 @@ describe('ConfigProxy', () => {
 
     describe('#defaults()', () => {
         it('should do merge successfully', () => {
-            const config = new ConfigProxy();
-
             config.merge({
                 foo: 'foo1',
                 bar: 'bar1'
@@ -38,8 +40,7 @@ describe('ConfigProxy', () => {
 
     describe('#extend()', () => {
         it('should do extend successfully', () => {
-            const config = new ConfigProxy(),
-                paths = [];
+            const paths = [];
 
             config.extend('./test/fixtures/webpack.1.config.js');
 
