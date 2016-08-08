@@ -53,7 +53,15 @@ class ConfigNameResolver {
             options[key] = this.environment.valueOf(key);
         }
 
-        return this.patternCache.eval(value, options);
+        let resolvedValue;
+
+        try {
+            resolvedValue = this.patternCache.eval(value, options);
+        } catch (e) {
+            resolvedValue = value;
+        }
+
+        return resolvedValue;
     }
 }
 
