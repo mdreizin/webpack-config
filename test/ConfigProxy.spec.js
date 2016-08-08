@@ -1,5 +1,6 @@
 import ConfigDependency from '../src/ConfigDependency';
 import ConfigProxy from '../src';
+import getConfigDependencyTree from './helpers/getConfigDependencyTree';
 
 describe('ConfigProxy', () => {
     let config;
@@ -40,13 +41,9 @@ describe('ConfigProxy', () => {
 
     describe('#extend()', () => {
         it('should do extend successfully', () => {
-            const paths = [];
-
             config.extend('./test/fixtures/webpack.1.config.js');
 
-            for (const {node} of config.dependencyTree) {
-                paths.push(node.root.filename);
-            }
+            const paths = getConfigDependencyTree(config);
 
             expect(config.dependencyTree).toEqual(jasmine.any(ConfigDependency));
             expect(paths.length).toEqual(5);
