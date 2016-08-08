@@ -16,12 +16,6 @@ const DEPENDENCY_TREE = 'DEPENDENCY_TREE';
  * @private
  * @type {WeakMap}
  */
-const LOADER = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
 const FACTORY = new WeakMap();
 
 /**
