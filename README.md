@@ -1,6 +1,6 @@
 [![NPM version](http://img.shields.io/npm/v/webpack-config.svg?style=flat-square)](https://www.npmjs.org/package/webpack-config)
-[![Travis build status](http://img.shields.io/travis/mdreizin/webpack-config/develop.svg?style=flat-square)](https://travis-ci.org/mdreizin/webpack-config)
-[![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/develop.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/develop)
+[![Travis build status](http://img.shields.io/travis/mdreizin/webpack-config/master.svg?style=flat-square)](https://travis-ci.org/mdreizin/webpack-config)
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/master.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/master)
 [![Code Climate GPA](https://img.shields.io/codeclimate/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config)
 [![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config)
 [![Dependency Status](https://img.shields.io/david/mdreizin/webpack-config.svg?style=flat-square)](https://david-dm.org/mdreizin/webpack-config)
