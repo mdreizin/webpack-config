@@ -37,6 +37,21 @@ const MERGE_COMMAND = new WeakMap();
 const EXTEND_COMMAND = new WeakMap();
 
 /**
+ * @private
+ * @param {Config} config
+ * @param {ConfigCommand} command
+ * @param {...*} values
+ * @returns {Config}
+ */
+const executeCommand = (config, command, ...values) => {
+    for (const value of values) {
+        command.execute(config, value);
+    }
+
+    return config;
+};
+
+/**
  * @class
  */
 class Config {
@@ -135,11 +150,7 @@ class Config {
      * @returns {Config}
      */
     defaults(...values) {
-        for (const value of Object.values(values)) {
-            this.defaultsCommand.execute(this, value);
-        }
-
-        return this;
+        return executeCommand(this, this.defaultsCommand, ...values);
     }
 
     /**
@@ -164,11 +175,7 @@ class Config {
      * @returns {Config}
      */
     merge(...values) {
-        for (const value of Object.values(values)) {
-            this.mergeCommand.execute(this, value);
-        }
-
-        return this;
+        return executeCommand(this, this.mergeCommand, ...values);
     }
 
     /**
@@ -215,11 +222,7 @@ class Config {
      * @returns {Config}
      */
     extend(...values) {
-        for (const value of Object.values(values)) {
-            this.extendCommand.execute(this, value);
-        }
-
-        return this;
+        return executeCommand(this, this.extendCommand, ...values);
     }
 
     /**
