@@ -8,6 +8,7 @@ import CLEANUP_TRANSFORM from '../src/ConfigCleanupTransform';
 import ConfigDependency from '../src/ConfigDependency';
 import MockConfigContainer from './helpers/MockConfigContainer';
 import getConfigDependencyTree from './helpers/getConfigDependencyTree';
+import getConfigCommand from './helpers/getConfigCommand';
 
 describe('ConfigExtendCommand', () => {
     let container = new MockConfigContainer(),
@@ -22,8 +23,7 @@ describe('ConfigExtendCommand', () => {
         customTransform = () => {};
 
     beforeEach(() => {
-        config = container.resolve(Config);
-        command = container.resolve(ConfigExtendCommand);
+        [config, command] = getConfigCommand(container, ConfigExtendCommand);
     });
 
     describe('.normalizeOptions()', () => {
