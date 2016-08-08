@@ -6,7 +6,7 @@ import Config from './Config';
 import ConfigCache from './ConfigCache';
 import ConfigEnvironment from './ConfigEnvironment';
 import ConfigPatternCache from './ConfigPatternCache';
-import ConfigNameResolver from './ConfigNameResolver';
+import ConfigStringResolver from './ConfigStringResolver';
 import ConfigPathResolver from './ConfigPathResolver';
 import ConfigLoader from './ConfigLoader';
 import ConfigFinder from './ConfigFinder';
@@ -57,12 +57,12 @@ class ConfigContainer {
             ConfigEnvironment
         ]);
         container.bindValue(ConfigPatternCache, new ConfigPatternCache());
-        container.bindClass(ConfigNameResolver, ConfigNameResolver, [
+        container.bindClass(ConfigStringResolver, ConfigStringResolver, [
             ConfigEnvironment,
             ConfigPatternCache
         ]);
         container.bindClass(ConfigPathResolver, ConfigPathResolver, [
-            ConfigNameResolver
+            ConfigStringResolver
         ]);
         container.bindClass(ConfigLoader, ConfigLoader, [
             ConfigPathResolver,
@@ -85,7 +85,7 @@ class ConfigContainer {
             ConfigFactory
         ]));
         container.bindClass(ConfigOptionsResolver, ConfigOptionsResolver, [
-            ConfigNameResolver
+            ConfigStringResolver
         ]);
         container.bindClass(ConfigDefaultsCommand, ConfigDefaultsCommand, [
             ConfigOptionsResolver

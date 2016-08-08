@@ -2,68 +2,19 @@ import {
     isString,
     isError
 } from 'lodash';
-import {
-    resolve
-} from 'path';
+import DEFAULT_RESOLVERS from './ConfigPathDefaultResolvers';
 
 /**
  * @private
  * @type {WeakMap}
  */
-const NAME_RESOLVER = new WeakMap();
-
-/**
- * @private
- * @type {String}
- */
-const MODULE_PREFIX = 'webpack-config';
-
-/* eslint-disable valid-jsdoc */
-/**
- * @private
- * @type {Function[]}
- */
-const DEFAULT_RESOLVERS = [
-    /**
-     * `require('<module-name>')`
-     * @param {String} value
-     * @returns {String|Error}
-     */
-    value => {
-        try {
-            return require.resolve(value);
-        } catch (err) {
-            return err;
-        }
-    },
-
-    /**
-     * `require('webpack-config-<name>')`
-     * @param {String} value
-     * @returns {String|Error}
-     */
-    value => {
-        try {
-            return require.resolve(`${MODULE_PREFIX}-${value}`);
-        } catch (err) {
-            return err;
-        }
-    },
-
-    /**
-     * `path.resolve('<file-name>')`
-     * @param {String} value
-     * @returns {String}
-     */
-    value => resolve(value)
-];
-/* eslint-enable valid-jsdoc */
+const PATH_RESOLVERS = new WeakMap();
 
 /**
  * @private
  * @type {WeakMap}
  */
-const RESOLVERS = new WeakMap();
+const STRING_RESOLVER = new WeakMap();
 
 /**
  * @class
@@ -71,28 +22,28 @@ const RESOLVERS = new WeakMap();
 class ConfigPathResolver {
     /**
      * @constructor
-     * @param {ConfigNameResolver} nameResolver
-     * @param {Function[]} [resolvers]
+     * @param {ConfigStringResolver} stringResolver
+     * @param {Function[]} [pathResolvers]
      */
-    constructor(nameResolver, resolvers = DEFAULT_RESOLVERS) {
-        NAME_RESOLVER.set(this, nameResolver);
-        RESOLVERS.set(this, resolvers);
+    constructor(stringResolver, pathResolvers = DEFAULT_RESOLVERS) {
+        STRING_RESOLVER.set(this, stringResolver);
+        PATH_RESOLVERS.set(this, pathResolvers);
     }
 
     /**
      * @readonly
-     * @type {ConfigNameResolver}
+     * @type {ConfigStringResolver}
      */
-    get nameResolver() {
-        return NAME_RESOLVER.get(this);
+    get stringResolver() {
+        return STRING_RESOLVER.get(this);
     }
 
     /**
      * @readonly
      * @type {Function[]}
      */
-    get resolvers() {
-        return RESOLVERS.get(this);
+    get pathResolvers() {
+        return PATH_RESOLVERS.get(this);
     }
 
     /**
@@ -100,9 +51,9 @@ class ConfigPathResolver {
      * @returns {String}
      */
     resolve(value) {
-        value = this.nameResolver.resolve(value);
+        value = this.stringResolver.resolve(value);
 
-        for (const resolver of this.resolvers) {
+        for (const resolver of this.pathResolvers) {
             const resolvedValue = resolver(value),
                 throwsError = isError(value) || value instanceof Error;
 

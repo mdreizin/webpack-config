@@ -13,7 +13,7 @@ const PATTERN_CACHE = new WeakMap();
 /**
  * @class
  */
-class ConfigNameResolver {
+class ConfigStringResolver {
     /**
      * @constructor
      * @param {ConfigEnvironment} environment
@@ -63,4 +63,4 @@ class ConfigNameResolver {
     }
 }
 
-export default ConfigNameResolver;
+export default ConfigStringResolver;

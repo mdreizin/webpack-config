@@ -17,7 +17,7 @@ describe('ConfigOptionsResolver', () => {
     beforeEach(() => {
         config = container.resolve(Config);
         optionsResolver = container.resolve(ConfigOptionsResolver);
-        environment = optionsResolver.nameResolver.environment;
+        environment = optionsResolver.stringResolver.environment;
     });
 
     describe('#resolve()', () => {

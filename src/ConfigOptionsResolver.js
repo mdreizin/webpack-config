@@ -19,7 +19,7 @@ import RecursiveIterator from 'recursive-iterator';
  * @private
  * @type {WeakMap}
  */
-const NAME_RESOLVER = new WeakMap();
+const STRING_RESOLVER = new WeakMap();
 
 /**
  * @class
@@ -27,18 +27,18 @@ const NAME_RESOLVER = new WeakMap();
 class ConfigOptionsResolver {
     /**
      * @constructor
-     * @param {ConfigNameResolver} nameResolver
+     * @param {ConfigStringResolver} stringResolver
      */
-    constructor(nameResolver) {
-        NAME_RESOLVER.set(this, nameResolver);
+    constructor(stringResolver) {
+        STRING_RESOLVER.set(this, stringResolver);
     }
 
     /**
      * @readonly
-     * @type {ConfigNameResolver}
+     * @type {ConfigStringResolver}
      */
-    get nameResolver() {
-        return NAME_RESOLVER.get(this);
+    get stringResolver() {
+        return STRING_RESOLVER.get(this);
     }
 
     /**
@@ -61,7 +61,7 @@ class ConfigOptionsResolver {
 
         for (const {parent, node, key} of new RecursiveIterator(value, 1, true)) {
             if (isString(node)) {
-                parent[key] = this.nameResolver.resolve(node);
+                parent[key] = this.stringResolver.resolve(node);
             }
         }
 

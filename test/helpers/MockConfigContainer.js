@@ -4,7 +4,7 @@ import {
 import ConfigContainer from '../../src/ConfigContainer';
 import ConfigPatternCache from '../../src/ConfigPatternCache';
 import ConfigEnvironment from '../../src/ConfigEnvironment';
-import ConfigNameResolver from '../../src/ConfigNameResolver';
+import ConfigStringResolver from '../../src/ConfigStringResolver';
 import ConfigPathResolver from '../../src/ConfigPathResolver';
 import ConfigCache from '../../src/ConfigCache';
 import ConfigLoader from '../../src/ConfigLoader';
@@ -31,12 +31,12 @@ class MockConfigContainer extends ConfigContainer {
         container.bindValue(ConfigContainer, this);
         container.bindClass(ConfigPatternCache, ConfigPatternCache, Transient.with([]));
         container.bindClass(ConfigEnvironment, ConfigEnvironment, Transient.with([]));
-        container.bindClass(ConfigNameResolver, ConfigNameResolver, Transient.with([
+        container.bindClass(ConfigStringResolver, ConfigStringResolver, Transient.with([
             ConfigEnvironment,
             ConfigPatternCache
         ]));
         container.bindClass(ConfigPathResolver, ConfigPathResolver, Transient.with([
-            ConfigNameResolver
+            ConfigStringResolver
         ]));
         container.bindClass(ConfigCache, ConfigCache, Transient.with([
             ConfigEnvironment
@@ -62,7 +62,7 @@ class MockConfigContainer extends ConfigContainer {
             ConfigFactory
         ]));
         container.bindClass(ConfigOptionsResolver, ConfigOptionsResolver, Transient.with([
-            ConfigNameResolver
+            ConfigStringResolver
         ]));
         container.bindClass(ConfigDefaultsCommand, ConfigDefaultsCommand, Transient.with([
             ConfigOptionsResolver

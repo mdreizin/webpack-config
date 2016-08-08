@@ -1,17 +1,17 @@
-import ConfigNameResolver from '../src/ConfigNameResolver';
+import ConfigStringResolver from '../src/ConfigStringResolver';
 import MockConfigContainer from './helpers/MockConfigContainer';
 
-describe('ConfigNameResolver', () => {
+describe('ConfigStringResolver', () => {
     let container = new MockConfigContainer(),
         /**
-         * @type {ConfigNameResolver}
+         * @type {ConfigStringResolver}
          */
-        nameResolver,
+        stringResolver,
         environment;
 
     beforeEach(() => {
-        nameResolver = container.resolve(ConfigNameResolver);
-        environment = nameResolver.environment;
+        stringResolver = container.resolve(ConfigStringResolver);
+        environment = stringResolver.environment;
     });
 
     describe('#resolve()', () => {
@@ -25,31 +25,31 @@ describe('ConfigNameResolver', () => {
         });
 
         it('should resolve `[foo1]` with `foo1`', () => {
-            const filename = nameResolver.resolve('webpack.[foo1].config.js');
+            const filename = stringResolver.resolve('webpack.[foo1].config.js');
 
             expect(filename).toEqual('webpack.foo1.config.js');
         });
 
         it('should resolve `[bar1]` with `bar1`', () => {
-            const filename = nameResolver.resolve('webpack.[bar1].config.js');
+            const filename = stringResolver.resolve('webpack.[bar1].config.js');
 
             expect(filename).toEqual('webpack.bar1.config.js');
         });
 
         it('should resolve `[foo2]` with `foo2', () => {
-            const filename = nameResolver.resolve('webpack.[foo2].config.js');
+            const filename = stringResolver.resolve('webpack.[foo2].config.js');
 
             expect(filename).toEqual('webpack.foo2.config.js');
         });
 
         it('should resolve `[bar2]` with `foo2', () => {
-            const filename = nameResolver.resolve('webpack.[bar2].config.js');
+            const filename = stringResolver.resolve('webpack.[bar2].config.js');
 
             expect(filename).toEqual('webpack.foo2.config.js');
         });
 
         it('should not resolve `unknown` variables', () => {
-            const filename = nameResolver.resolve('webpack.[name].config.js');
+            const filename = stringResolver.resolve('webpack.[name].config.js');
 
             expect(filename).toEqual('webpack.[name].config.js');
         });

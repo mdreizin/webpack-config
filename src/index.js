@@ -5,7 +5,7 @@ import ConfigLoader from './ConfigLoader';
 import ConfigFinder from './ConfigFinder';
 import ConfigEnvironment from './ConfigEnvironment';
 import ConfigPatternCache from './ConfigPatternCache';
-import ConfigNameResolver from './ConfigNameResolver';
+import ConfigStringResolver from './ConfigStringResolver';
 import ConfigPathResolver from './ConfigPathResolver';
 import ConfigFactory from './ConfigFactory';
 import ConfigContainer from './ConfigContainer';
@@ -74,9 +74,9 @@ export {
     ConfigEnvironment,
 
     /**
-     * @type {ConfigNameResolver}
+     * @type {ConfigStringResolver}
      */
-    ConfigNameResolver,
+    ConfigStringResolver,
 
     /**
      * @type {ConfigPathResolver}
@@ -110,12 +110,12 @@ export const cache = container.resolve(ConfigCache);
 export const patternCache = container.resolve(ConfigPatternCache);
 
 /**
- * @type {ConfigNameResolver}
+ * @type {ConfigStringResolver}
  */
-export const nameResolver = container.resolve(ConfigNameResolver);
+export const stringResolver = container.resolve(ConfigStringResolver);
 
 /**
- * @type {ConfigNameResolver}
+ * @type {ConfigPathResolver}
  */
 export const pathResolver = container.resolve(ConfigPathResolver);
 
