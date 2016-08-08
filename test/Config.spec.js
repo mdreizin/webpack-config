@@ -153,18 +153,6 @@ describe('Config', () => {
             expect(config.toObject()).toEqual({
                 foo1: 'foo1'
             });
-            expect(clone.defaults({
-                bar1: 'ba1'
-            }).toObject()).toEqual({
-                foo1: 'foo1',
-                bar1: 'ba1'
-            });
-            expect(clone.merge({
-                bar1: 'ba2'
-            }).toObject()).toEqual({
-                foo1: 'foo1',
-                bar1: 'ba2'
-            });
         });
     });
 
