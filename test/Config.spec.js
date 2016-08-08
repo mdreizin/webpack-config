@@ -1,8 +1,4 @@
-import {
-    resolve
-} from 'path';
 import Config from '../src/Config';
-import ConfigDependency from '../src/ConfigDependency';
 import MockConfigContainer from './helpers/MockConfigContainer';
 
 describe('Config', () => {
@@ -23,7 +19,7 @@ describe('Config', () => {
     });
 
     describe('#defaults()', () => {
-        it('should not add extra `values`', () => {
+        it('should merge successfully', () => {
             const date1 = new Date(),
                 date2 = new Date();
 
@@ -51,58 +47,30 @@ describe('Config', () => {
     });
 
     describe('#merge()', () => {
-        it('should merge `values`', function() {
+        it('should merge successfully', function() {
             config.merge({
-                foo: {
-                    bar: 'bar1'
-                },
+                foo: 'foo1',
                 bar: ['bar1']
             }, {
-                foo: {
-                    bar: 'bar2'
-                },
+                foo: 'foo2',
                 bar: ['bar2']
             }, x => {
                 expect(x).toBe(config);
 
                 return {
-                    foo: {
-                        bar: 'bar3'
-                    }
+                    foo: 'bar3'
                 };
             }, () => {});
 
             expect(config.toObject()).toEqual({
-                foo: {
-                    bar: 'bar3'
-                },
+                foo: 'bar3',
                 bar: ['bar1', 'bar2']
             });
         });
     });
 
     describe('#extend()', () => {
-        it('should add `dependencyTree` property', () => {
-            const paths = [];
-
-            config.extend('./test/fixtures/webpack.1.config.js');
-
-            expect(config.dependencyTree).toEqual(jasmine.any(ConfigDependency));
-
-            for (const {node} of config.dependencyTree) {
-                paths.push(node.root.filename);
-            }
-
-            expect(paths).toEqual([
-                resolve('./test/fixtures/webpack.1.config.js'),
-                resolve('./test/fixtures/webpack.2.config.js'),
-                resolve('./test/fixtures/webpack.3.config.js'),
-                resolve('./test/fixtures/webpack.5.config.js'),
-                resolve('./test/fixtures/webpack.4.config.js')
-            ]);
-        });
-
-        it('should extend using `String`', () => {
+        it('should extend successfully using `String`', () => {
             config.extend('./test/fixtures/webpack.1.config.js');
 
             expect(config.toObject()).toEqual({
@@ -116,7 +84,7 @@ describe('Config', () => {
             });
         });
 
-        it('should extend using `Object<String,Function>`', () => {
+        it('should extend successfully `Object<String,Function>`', () => {
             config.extend({
                 './test/fixtures/webpack.1.config.js': x => {
                     expect(x).toEqual(jasmine.any(Config));
@@ -136,7 +104,7 @@ describe('Config', () => {
             });
         });
 
-        it('should extend using `Object<String,Function[]>`', () => {
+        it('should extend successfully `Object<String,Function[]>`', () => {
             config.extend({
                 './test/fixtures/webpack.1.config.js': [
                     x => {

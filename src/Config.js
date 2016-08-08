@@ -62,14 +62,6 @@ class Config {
 
     /**
      * @readonly
-     * @type {ConfigLoader}
-     */
-    get loader() {
-        return LOADER.get(this);
-    }
-
-    /**
-     * @readonly
      * @type {ConfigFactory}
      */
     get factory() {
