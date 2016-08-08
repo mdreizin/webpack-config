@@ -101,7 +101,7 @@ class ConfigContainer {
     }
 
     /**
-     * @param {Class} T
+     * @param {*} T
      * @returns {*}
      */
     resolve(T) {
@@ -109,7 +109,7 @@ class ConfigContainer {
     }
 
     /**
-     * @param {Class} T
+     * @param {*} T
      * @returns {Function}
      */
     proxy(T) {
