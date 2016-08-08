@@ -82,7 +82,7 @@ describe('Config', () => {
     });
 
     describe('#extend()', () => {
-        it('should have `dependencyTree`', () => {
+        it('should add `dependencyTree` property', () => {
             const paths = [];
 
             config.extend('./test/fixtures/webpack.1.config.js');
