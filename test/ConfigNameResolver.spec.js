@@ -48,7 +48,7 @@ describe('ConfigNameResolver', () => {
             expect(filename).toEqual('webpack.foo2.config.js');
         });
 
-        it('should not resolve unknown variables', () => {
+        it('should not resolve `unknown` variables', () => {
             const filename = nameResolver.resolve('webpack.[name].config.js');
 
             expect(filename).toEqual('webpack.[name].config.js');
