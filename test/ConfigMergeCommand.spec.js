@@ -1,6 +1,6 @@
-import Config from '../src/Config';
 import ConfigMergeCommand from '../src/ConfigMergeCommand';
 import MockConfigContainer from './helpers/MockConfigContainer';
+import getConfigCommand from './helpers/getConfigCommand';
 
 describe('ConfigMergeCommand', () => {
     let container = new MockConfigContainer(),
@@ -14,8 +14,7 @@ describe('ConfigMergeCommand', () => {
         command;
 
     beforeEach(() => {
-        config = container.resolve(Config);
-        command = container.resolve(ConfigMergeCommand);
+        [config, command] = getConfigCommand(container, ConfigMergeCommand);
     });
 
     describe('#execute()', () => {
