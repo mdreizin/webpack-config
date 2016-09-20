@@ -6,7 +6,7 @@ import {
  * @private
  * @type {RegExp}
  */
-const DEFAULT_INTERPOLATE = /\[([\s\S]+?)]/g;
+const DEFAULT_INTERPOLATE = /\[([\w\s]+?)]/g;
 
 /**
  * @private
@@ -21,7 +21,7 @@ const INTERPOLATE = new WeakMap();
 class ConfigPatternCache extends Map {
     /**
      * @constructor
-     * @param {RegExp} [interpolate=/\[([\s\S]+?)]/g]
+     * @param {RegExp} [interpolate=/\[([\w\s]+?)]/g]
      */
     constructor(interpolate = DEFAULT_INTERPOLATE) {
         super();
@@ -42,7 +42,7 @@ class ConfigPatternCache extends Map {
      *   patternCache
      * } from 'webpack-config';
      *
-     * patternCache.interpolate = /{([\s\S]+?)}/g;
+     * patternCache.interpolate = /{([\w\s]+?)}/g;
      * @param {RegExp} value
      */
     set interpolate(value) {

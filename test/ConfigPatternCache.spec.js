@@ -40,15 +40,31 @@ describe('ConfigPatternCache', () => {
 
     describe('#eval()', () => {
         it('should replace `[foo]` with `bar`', () => {
-            const value = patternCache.eval('[foo]-[foo]', {
+            expect(patternCache.eval('[foo]-[foo]', {
                 foo: 'bar'
-            });
+            })).toEqual('bar-bar');
 
-            expect(value).toEqual('bar-bar');
+            expect(patternCache.eval('[ foo ]-[ foo ]', {
+                foo: 'bar'
+            })).toEqual('bar-bar');
         });
 
-        it('should replace `{foo}` with `bar`', () => {
-            patternCache.interpolate = /{([\s\S]+?)}/g;
+        it('should not replace `JSON.stringify`-strings', () => {
+            const str = JSON.stringify({
+                foo: [
+                    { x: 1 },
+                    { y: 2 },
+                    { z: 3 }
+                ]
+            });
+
+            expect(patternCache.eval(str, {})).toEqual(str);
+        });
+    });
+
+    describe('#interpolate', () => {
+        it('should replace `{foo}` with `bar` using custom `interpolate`', () => {
+            patternCache.interpolate = /{([\w\s]+?)}/g;
 
             const value = patternCache.eval('{foo}-{foo}', {
                 foo: 'bar'
