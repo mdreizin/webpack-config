@@ -105,7 +105,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * let config = new Config();
+     * const config = new Config();
      *
      * config.extend('./test/fixtures/webpack.1.config.js');
      *
@@ -229,7 +229,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * let config = new Config();
+     * const config = new Config();
      *
      * config.merge({
      *   debug: true
@@ -248,7 +248,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * let config = new Config();
+     * const config = new Config();
      *
      * config.merge({
      *   debug: true
@@ -277,7 +277,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * let config = new Config();
+     * const config = new Config();
      *
      * config.set('debug', true);
      *
@@ -298,7 +298,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * let config = new Config();
+     * const config = new Config();
      *
      * config.set('debug', true);
      *
@@ -316,7 +316,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * let config = new Config();
+     * const config = new Config();
      *
      * config.set('debug', true).remove('debug');
      *
@@ -336,7 +336,7 @@ class Config {
      * @example
      * import Config from 'webpack-config';
      *
-     * let config = new Config();
+     * const config = new Config();
      *
      * config.set('debug', true);
      *
