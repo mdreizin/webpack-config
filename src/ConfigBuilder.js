@@ -92,7 +92,7 @@ class ConfigBuilder {
 
     /**
      * @see {@link Config#merge}
-     * @param {...ConfigMergeOptions} values
+     * @param {...ConfigOptions} values
      * @returns {ConfigBuilder}
      */
     merge(...values) {
@@ -103,7 +103,7 @@ class ConfigBuilder {
 
     /**
      * @see {@link Config#defaults}
-     * @param {...ConfigDefaultsOptions} values
+     * @param {...ConfigOptions} values
      * @returns {ConfigBuilder}
      */
     defaults(...values) {
