@@ -45,7 +45,7 @@
   "homepage": "https://github.com/mdreizin/webpack-config",
   "devDependencies": {
     "babel-cli": "^6.14.0",
-    "babel-eslint": "^6.1.1",
+    "babel-eslint": "^7.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-istanbul": "^2.0.0",
     "babel-plugin-transform-builtin-extend": "^1.1.0",
