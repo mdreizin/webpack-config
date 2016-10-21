@@ -5,6 +5,7 @@ import {
     has
 } from 'lodash';
 import ConfigDependency from './ConfigDependency';
+import ConfigCommandInvoker from './ConfigCommandInvoker';
 
 /**
  * @private
@@ -35,21 +36,6 @@ const MERGE_COMMAND = new WeakMap();
  * @type {WeakMap}
  */
 const EXTEND_COMMAND = new WeakMap();
-
-/**
- * @private
- * @param {Config} config
- * @param {ConfigCommand} command
- * @param {...*} values
- * @returns {Config}
- */
-const executeCommand = (config, command, ...values) => {
-    for (const value of values) {
-        command.execute(config, value);
-    }
-
-    return config;
-};
 
 /**
  * @class
@@ -158,7 +144,7 @@ class Config {
      * @returns {Config}
      */
     defaults(...values) {
-        return executeCommand(this, this.defaultsCommand, ...values);
+        return new ConfigCommandInvoker(this.defaultsCommand).invoke(this, ...values);
     }
 
     /**
@@ -183,7 +169,7 @@ class Config {
      * @returns {Config}
      */
     merge(...values) {
-        return executeCommand(this, this.mergeCommand, ...values);
+        return new ConfigCommandInvoker(this.mergeCommand).invoke(this, ...values);
     }
 
     /**
@@ -230,7 +216,7 @@ class Config {
      * @returns {Config}
      */
     extend(...values) {
-        return executeCommand(this, this.extendCommand, ...values);
+        return new ConfigCommandInvoker(this.extendCommand).invoke(this, ...values);
     }
 
     /**

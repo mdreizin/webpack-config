@@ -1,0 +1,40 @@
+/**
+ * @private
+ * @type {WeakMap}
+ */
+const COMMAND = new WeakMap();
+
+/**
+ * @class
+ */
+class ConfigCommandInvoker {
+    /**
+     * @constructor
+     * @param {ConfigCommand} command
+     */
+    constructor(command) {
+        COMMAND.set(this, command);
+    }
+
+    /**
+     * @readonly
+     * @type {ConfigCommand}
+     */
+    get command() {
+        return COMMAND.get(this);
+    }
+
+    /**
+     * @param {Config} config
+     * @param {...*} values
+     */
+    invoke(config, ...values) {
+        for (const value of values) {
+            this.command.execute(config, value);
+        }
+
+        return config;
+    }
+}
+
+export default ConfigCommandInvoker;
