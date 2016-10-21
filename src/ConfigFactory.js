@@ -4,7 +4,6 @@ import {
 } from 'lodash';
 import Config from './Config';
 import ConfigList from './ConfigList';
-import ConfigDependency from './ConfigDependency';
 
 /**
  * @private

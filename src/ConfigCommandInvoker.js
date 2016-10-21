@@ -27,6 +27,7 @@ class ConfigCommandInvoker {
     /**
      * @param {Config} config
      * @param {...*} values
+     * @returns {Config}
      */
     invoke(config, ...values) {
         for (const value of values) {
