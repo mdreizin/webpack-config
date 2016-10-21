@@ -8,9 +8,9 @@ import ConfigDependency from './ConfigDependency';
 
 /**
  * @private
- * @type {String}
+ * @type {WeakMap}
  */
-const DEPENDENCY_TREE = 'DEPENDENCY_TREE';
+const DEPENDENCY_TREE = new WeakMap();
 
 /**
  * @private
@@ -109,7 +109,7 @@ class Config {
      *
      * config.extend('./test/fixtures/webpack.1.config.js');
      *
-     * for (let {node} of config.dependencyTree) {
+     * for (const {node} of config.dependencyTree) {
      *   console.log(node.root.filename);
      * }
      * // ./test/fixtures/webpack.1.config.js
@@ -117,16 +117,24 @@ class Config {
      * // ./test/fixtures/webpack.3.config.js
      * // ./test/fixtures/webpack.5.config.js
      * // ./test/fixtures/webpack.4.config.js
-     * @description Keeps information about configs which have been loaded via {@link Config#extend}
+     * @description Holds information about [included]{@link Config#extend} configs
      * @readonly
      * @type {ConfigDependency}
      */
     get dependencyTree() {
-        if (!this[DEPENDENCY_TREE]) {
-            this[DEPENDENCY_TREE] = new ConfigDependency(this);
+        if (!DEPENDENCY_TREE.has(this)) {
+            DEPENDENCY_TREE.set(this, new ConfigDependency(this));
         }
 
-        return this[DEPENDENCY_TREE];
+        return DEPENDENCY_TREE.get(this);
+    }
+
+    /**
+     * @private
+     * @param {ConfigDependency} value
+     */
+    set dependencyTree(value) {
+        DEPENDENCY_TREE.set(this, value);
     }
 
     /**
@@ -267,8 +275,6 @@ class Config {
                 properties[key] = value;
             }
         }
-
-        delete properties[DEPENDENCY_TREE];
 
         return properties;
     }

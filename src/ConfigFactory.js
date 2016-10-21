@@ -4,6 +4,7 @@ import {
 } from 'lodash';
 import Config from './Config';
 import ConfigList from './ConfigList';
+import ConfigDependency from './ConfigDependency';
 
 /**
  * @private
@@ -33,13 +34,27 @@ class ConfigFactory {
 
     /**
      * @private
-     * @param {Object} options
+     * @param {Object|Config} value
      * @returns {Config}
      */
-    initWith(options) {
+    initWith(value) {
         const config = this.container.resolve(Config);
 
-        return config.merge(options);
+        let tree,
+            raw;
+
+        if (value instanceof Config) {
+            raw = value.toObject();
+            tree = value.dependencyTree;
+        } else {
+            raw = value;
+        }
+
+        if (tree instanceof ConfigDependency) {
+            config.dependencyTree = new ConfigDependency(config, tree.children);
+        }
+
+        return config.merge(raw);
     }
 
     /**
