@@ -38,23 +38,15 @@ class ConfigFactory {
      * @returns {Config}
      */
     initWith(value) {
-        const config = this.container.resolve(Config);
-
-        let tree,
-            raw;
+        let config;
 
         if (value instanceof Config) {
-            raw = value.toObject();
-            tree = value.dependencyTree;
+            config = value.clone();
         } else {
-            raw = value;
+            config = this.container.resolve(Config).merge(value);
         }
 
-        if (tree instanceof ConfigDependency) {
-            config.dependencyTree = new ConfigDependency(config, tree.children);
-        }
-
-        return config.merge(raw);
+        return config;
     }
 
     /**

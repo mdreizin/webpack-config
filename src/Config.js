@@ -235,7 +235,11 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        return new Config(this.factory, this.defaultsCommand, this.mergeCommand, this.extendCommand).merge(this.toObject());
+        const config = new Config(this.factory, this.defaultsCommand, this.mergeCommand, this.extendCommand);
+
+        config.dependencyTree = new ConfigDependency(config, this.dependencyTree.children);
+
+        return config.merge(this.toObject());
     }
 
     /**
