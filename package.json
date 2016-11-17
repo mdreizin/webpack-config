@@ -55,7 +55,7 @@
     "codeclimate-test-reporter": "^0.4.0",
     "eslint": "^3.8.0",
     "eslint-config-mdreizin": "^1.1.1",
-    "eslint-plugin-babel": "^3.2.0",
+    "eslint-plugin-babel": "^4.0.0",
     "gh-pages": "^0.11.0",
     "gitdown": "^2.4.8",
     "jasmine": "^2.4.1",
