@@ -7,7 +7,6 @@ import {
     ConfigStringResolver,
     ConfigPathResolver,
     ConfigLoader,
-    ConfigFinder,
     ConfigFactory,
     ConfigOptionsResolver,
     environment,
@@ -16,7 +15,6 @@ import {
     stringResolver,
     pathResolver,
     loader,
-    finder,
     factory,
     optionsResolver
 } from '../src';
@@ -32,7 +30,6 @@ describe('Module', () => {
             [ConfigStringResolver, stringResolver],
             [ConfigPathResolver, pathResolver],
             [ConfigLoader, loader],
-            [ConfigFinder, finder],
             [ConfigFactory, factory],
             [ConfigOptionsResolver, optionsResolver]
         ];
