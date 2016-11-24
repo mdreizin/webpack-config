@@ -55,7 +55,7 @@ class ConfigStringResolver {
 
         try {
             resolvedValue = this.patternCache.eval(value, options);
-        } catch (e) {
+        } catch (err) {
             resolvedValue = value;
         }
 
