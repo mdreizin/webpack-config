@@ -1,5 +1,4 @@
 import ConfigBase from './Config';
-import ConfigBuilderBase from './ConfigBuilder';
 import ConfigCache from './ConfigCache';
 import ConfigLoader from './ConfigLoader';
 import ConfigFinder from './ConfigFinder';
@@ -25,13 +24,6 @@ const container = new ConfigContainer();
 const ConfigProxy = container.proxy(ConfigBase);
 
 /**
- * Proxy class which automatically fills {@link ConfigBuilder} constructor dependencies
- * @class
- * @extends {ConfigBuilder}
- */
-const ConfigBuilderProxy = container.proxy(ConfigBuilderBase);
-
-/**
  * @module webpack-config
  */
 
@@ -42,11 +34,6 @@ export {
      * @type {ConfigProxy}
      */
     ConfigProxy as Config,
-
-    /**
-     * @type {ConfigBuilderProxy}
-     */
-    ConfigBuilderProxy as ConfigBuilder,
 
     /**
      * @type {ConfigPatternCache}

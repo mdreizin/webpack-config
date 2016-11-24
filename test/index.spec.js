@@ -1,5 +1,4 @@
 import Config from '../src/Config';
-import ConfigBuilder from '../src/ConfigBuilder';
 import {
     Config as ConfigProxy,
     ConfigEnvironment,
@@ -10,7 +9,6 @@ import {
     ConfigLoader,
     ConfigFinder,
     ConfigFactory,
-    ConfigBuilder as ConfigBuilderProxy,
     ConfigOptionsResolver,
     environment,
     cache,
@@ -25,8 +23,7 @@ import {
 
 describe('Module', () => {
     const proxies = [
-            [ConfigProxy, Config],
-            [ConfigBuilderProxy, ConfigBuilder]
+            [ConfigProxy, Config]
         ],
         classes = [
             [ConfigEnvironment, environment],
