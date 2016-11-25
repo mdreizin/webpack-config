@@ -7,4 +7,4 @@ export default {
     [names.DEFAULTS]: ConfigDefaultsCommand,
     [names.MERGE]: ConfigMergeCommand,
     [names.EXTEND]: ConfigExtendCommand,
-}
+};
