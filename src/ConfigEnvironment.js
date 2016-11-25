@@ -14,7 +14,7 @@ class ConfigEnvironment extends Map {
      */
     setAll(...values) {
         values.forEach(obj => {
-            for (let [key, value] of Object.entries(obj)) {
+            for (const [key, value] of Object.entries(obj)) {
                 this.set(key, value);
             }
         });
