@@ -32,7 +32,7 @@ class ConfigCommandFactory {
      * @returns {ConfigCommand}
      */
     createCommand(name) {
-        return this.container.resolve(types[name])
+        return this.container.resolve(types[name]);
     }
 }
 
