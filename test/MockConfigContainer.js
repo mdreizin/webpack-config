@@ -1,20 +1,20 @@
 import {
     Transient
 } from 'constitute';
-import ConfigContainer from '../../src/ConfigContainer';
-import ConfigPatternCache from '../../src/ConfigPatternCache';
-import ConfigEnvironment from '../../src/ConfigEnvironment';
-import ConfigStringResolver from '../../src/ConfigStringResolver';
-import ConfigPathResolver from '../../src/ConfigPathResolver';
-import ConfigCache from '../../src/ConfigCache';
-import ConfigLoader from '../../src/ConfigLoader';
-import ConfigFactory from '../../src/ConfigFactory';
-import Config from '../../src/Config';
-import ConfigOptionsResolver from '../../src/ConfigOptionsResolver';
-import ConfigDefaultsCommand from '../../src/ConfigDefaultsCommand';
-import ConfigMergeCommand from '../../src/ConfigMergeCommand';
-import ConfigExtendCommand from '../../src/ConfigExtendCommand';
-import ConfigCommandFactory from '../../src/ConfigCommandFactory';
+import ConfigContainer from '../src/ConfigContainer';
+import ConfigPatternCache from '../src/ConfigPatternCache';
+import ConfigEnvironment from '../src/ConfigEnvironment';
+import ConfigStringResolver from '../src/ConfigStringResolver';
+import ConfigPathResolver from '../src/ConfigPathResolver';
+import ConfigCache from '../src/ConfigCache';
+import ConfigLoader from '../src/ConfigLoader';
+import ConfigFactory from '../src/ConfigFactory';
+import Config from '../src/Config';
+import ConfigOptionsResolver from '../src/ConfigOptionsResolver';
+import ConfigDefaultsCommand from '../src/ConfigDefaultsCommand';
+import ConfigMergeCommand from '../src/ConfigMergeCommand';
+import ConfigExtendCommand from '../src/ConfigExtendCommand';
+import ConfigCommandFactory from '../src/ConfigCommandFactory';
 
 /**
  * @class

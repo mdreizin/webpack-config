@@ -2,16 +2,13 @@ import {
     resolve
 } from 'path';
 import ConfigCache from '../src/ConfigCache';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigCache', () => {
-    const FILENAME = resolve('./test/fixtures/webpack.1.config.js');
+    const FILENAME = resolve('./test/fixtures/webpack.1.config.js'),
+        container = new MockConfigContainer();
 
-    let container = new MockConfigContainer(),
-        /**
-         * @type {ConfigCache}
-         */
-        cache;
+    let cache;
 
     beforeEach(() => {
         cache = container.resolve(ConfigCache);

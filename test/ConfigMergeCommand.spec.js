@@ -1,20 +1,16 @@
+import Config from '../src/Config';
 import ConfigMergeCommand from '../src/ConfigMergeCommand';
-import MockConfigContainer from './helpers/MockConfigContainer';
-import getConfigCommand from './helpers/getConfigCommand';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigMergeCommand', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {Config}
-         */
-        config,
-        /**
-         * @type {ConfigMergeCommand}
-         */
+    const container = new MockConfigContainer();
+
+    let config,
         command;
 
     beforeEach(() => {
-        [config, command] = getConfigCommand(container, ConfigMergeCommand);
+        config = container.resolve(Config);
+        command = container.resolve(ConfigMergeCommand);
     });
 
     describe('#execute()', () => {

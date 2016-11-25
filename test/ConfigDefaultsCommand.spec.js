@@ -1,20 +1,16 @@
+import Config from '../src/Config';
 import ConfigDefaultsCommand from '../src/ConfigDefaultsCommand';
-import MockConfigContainer from './helpers/MockConfigContainer';
-import getConfigCommand from './helpers/getConfigCommand';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigDefaultsCommand', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {Config}
-         */
-        config,
-        /**
-         * @type {ConfigDefaultsCommand}
-         */
+    const container = new MockConfigContainer();
+
+    let config,
         command;
 
     beforeEach(() => {
-        [config, command] = getConfigCommand(container, ConfigDefaultsCommand);
+        config = container.resolve(Config);
+        command = container.resolve(ConfigDefaultsCommand);
     });
 
     describe('#execute()', () => {

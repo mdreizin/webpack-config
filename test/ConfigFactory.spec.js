@@ -1,14 +1,12 @@
 import Config from '../src/Config';
 import ConfigList from '../src/ConfigList';
 import ConfigFactory from '../src/ConfigFactory';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigFactory', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {ConfigFactory}
-         */
-        factory;
+    const container = new MockConfigContainer();
+
+    let factory;
 
     beforeEach(() => {
         factory = container.resolve(ConfigFactory);

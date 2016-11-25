@@ -1,12 +1,10 @@
 import ConfigPatternCache from '../src/ConfigPatternCache';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigPatternCache', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {ConfigPatternCache}
-         */
-        patternCache;
+    const container = new MockConfigContainer();
+
+    let patternCache;
 
     beforeEach(() => {
         patternCache = container.resolve(ConfigPatternCache);

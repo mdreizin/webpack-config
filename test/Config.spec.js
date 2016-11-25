@@ -1,12 +1,10 @@
 import Config from '../src/Config';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('Config', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {Config}
-         */
-        config;
+    const container = new MockConfigContainer();
+
+    let config;
 
     beforeEach(() => {
         config = container.resolve(Config);

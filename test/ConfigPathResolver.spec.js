@@ -2,14 +2,12 @@ import {
     resolve
 } from 'path';
 import ConfigPathResolver from '../src/ConfigPathResolver';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigPathResolver', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {ConfigPathResolver}
-         */
-        pathResolver;
+    const container = new MockConfigContainer();
+
+    let pathResolver;
 
     beforeEach(() => {
         pathResolver = container.resolve(ConfigPathResolver);
