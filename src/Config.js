@@ -6,6 +6,7 @@ import {
 } from 'lodash';
 import ConfigDependency from './ConfigDependency';
 import ConfigCommandInvoker from './ConfigCommandInvoker';
+import * as commandNames from './ConfigCommandNames';
 
 /**
  * @private
@@ -23,19 +24,7 @@ const FACTORY = new WeakMap();
  * @private
  * @type {WeakMap}
  */
-const DEFAULTS_COMMAND = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const MERGE_COMMAND = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const EXTEND_COMMAND = new WeakMap();
+const COMMAND_FACTORY = new WeakMap();
 
 /**
  * @class
@@ -44,15 +33,11 @@ class Config {
     /**
      * @constructor
      * @param {ConfigFactory} factory
-     * @param {ConfigDefaultsCommand} defaultsCommand
-     * @param {ConfigMergeCommand} mergeCommand
-     * @param {ConfigExtendCommand} extendCommand
+     * @param {ConfigCommandFactory} commandFactory
      */
-    constructor(factory, defaultsCommand, mergeCommand, extendCommand) {
+    constructor(factory, commandFactory) {
         FACTORY.set(this, factory);
-        DEFAULTS_COMMAND.set(this, defaultsCommand);
-        MERGE_COMMAND.set(this, mergeCommand);
-        EXTEND_COMMAND.set(this, extendCommand);
+        COMMAND_FACTORY.set(this, commandFactory);
     }
 
     /**
@@ -65,26 +50,10 @@ class Config {
 
     /**
      * @readonly
-     * @type {ConfigDefaultsCommand}
+     * @type {ConfigCommandFactory}
      */
-    get defaultsCommand() {
-        return DEFAULTS_COMMAND.get(this);
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigMergeCommand}
-     */
-    get mergeCommand() {
-        return MERGE_COMMAND.get(this);
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigExtendCommand}
-     */
-    get extendCommand() {
-        return EXTEND_COMMAND.get(this);
+    get commandFactory() {
+        return COMMAND_FACTORY.get(this);
     }
 
     /**
@@ -144,7 +113,9 @@ class Config {
      * @returns {Config}
      */
     defaults(...values) {
-        return new ConfigCommandInvoker(this.defaultsCommand).invoke(this, ...values);
+        const command = this.commandFactory.createCommand(commandNames.DEFAULTS);
+
+        return new ConfigCommandInvoker(command).invoke(this, ...values);
     }
 
     /**
@@ -169,7 +140,9 @@ class Config {
      * @returns {Config}
      */
     merge(...values) {
-        return new ConfigCommandInvoker(this.mergeCommand).invoke(this, ...values);
+        const command = this.commandFactory.createCommand(commandNames.MERGE);
+
+        return new ConfigCommandInvoker(command).invoke(this, ...values);
     }
 
     /**
@@ -216,7 +189,9 @@ class Config {
      * @returns {Config}
      */
     extend(...values) {
-        return new ConfigCommandInvoker(this.extendCommand).invoke(this, ...values);
+        const command = this.commandFactory.createCommand(commandNames.EXTEND);
+
+        return new ConfigCommandInvoker(command).invoke(this, ...values);
     }
 
     /**
@@ -235,7 +210,7 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        const config = new Config(this.factory, this.defaultsCommand, this.mergeCommand, this.extendCommand);
+        const config = new Config(this.factory, this.commandFactory);
 
         config.dependencyTree = new ConfigDependency(config, this.dependencyTree.children);
 

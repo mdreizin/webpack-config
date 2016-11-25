@@ -9,6 +9,7 @@ import {
     ConfigLoader,
     ConfigFactory,
     ConfigOptionsResolver,
+    ConfigCommandFactory,
     environment,
     cache,
     patternCache,
@@ -16,7 +17,8 @@ import {
     pathResolver,
     loader,
     factory,
-    optionsResolver
+    optionsResolver,
+    commandFactory
 } from '../src';
 
 describe('Module', () => {
@@ -31,7 +33,8 @@ describe('Module', () => {
             [ConfigPathResolver, pathResolver],
             [ConfigLoader, loader],
             [ConfigFactory, factory],
-            [ConfigOptionsResolver, optionsResolver]
+            [ConfigOptionsResolver, optionsResolver],
+            [ConfigCommandFactory, commandFactory]
         ];
 
     proxies.forEach(proxy => {
