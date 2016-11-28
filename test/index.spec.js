@@ -10,8 +10,8 @@ import {
     ConfigFactory,
     ConfigOptionsResolver,
     ConfigCommandFactory,
-    environment,
     cache,
+    environment,
     patternCache,
     stringResolver,
     pathResolver,
@@ -22,34 +22,32 @@ import {
 } from '../src';
 
 describe('Module', () => {
-    const proxies = [
-            [ConfigProxy, Config]
-        ],
-        classes = [
-            [ConfigEnvironment, environment],
-            [ConfigCache, cache],
-            [ConfigPatternCache, patternCache],
-            [ConfigStringResolver, stringResolver],
-            [ConfigPathResolver, pathResolver],
-            [ConfigLoader, loader],
-            [ConfigFactory, factory],
-            [ConfigOptionsResolver, optionsResolver],
-            [ConfigCommandFactory, commandFactory]
-        ];
+    const proxies = new Map(),
+        classes = new Map();
 
-    proxies.forEach(proxy => {
-        it(`should export \`${proxy[1].name}\``, () => {
-            const Proxy = proxy[0];
+    proxies.set(ConfigProxy, Config);
 
-            expect(Proxy).toBeTruthy();
-            expect(new Proxy()).toEqual(jasmine.any(proxy[1]));
+    classes.set(ConfigEnvironment, environment)
+        .set(ConfigCache, cache)
+        .set(ConfigPatternCache, patternCache)
+        .set(ConfigStringResolver, stringResolver)
+        .set(ConfigPathResolver, pathResolver)
+        .set(ConfigLoader, loader)
+        .set(ConfigFactory, factory)
+        .set(ConfigOptionsResolver, optionsResolver)
+        .set(ConfigCommandFactory, commandFactory);
+
+    for (const [ProxyClass, Class] of proxies) {
+        it(`should export \`${Class.name}\``, () => {
+            expect(ProxyClass).toBeTruthy();
+            expect(new ProxyClass()).toEqual(jasmine.any(Class));
         });
-    });
+    }
 
-    classes.forEach(cls => {
-        it(`should export \`${cls[0].name}\``, () => {
-            expect(cls[0]).toBeTruthy();
-            expect(cls[1]).toEqual(jasmine.any(cls[0]));
+    for (const [Class, instance] of classes) {
+        it(`should export \`${Class.name}\``, () => {
+            expect(Class).toBeTruthy();
+            expect(instance).toEqual(jasmine.any(Class));
         });
-    });
+    }
 });
