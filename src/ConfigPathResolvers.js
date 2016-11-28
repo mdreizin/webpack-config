@@ -10,33 +10,23 @@ const MODULE_PREFIX = 'webpack-config';
 
 export default [
     /**
-     * `require('<module-name>')`
+     * @example `require('<module-name>')`
      * @param {String} value
-     * @returns {String|Error}
+     * @throws {Error}
+     * @returns {String}
      */
-    value => {
-        try {
-            return require.resolve(value);
-        } catch (err) {
-            return err;
-        }
-    },
+    value => require.resolve(value),
 
     /**
-     * `require('webpack-config-<name>')`
+     * @example `require('webpack-config-<name>')`
      * @param {String} value
-     * @returns {String|Error}
+     * @throws {Error}
+     * @returns {String}
      */
-    value => {
-        try {
-            return require.resolve(`${MODULE_PREFIX}-${value}`);
-        } catch (err) {
-            return err;
-        }
-    },
+    value => require.resolve(`${MODULE_PREFIX}-${value}`),
 
     /**
-     * `path.resolve('<file-name>')`
+     * @example `path.resolve('<file-name>')`
      * @param {String} value
      * @returns {String}
      */

@@ -1,7 +1,7 @@
 import {
-    isString,
-    isError
+    isString
 } from 'lodash';
+import ConfigStrategyList from './ConfigStrategyList';
 import DEFAULT_RESOLVERS from './ConfigPathResolvers';
 
 /**
@@ -27,7 +27,7 @@ class ConfigPathResolver {
      */
     constructor(stringResolver, pathResolvers = DEFAULT_RESOLVERS) {
         STRING_RESOLVER.set(this, stringResolver);
-        PATH_RESOLVERS.set(this, pathResolvers);
+        PATH_RESOLVERS.set(this, ConfigStrategyList.from(pathResolvers));
     }
 
     /**
@@ -40,7 +40,7 @@ class ConfigPathResolver {
 
     /**
      * @readonly
-     * @type {Function[]}
+     * @type {ConfigStrategyList}
      */
     get pathResolvers() {
         return PATH_RESOLVERS.get(this);
@@ -53,17 +53,7 @@ class ConfigPathResolver {
     resolve(value) {
         value = this.stringResolver.resolve(value);
 
-        for (const resolver of this.pathResolvers) {
-            const resolvedValue = resolver(value),
-                throwsError = isError(value) || value instanceof Error;
-
-            if (isString(resolvedValue) && !throwsError) {
-                value = resolvedValue;
-                break;
-            }
-        }
-
-        return value;
+        return this.pathResolvers.resolve(value, x => isString(x));
     }
 }
 
