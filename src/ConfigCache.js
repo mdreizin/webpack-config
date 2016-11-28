@@ -1,6 +1,8 @@
 import {
-    get
+    isUndefined,
 } from 'lodash';
+import ConfigStrategyList from './ConfigStrategyList';
+import DEFAULT_RESOLVERS from './ConfigCacheResolvers';
 
 /**
  * @private
@@ -10,15 +12,15 @@ const PERSISTENT_KEY = 'WEBPACK_CONFIG_CACHE';
 
 /**
  * @private
- * @type {String}
+ * @type {WeakMap}
  */
-const ES_MODULE_KEY = '__esModule';
+const ENVIRONMENT = new WeakMap();
 
 /**
  * @private
  * @type {WeakMap}
  */
-const ENVIRONMENT = new WeakMap();
+const VALUE_RESOLVERS = new WeakMap();
 
 /**
  * Please set `WEBPACK_CONFIG_CACHE` environment variable to `false` to make it non persistent or just use {@link ConfigCache#persistent}
@@ -29,11 +31,13 @@ class ConfigCache extends Map {
     /**
      * @constructor
      * @param {ConfigEnvironment} environment
+     * @param {Function[]} [valueResolvers]
      */
-    constructor(environment) {
+    constructor(environment, valueResolvers = DEFAULT_RESOLVERS) {
         super();
 
         ENVIRONMENT.set(this, environment);
+        VALUE_RESOLVERS.set(this, ConfigStrategyList.from(valueResolvers));
     }
 
     /**
@@ -67,6 +71,14 @@ class ConfigCache extends Map {
     }
 
     /**
+     * @readonly
+     * @type {ConfigStrategyList}
+     */
+    get valueResolvers() {
+        return VALUE_RESOLVERS.get(this);
+    }
+
+    /**
      * @override
      */
     get(key) {
@@ -86,7 +98,7 @@ class ConfigCache extends Map {
             value = require(key);
         }
 
-        return get(value, ES_MODULE_KEY, false) ? value.default : value;
+        return this.valueResolvers.resolve(value, x => !isUndefined(x));
     }
 }
 
