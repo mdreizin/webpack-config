@@ -1,4 +1,4 @@
-import ConfigBase from './Config';
+import Config from './Config';
 import ConfigCache from './ConfigCache';
 import ConfigLoader from './ConfigLoader';
 import ConfigEnvironment from './ConfigEnvironment';
@@ -21,7 +21,7 @@ const container = new ConfigContainer();
  * @class
  * @extends {Config}
  */
-const ConfigProxy = container.proxy(ConfigBase);
+const ConfigProxy = container.proxy(Config);
 
 /**
  * @module webpack-config
