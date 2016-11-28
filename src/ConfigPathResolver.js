@@ -2,7 +2,7 @@ import {
     isString,
     isError
 } from 'lodash';
-import DEFAULT_RESOLVERS from './ConfigPathDefaultResolvers';
+import DEFAULT_RESOLVERS from './ConfigPathResolvers';
 
 /**
  * @private
