@@ -4,6 +4,7 @@ import {
 } from 'lodash';
 import Config from './Config';
 import ConfigList from './ConfigList';
+import { env } from './ConfigArgv';
 
 /**
  * @private
@@ -56,7 +57,7 @@ class ConfigFactory {
         let config;
 
         if (isFunction(value)) {
-            config = value();
+            config = value(env);
         }
 
         if (Array.isArray(value)) {
