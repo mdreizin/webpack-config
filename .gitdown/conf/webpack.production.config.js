@@ -10,7 +10,6 @@ export default new Config().extend({
         return config;
     }
 }).merge({
-    filename: __filename,
     plugins: [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(true),
