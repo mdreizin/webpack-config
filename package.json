@@ -59,7 +59,7 @@
     "gh-pages": "^0.12.0",
     "gitdown": "^2.4.8",
     "jasmine": "^2.4.1",
-    "jasmine-spec-reporter": "^2.4.0",
+    "jasmine-spec-reporter": "^3.0.0",
     "jsdoc": "^3.4.0",
     "nyc": "^10.0.0",
     "semantic-release": "^6.3.2",
