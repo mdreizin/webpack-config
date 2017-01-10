@@ -49,7 +49,6 @@ class MockConfigContainer extends ConfigContainer {
             ConfigContainer
         ]));
         container.bindClass(Config, Config, Transient.with([
-            ConfigFactory,
             ConfigCommandFactory
         ]));
         container.bindClass(ConfigOptionsResolver, ConfigOptionsResolver, Transient.with([

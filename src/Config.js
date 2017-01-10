@@ -18,12 +18,6 @@ const DEPENDENCY_TREE = new WeakMap();
  * @private
  * @type {WeakMap}
  */
-const FACTORY = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
 const COMMAND_FACTORY = new WeakMap();
 
 /**
@@ -32,20 +26,10 @@ const COMMAND_FACTORY = new WeakMap();
 class Config {
     /**
      * @constructor
-     * @param {ConfigFactory} factory
      * @param {ConfigCommandFactory} commandFactory
      */
-    constructor(factory, commandFactory) {
-        FACTORY.set(this, factory);
+    constructor(commandFactory) {
         COMMAND_FACTORY.set(this, commandFactory);
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigFactory}
-     */
-    get factory() {
-        return FACTORY.get(this);
     }
 
     /**
@@ -210,7 +194,7 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        const config = new Config(this.factory, this.commandFactory);
+        const config = new Config(this.commandFactory);
 
         config.dependencyTree = new ConfigDependency(config, this.dependencyTree.children);
 
