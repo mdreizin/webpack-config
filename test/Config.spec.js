@@ -10,12 +10,6 @@ describe('Config', () => {
         config = container.resolve(Config);
     });
 
-    describe('.FILENAME', () => {
-        it('should be defined', () => {
-            expect(Config.FILENAME).toBeTruthy();
-        });
-    });
-
     describe('#defaults()', () => {
         it('should merge successfully', () => {
             const date1 = new Date(),

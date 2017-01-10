@@ -311,15 +311,6 @@ class Config {
     toJSON() {
         return this.toObject();
     }
-
-    /**
-     * Returns `webpack.config.js`
-     * @readonly
-     * @type {String}
-     */
-    static get FILENAME() {
-        return 'webpack.config.js';
-    }
 }
 
 export default Config;

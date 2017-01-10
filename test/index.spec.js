@@ -1,53 +1,50 @@
 import Config from '../src/Config';
+import ConfigEnvironment from '../src/ConfigEnvironment';
+import ConfigCache from '../src/ConfigCache';
+import ConfigPatternCache from '../src/ConfigPatternCache';
 import {
     Config as ConfigProxy,
-    ConfigEnvironment,
-    ConfigCache,
-    ConfigPatternCache,
-    ConfigStringResolver,
-    ConfigPathResolver,
-    ConfigLoader,
-    ConfigFactory,
-    ConfigOptionsResolver,
-    ConfigCommandFactory,
-    cache,
     environment,
+    cache,
     patternCache,
-    stringResolver,
-    pathResolver,
-    loader,
-    factory,
-    optionsResolver,
-    commandFactory
+    FILENAME
 } from '../src';
 
 describe('Module', () => {
-    const proxies = new Map(),
-        classes = new Map();
-
-    proxies.set(ConfigProxy, Config);
-
-    classes.set(ConfigEnvironment, environment)
-        .set(ConfigCache, cache)
-        .set(ConfigPatternCache, patternCache)
-        .set(ConfigStringResolver, stringResolver)
-        .set(ConfigPathResolver, pathResolver)
-        .set(ConfigLoader, loader)
-        .set(ConfigFactory, factory)
-        .set(ConfigOptionsResolver, optionsResolver)
-        .set(ConfigCommandFactory, commandFactory);
-
-    for (const [ProxyClass, Class] of proxies) {
-        it(`should export \`${Class.name}\``, () => {
-            expect(ProxyClass).toBeTruthy();
-            expect(new ProxyClass()).toEqual(jasmine.any(Class));
+    describe('FILENAME', () => {
+        it('should be equal to `webpack.config.js`', () => {
+            expect(FILENAME).toEqual('webpack.config.js');
         });
-    }
+    });
 
-    for (const [Class, instance] of classes) {
-        it(`should export \`${Class.name}\``, () => {
-            expect(Class).toBeTruthy();
-            expect(instance).toEqual(jasmine.any(Class));
+    describe('Config', () => {
+        it('should be defined', () => {
+            expect(ConfigProxy).toEqual(jasmine.any(Function));
         });
-    }
+    });
+
+    describe('config', () => {
+        it('should be instance of `Config`', () => {
+            expect(ConfigProxy).toBeTruthy();
+            expect(new ConfigProxy()).toEqual(jasmine.any(Config));
+        });
+    });
+
+    describe('environment', () => {
+        it('should be instance of `ConfigEnvironment`', () => {
+            expect(environment).toEqual(jasmine.any(ConfigEnvironment));
+        });
+    });
+
+    describe('cache', () => {
+        it('should be instance of `ConfigCache`', () => {
+            expect(cache).toEqual(jasmine.any(ConfigCache));
+        });
+    });
+
+    describe('patternCache', () => {
+        it('should be instance of `ConfigPatternCache`', () => {
+            expect(patternCache).toEqual(jasmine.any(ConfigPatternCache));
+        });
+    });
 });

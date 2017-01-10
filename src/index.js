@@ -1,14 +1,8 @@
 import Config from './Config';
-import ConfigCache from './ConfigCache';
-import ConfigLoader from './ConfigLoader';
 import ConfigEnvironment from './ConfigEnvironment';
+import ConfigCache from './ConfigCache';
 import ConfigPatternCache from './ConfigPatternCache';
-import ConfigStringResolver from './ConfigStringResolver';
-import ConfigPathResolver from './ConfigPathResolver';
-import ConfigFactory from './ConfigFactory';
 import ConfigContainer from './ConfigContainer';
-import ConfigOptionsResolver from './ConfigOptionsResolver';
-import ConfigCommandFactory from './ConfigCommandFactory';
 
 /**
  * @private
@@ -33,52 +27,7 @@ export {
     /**
      * @type {ConfigProxy}
      */
-    ConfigProxy as Config,
-
-    /**
-     * @type {ConfigPatternCache}
-     */
-    ConfigPatternCache,
-
-    /**
-     * @type {ConfigCache}
-     */
-    ConfigCache,
-
-    /**
-     * @type {ConfigLoader}
-     */
-    ConfigLoader,
-
-    /**
-     * @type {ConfigEnvironment}
-     */
-    ConfigEnvironment,
-
-    /**
-     * @type {ConfigStringResolver}
-     */
-    ConfigStringResolver,
-
-    /**
-     * @type {ConfigPathResolver}
-     */
-    ConfigPathResolver,
-
-    /**
-     * @type {ConfigFactory}
-     */
-    ConfigFactory,
-
-    /**
-     * @type {ConfigOptionsResolver}
-     */
-    ConfigOptionsResolver,
-
-    /**
-     * @type {ConfigCommandFactory}
-     */
-    ConfigCommandFactory
+    ConfigProxy as Config
 };
 
 /**
@@ -97,31 +46,7 @@ export const cache = container.resolve(ConfigCache);
 export const patternCache = container.resolve(ConfigPatternCache);
 
 /**
- * @type {ConfigStringResolver}
+ * Returns `webpack.config.js`
+ * @type {String}
  */
-export const stringResolver = container.resolve(ConfigStringResolver);
-
-/**
- * @type {ConfigPathResolver}
- */
-export const pathResolver = container.resolve(ConfigPathResolver);
-
-/**
- * @type {ConfigLoader}
- */
-export const loader = container.resolve(ConfigLoader);
-
-/**
- * @type {ConfigFactory}
- */
-export const factory = container.resolve(ConfigFactory);
-
-/**
- * @type {ConfigOptionsResolver}
- */
-export const optionsResolver = container.resolve(ConfigOptionsResolver);
-
-/**
- * @type {ConfigCommandFactory}
- */
-export const commandFactory = container.resolve(ConfigCommandFactory);
+export const FILENAME = 'webpack.config.js';
