@@ -97,9 +97,7 @@ class Config {
      * @returns {Config}
      */
     defaults(...values) {
-        const command = this.commandFactory.createCommand(commandNames.DEFAULTS);
-
-        return new ConfigCommandInvoker(command).invoke(this, ...values);
+        return ConfigCommandInvoker.invoke(commandNames.DEFAULTS, this, ...values);
     }
 
     /**
@@ -124,9 +122,7 @@ class Config {
      * @returns {Config}
      */
     merge(...values) {
-        const command = this.commandFactory.createCommand(commandNames.MERGE);
-
-        return new ConfigCommandInvoker(command).invoke(this, ...values);
+        return ConfigCommandInvoker.invoke(commandNames.MERGE, this, ...values);
     }
 
     /**
@@ -173,9 +169,7 @@ class Config {
      * @returns {Config}
      */
     extend(...values) {
-        const command = this.commandFactory.createCommand(commandNames.EXTEND);
-
-        return new ConfigCommandInvoker(command).invoke(this, ...values);
+        return ConfigCommandInvoker.invoke(commandNames.EXTEND, this, ...values);
     }
 
     /**

@@ -36,6 +36,18 @@ class ConfigCommandInvoker {
 
         return config;
     }
+
+    /**
+     * @param {String} name
+     * @param {Config} config
+     * @param {...*} values
+     * @return {Config}
+     */
+    static invoke(name, config, ...values) {
+        const command = config.commandFactory.createCommand(name);
+
+        return new ConfigCommandInvoker(command).invoke(config, ...values);
+    }
 }
 
 export default ConfigCommandInvoker;
