@@ -58,7 +58,7 @@
     "eslint-plugin-babel": "^4.0.0",
     "gh-pages": "^0.12.0",
     "gitdown": "^2.4.8",
-    "jasmine": "^2.4.1",
+    "jasmine": "^2.5.3",
     "jasmine-spec-reporter": "^3.1.0",
     "jsdoc": "^3.4.0",
     "nyc": "^10.0.0",
