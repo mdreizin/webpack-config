@@ -1,15 +1,30 @@
 [![NPM version](http://img.shields.io/npm/v/webpack-config.svg?style=flat-square)](https://www.npmjs.org/package/webpack-config)
-[![Travis build status](http://img.shields.io/travis/mdreizin/webpack-config/master.svg?style=flat-square)](https://travis-ci.org/mdreizin/webpack-config)
+[![Travis build status](http://img.shields.io/travis/Fitbit/webpack-config/master.svg?style=flat-square)](https://travis-ci.org/Fitbit/webpack-config)
 [![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/master.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/master)
-[![Code Climate GPA](https://img.shields.io/codeclimate/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config)
-[![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/mdreizin/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/mdreizin/webpack-config)
-[![Dependency Status](https://img.shields.io/david/mdreizin/webpack-config.svg?style=flat-square)](https://david-dm.org/mdreizin/webpack-config)
-[![Development Dependency Status](https://img.shields.io/david/dev/mdreizin/webpack-config.svg?style=flat-square)](https://david-dm.org/mdreizin/webpack-config#info=devDependencies)
+[![Code Climate GPA](https://img.shields.io/codeclimate/github/Fitbit/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/Fitbit/webpack-config)
+[![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/Fitbit/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/Fitbit/webpack-config)
+[![Dependency Status](https://img.shields.io/david/Fitbit/webpack-config.svg?style=flat-square)](https://david-dm.org/Fitbit/webpack-config)
+[![Development Dependency Status](https://img.shields.io/david/dev/Fitbit/webpack-config.svg?style=flat-square)](https://david-dm.org/Fitbit/webpack-config#info=devDependencies)
 
-<h1 id="webpack-config">webpack-config</h1>
+<a name="webpack-config"></a>
+# webpack-config
 > Helps to load, extend and merge webpack configs
 
-<h2 id="webpack-config-features">Features</h2>
+<a name="webpack-config-installation"></a>
+## Installation
+
+```bash
+npm install webpack-config --save-dev
+```
+
+or
+
+```bash
+yarn add webpack-config --dev
+```
+
+<a name="webpack-config-features"></a>
+## Features
 
 - [x] `#extend()` - Helps to extend config using local file or shareable config
 - [x] `#merge()` - Helps to merge some values into config and overrides existing ones
@@ -18,11 +33,13 @@
 - [x] Supports `process.env.*` variables in addition to `environment` ones
 - [x] Supports shareable configs via `node`-modules
 
-<h2 id="webpack-config-changelog">Changelog</h2>
+<a name="webpack-config-changelog"></a>
+## Changelog
 
-Details changes for each release are documented in the [release notes](https://github.com/mdreizin/webpack-config/releases) and also in the [wiki page](https://github.com/mdreizin/webpack-config/wiki/Changelog).
+Details changes for each release are documented in the [release notes](https://github.com/Fitbit/webpack-config/releases) and also in the [wiki page](https://github.com/Fitbit/webpack-config/wiki/Changelog).
 
-<h2 id="webpack-config-shareable-configs">Shareable Configs</h2>
+<a name="webpack-config-shareable-configs"></a>
+## Shareable Configs
 
 You can publish your configs to `npm` using `webpack-config-` prefix for package name.
 
@@ -43,7 +60,8 @@ export default new Config().extend(
 
 Also I would recommend to add `webpack` and `webpack-config` keywords so other users can easily find your module.
 
-<h2 id="webpack-config-samples">Samples</h2>
+<a name="webpack-config-usage"></a>
+## Usage
 
 `./webpack.config.js`
 

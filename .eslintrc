@@ -1,8 +1,20 @@
 {
   "extends": [
-    "mdreizin/base",
-    "mdreizin/node-es6",
-    "mdreizin/babel"
+    "eslint:recommended"
+  ],
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "plugins": [
+    "babel"
   ],
   "rules": {
     "valid-jsdoc": ["error", {

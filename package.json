@@ -16,7 +16,7 @@
     "codeclimate": "codeclimate-test-reporter < ./coverage/lcov.info",
     "gitdown": "gitdown ./.gitdown/README.md --output-file ./README.md",
     "jsdoc": "jsdoc ./src -c ./jsdoc.json",
-    "gh-pages": "gh-pages -r https://${GH_TOKEN}@github.com/mdreizin/webpack-config.git -d docs",
+    "gh-pages": "gh-pages -r https://${GH_TOKEN}@github.com/Fitbit/webpack-config.git -d docs",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "nyc": {
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mdreizin/webpack-config.git"
+    "url": "https://github.com/Fitbit/webpack-config.git"
   },
   "keywords": [
     "webpack",
@@ -40,9 +40,9 @@
   "author": "Marat Dreizin <marat.dreizin@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mdreizin/webpack-config/issues"
+    "url": "https://github.com/Fitbit/webpack-config/issues"
   },
-  "homepage": "https://github.com/mdreizin/webpack-config",
+  "homepage": "https://github.com/Fitbit/webpack-config",
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-eslint": "^7.0.0",
@@ -54,11 +54,10 @@
     "babel-register": "^6.16.3",
     "codeclimate-test-reporter": "^0.4.0",
     "eslint": "^3.12.1",
-    "eslint-config-mdreizin": "^1.1.1",
     "eslint-plugin-babel": "^4.0.0",
     "gh-pages": "^0.12.0",
     "gitdown": "^2.4.8",
-    "jasmine": "^2.4.1",
+    "jasmine": "^2.5.3",
     "jasmine-spec-reporter": "^3.1.0",
     "jsdoc": "^3.4.0",
     "nyc": "^10.0.0",

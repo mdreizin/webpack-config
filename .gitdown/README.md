@@ -1,6 +1,6 @@
 {"gitdown": "badge", "name": "npm-version"}
 {"gitdown": "badge", "name": "travis"}
-{"gitdown": "badge", "name": "appveyor"}
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/{"gitdown": "gitinfo", "name": "name"}/{"gitdown": "gitinfo", "name": "branch"}.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/{"gitdown": "gitinfo", "name": "name"}/branch/{"gitdown": "gitinfo", "name": "branch"})
 {"gitdown": "badge", "name": "codeclimate-gpa"}
 {"gitdown": "badge", "name": "codeclimate-coverage"}
 {"gitdown": "badge", "name": "david"}
@@ -8,6 +8,18 @@
 
 # {"gitdown": "gitinfo", "name": "name"}
 > Helps to load, extend and merge webpack configs
+
+## Installation
+
+```bash
+npm install {"gitdown": "gitinfo", "name": "name"} --save-dev
+```
+
+or
+
+```bash
+yarn add {"gitdown": "gitinfo", "name": "name"} --dev
+```
 
 ## Features
 
@@ -34,7 +46,7 @@ When you call `#extend()` method you may omit that prefix:
 
 Also I would recommend to add `webpack` and `webpack-config` keywords so other users can easily find your module.
 
-## Samples
+## Usage
 
 `./webpack.config.js`
 
