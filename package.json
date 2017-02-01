@@ -54,7 +54,6 @@
     "babel-register": "^6.16.3",
     "codeclimate-test-reporter": "^0.4.0",
     "eslint": "^3.12.1",
-    "eslint-config-mdreizin": "^1.1.1",
     "eslint-plugin-babel": "^4.0.0",
     "gh-pages": "^0.12.0",
     "gitdown": "^2.4.8",
