@@ -23,11 +23,9 @@ branches:
 before_install:
   - git config --global user.name "$GH_USER_NAME"
   - git config --global user.email "$GH_USER_EMAIL"
-before_script:
-  - npm prune
 script:
-  - npm run clean
-  - npm run eslint
-  - npm run cover
+  - yarn run clean
+  - yarn run eslint
+  - yarn run cover
 after_script:
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && .travis/after-all.sh || false'
