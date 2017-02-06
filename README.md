@@ -6,11 +6,9 @@
 [![Dependency Status](https://img.shields.io/david/Fitbit/webpack-config.svg?style=flat-square)](https://david-dm.org/Fitbit/webpack-config)
 [![Development Dependency Status](https://img.shields.io/david/dev/Fitbit/webpack-config.svg?style=flat-square)](https://david-dm.org/Fitbit/webpack-config#info=devDependencies)
 
-<a name="webpack-config"></a>
 # webpack-config
 > Helps to load, extend and merge webpack configs
 
-<a name="webpack-config-installation"></a>
 ## Installation
 
 ```bash
@@ -23,7 +21,6 @@ or
 yarn add webpack-config --dev
 ```
 
-<a name="webpack-config-features"></a>
 ## Features
 
 - [x] `#extend()` - Helps to extend config using local file or shareable config
@@ -33,12 +30,10 @@ yarn add webpack-config --dev
 - [x] Supports `process.env.*` variables in addition to `environment` ones
 - [x] Supports shareable configs via `node`-modules
 
-<a name="webpack-config-changelog"></a>
 ## Changelog
 
 Details changes for each release are documented in the [release notes](https://github.com/Fitbit/webpack-config/releases) and also in the [wiki page](https://github.com/Fitbit/webpack-config/wiki/Changelog).
 
-<a name="webpack-config-shareable-configs"></a>
 ## Shareable Configs
 
 You can publish your configs to `npm` using `webpack-config-` prefix for package name.
@@ -55,12 +50,10 @@ export default new Config().extend(
     'webpack-config-mdreizin/json'
     // etc
 );
-
 ```
 
 Also I would recommend to add `webpack` and `webpack-config` keywords so other users can easily find your module.
 
-<a name="webpack-config-usage"></a>
 ## Usage
 
 `./webpack.config.js`
@@ -74,7 +67,6 @@ environment.setAll({
 
 // Also you may use `'conf/webpack.[NODE_ENV].config.js'`
 export default new Config().extend('conf/webpack.[env].config.js');
-
 ```
 
 `./conf/webpack.base.config.js`
@@ -110,7 +102,6 @@ export default new Config().merge({
         }]
     }
 });
-
 ```
 
 `./conf/webpack.development.config.js`
@@ -120,7 +111,6 @@ import webpack from 'webpack';
 import Config from 'webpack-config';
 
 export default new Config().extend('conf/webpack.base.config.js').merge({
-    filename: __filename,
     debug: true,
     devtool: '#source-map',
     output: {
@@ -139,7 +129,6 @@ export default new Config().extend('conf/webpack.base.config.js').merge({
         new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
     ]
 });
-
 ```
 
 `./conf/webpack.production.config.js`
@@ -157,7 +146,6 @@ export default new Config().extend({
         return config;
     }
 }).merge({
-    filename: __filename,
     plugins: [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(true),
@@ -172,5 +160,4 @@ export default new Config().extend({
         })
     ]
 });
-
 ```

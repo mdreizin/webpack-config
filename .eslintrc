@@ -14,7 +14,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "babel"
+    "babel",
+    "markdown"
   ],
   "rules": {
     "valid-jsdoc": ["error", {
