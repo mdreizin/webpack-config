@@ -8,6 +8,8 @@
 
 <a name="webpack-config"></a>
 # webpack-config
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Fitbit/webpack-config.svg)](https://greenkeeper.io/)
 > Helps to load, extend and merge webpack configs
 
 <a name="webpack-config-installation"></a>
