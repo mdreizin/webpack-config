@@ -1,10 +1,10 @@
-[![NPM version](http://img.shields.io/npm/v/webpack-config.svg?style=flat-square)](https://www.npmjs.org/package/webpack-config)
-[![Travis build status](http://img.shields.io/travis/Fitbit/webpack-config/master.svg?style=flat-square)](https://travis-ci.org/Fitbit/webpack-config)
-[![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/master.svg?style=flat-square)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/master)
-[![Code Climate GPA](https://img.shields.io/codeclimate/github/Fitbit/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/Fitbit/webpack-config)
-[![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/Fitbit/webpack-config.svg?style=flat-square)](https://codeclimate.com/github/Fitbit/webpack-config)
-[![Dependency Status](https://img.shields.io/david/Fitbit/webpack-config.svg?style=flat-square)](https://david-dm.org/Fitbit/webpack-config)
-[![Development Dependency Status](https://img.shields.io/david/dev/Fitbit/webpack-config.svg?style=flat-square)](https://david-dm.org/Fitbit/webpack-config#info=devDependencies)
+[![NPM version](http://img.shields.io/npm/v/webpack-config.svg)](https://www.npmjs.org/package/webpack-config)
+[![Travis build status](http://img.shields.io/travis/Fitbit/webpack-config/master.svg)](https://travis-ci.org/Fitbit/webpack-config)
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/mdreizin/webpack-config/master.svg)](https://ci.appveyor.com/project/mdreizin/webpack-config/branch/master)
+[![Code Climate GPA](https://img.shields.io/codeclimate/github/Fitbit/webpack-config.svg)](https://codeclimate.com/github/Fitbit/webpack-config)
+[![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/Fitbit/webpack-config.svg)](https://codeclimate.com/github/Fitbit/webpack-config)
+[![Dependency Status](https://img.shields.io/david/Fitbit/webpack-config.svg)](https://david-dm.org/Fitbit/webpack-config)
+[![Development Dependency Status](https://img.shields.io/david/dev/Fitbit/webpack-config.svg)](https://david-dm.org/Fitbit/webpack-config#info=devDependencies)
 
 # webpack-config
 > Helps to load, extend and merge webpack configs
