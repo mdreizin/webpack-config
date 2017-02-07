@@ -6,6 +6,7 @@ import {
 } from 'lodash';
 import ConfigDependency from './ConfigDependency';
 import ConfigCommandInvoker from './ConfigCommandInvoker';
+import * as commandNames from './ConfigCommandNames';
 
 /**
  * @private
@@ -17,25 +18,7 @@ const DEPENDENCY_TREE = new WeakMap();
  * @private
  * @type {WeakMap}
  */
-const FACTORY = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const DEFAULTS_COMMAND = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const MERGE_COMMAND = new WeakMap();
-
-/**
- * @private
- * @type {WeakMap}
- */
-const EXTEND_COMMAND = new WeakMap();
+const COMMAND_FACTORY = new WeakMap();
 
 /**
  * @class
@@ -43,48 +26,18 @@ const EXTEND_COMMAND = new WeakMap();
 class Config {
     /**
      * @constructor
-     * @param {ConfigFactory} factory
-     * @param {ConfigDefaultsCommand} defaultsCommand
-     * @param {ConfigMergeCommand} mergeCommand
-     * @param {ConfigExtendCommand} extendCommand
+     * @param {ConfigCommandFactory} commandFactory
      */
-    constructor(factory, defaultsCommand, mergeCommand, extendCommand) {
-        FACTORY.set(this, factory);
-        DEFAULTS_COMMAND.set(this, defaultsCommand);
-        MERGE_COMMAND.set(this, mergeCommand);
-        EXTEND_COMMAND.set(this, extendCommand);
+    constructor(commandFactory) {
+        COMMAND_FACTORY.set(this, commandFactory);
     }
 
     /**
      * @readonly
-     * @type {ConfigFactory}
+     * @type {ConfigCommandFactory}
      */
-    get factory() {
-        return FACTORY.get(this);
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigDefaultsCommand}
-     */
-    get defaultsCommand() {
-        return DEFAULTS_COMMAND.get(this);
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigMergeCommand}
-     */
-    get mergeCommand() {
-        return MERGE_COMMAND.get(this);
-    }
-
-    /**
-     * @readonly
-     * @type {ConfigExtendCommand}
-     */
-    get extendCommand() {
-        return EXTEND_COMMAND.get(this);
+    get commandFactory() {
+        return COMMAND_FACTORY.get(this);
     }
 
     /**
@@ -144,7 +97,7 @@ class Config {
      * @returns {Config}
      */
     defaults(...values) {
-        return new ConfigCommandInvoker(this.defaultsCommand).invoke(this, ...values);
+        return ConfigCommandInvoker.invoke(commandNames.DEFAULTS, this, ...values);
     }
 
     /**
@@ -169,7 +122,7 @@ class Config {
      * @returns {Config}
      */
     merge(...values) {
-        return new ConfigCommandInvoker(this.mergeCommand).invoke(this, ...values);
+        return ConfigCommandInvoker.invoke(commandNames.MERGE, this, ...values);
     }
 
     /**
@@ -216,7 +169,7 @@ class Config {
      * @returns {Config}
      */
     extend(...values) {
-        return new ConfigCommandInvoker(this.extendCommand).invoke(this, ...values);
+        return ConfigCommandInvoker.invoke(commandNames.EXTEND, this, ...values);
     }
 
     /**
@@ -235,7 +188,7 @@ class Config {
      * @returns {Config}
      */
     clone() {
-        const config = new Config(this.factory, this.defaultsCommand, this.mergeCommand, this.extendCommand);
+        const config = new Config(this.commandFactory);
 
         config.dependencyTree = new ConfigDependency(config, this.dependencyTree.children);
 
@@ -351,15 +304,6 @@ class Config {
      */
     toJSON() {
         return this.toObject();
-    }
-
-    /**
-     * Returns `webpack.config.js`
-     * @readonly
-     * @type {String}
-     */
-    static get FILENAME() {
-        return 'webpack.config.js';
     }
 }
 

@@ -1,17 +1,13 @@
 import Config from '../src/Config';
 import ConfigDependency from '../src/ConfigDependency';
 import ConfigDependencyIterator from '../src/ConfigDependencyIterator';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigDependencyIterator', () => {
-    let container = new MockConfigContainer(),
-        dependencyTree;
+    const container = new MockConfigContainer();
 
-    /**
-     * @private
-     * @param {String} filename
-     * @returns {Config}
-     */
+    let dependencyTree;
+
     const generateConfig = filename => container.resolve(Config).merge({ filename });
 
     beforeEach(() => {

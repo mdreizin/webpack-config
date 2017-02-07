@@ -2,14 +2,12 @@ import {
     resolve
 } from 'path';
 import ConfigLoader from '../src/ConfigLoader';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigLoader', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {ConfigLoader}
-         */
-        loader;
+    const container = new MockConfigContainer();
+
+    let loader;
 
     beforeEach(() => {
         loader = container.resolve(ConfigLoader);

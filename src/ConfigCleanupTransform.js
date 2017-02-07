@@ -2,9 +2,8 @@
  * @private
  * @type {String[]}
  */
-const EXCLUDE_FIELDS = [
-    'filename',
-    'DEPENDENCY_TREE'
+const SYSTEM_FIELDS = [
+    'filename'
 ];
 
 /**
@@ -13,7 +12,7 @@ const EXCLUDE_FIELDS = [
  * @returns {Config}
  */
 export default config => {
-    EXCLUDE_FIELDS.forEach(function(name) {
+    SYSTEM_FIELDS.forEach(function(name) {
         delete config[name];
     });
 

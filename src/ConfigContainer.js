@@ -9,13 +9,12 @@ import ConfigPatternCache from './ConfigPatternCache';
 import ConfigStringResolver from './ConfigStringResolver';
 import ConfigPathResolver from './ConfigPathResolver';
 import ConfigLoader from './ConfigLoader';
-import ConfigFinder from './ConfigFinder';
 import ConfigFactory from './ConfigFactory';
-import ConfigBuilder from './ConfigBuilder';
 import ConfigOptionsResolver from './ConfigOptionsResolver';
 import ConfigDefaultsCommand from './ConfigDefaultsCommand';
 import ConfigMergeCommand from './ConfigMergeCommand';
 import ConfigExtendCommand from './ConfigExtendCommand';
+import ConfigCommandFactory from './ConfigCommandFactory';
 
 /**
  * @private
@@ -69,20 +68,11 @@ class ConfigContainer {
             ConfigCache,
             ConfigFactory
         ]);
-        container.bindClass(ConfigFinder, ConfigFinder, [
-            ConfigPathResolver
-        ]);
         container.bindClass(ConfigFactory, ConfigFactory, [
             ConfigContainer
         ]);
         container.bindClass(Config, Config, Transient.with([
-            ConfigFactory,
-            ConfigDefaultsCommand,
-            ConfigMergeCommand,
-            ConfigExtendCommand
-        ]));
-        container.bindClass(ConfigBuilder, ConfigBuilder, Transient.with([
-            ConfigFactory
+            ConfigCommandFactory
         ]));
         container.bindClass(ConfigOptionsResolver, ConfigOptionsResolver, [
             ConfigStringResolver
@@ -93,11 +83,14 @@ class ConfigContainer {
         container.bindClass(ConfigMergeCommand, ConfigMergeCommand, [
             ConfigOptionsResolver
         ]);
-        container.bindClass(ConfigExtendCommand, ConfigExtendCommand, Transient.with([
+        container.bindClass(ConfigExtendCommand, ConfigExtendCommand, [
             ConfigOptionsResolver,
             ConfigLoader,
             ConfigFactory
-        ]));
+        ]);
+        container.bindClass(ConfigCommandFactory, ConfigCommandFactory, [
+            ConfigContainer
+        ]);
     }
 
     /**

@@ -18,8 +18,9 @@
     "add-module-exports",
     "transform-runtime"
   ],
-  "ignore": [
-    "node_modules/",
-    "**/wallaby/wallaby/**"
+  "only": [
+    "src/",
+    "test/",
+    "jasmine.js"
   ]
 }

@@ -1,12 +1,10 @@
 import ConfigEnvironment from '../src/ConfigEnvironment';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigEnvironment', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {ConfigEnvironment}
-         */
-        environment;
+    const container = new MockConfigContainer();
+
+    let environment;
 
     beforeEach(() => {
         environment = container.resolve(ConfigEnvironment);

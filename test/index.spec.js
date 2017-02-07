@@ -1,58 +1,50 @@
 import Config from '../src/Config';
-import ConfigBuilder from '../src/ConfigBuilder';
+import ConfigEnvironment from '../src/ConfigEnvironment';
+import ConfigCache from '../src/ConfigCache';
+import ConfigPatternCache from '../src/ConfigPatternCache';
 import {
     Config as ConfigProxy,
-    ConfigEnvironment,
-    ConfigCache,
-    ConfigPatternCache,
-    ConfigStringResolver,
-    ConfigPathResolver,
-    ConfigLoader,
-    ConfigFinder,
-    ConfigFactory,
-    ConfigBuilder as ConfigBuilderProxy,
-    ConfigOptionsResolver,
     environment,
     cache,
     patternCache,
-    stringResolver,
-    pathResolver,
-    loader,
-    finder,
-    factory,
-    optionsResolver
+    FILENAME
 } from '../src';
 
 describe('Module', () => {
-    const proxies = [
-            [ConfigProxy, Config],
-            [ConfigBuilderProxy, ConfigBuilder]
-        ],
-        classes = [
-            [ConfigEnvironment, environment],
-            [ConfigCache, cache],
-            [ConfigPatternCache, patternCache],
-            [ConfigStringResolver, stringResolver],
-            [ConfigPathResolver, pathResolver],
-            [ConfigLoader, loader],
-            [ConfigFinder, finder],
-            [ConfigFactory, factory],
-            [ConfigOptionsResolver, optionsResolver]
-        ];
-
-    proxies.forEach(proxy => {
-        it(`should export \`${proxy[1].name}\``, () => {
-            const Proxy = proxy[0];
-
-            expect(Proxy).toBeTruthy();
-            expect(new Proxy()).toEqual(jasmine.any(proxy[1]));
+    describe('FILENAME', () => {
+        it('should be equal to `webpack.config.js`', () => {
+            expect(FILENAME).toEqual('webpack.config.js');
         });
     });
 
-    classes.forEach(cls => {
-        it(`should export \`${cls[0].name}\``, () => {
-            expect(cls[0]).toBeTruthy();
-            expect(cls[1]).toEqual(jasmine.any(cls[0]));
+    describe('Config', () => {
+        it('should be defined', () => {
+            expect(ConfigProxy).toEqual(jasmine.any(Function));
+        });
+    });
+
+    describe('config', () => {
+        it('should be instance of `Config`', () => {
+            expect(ConfigProxy).toBeTruthy();
+            expect(new ConfigProxy()).toEqual(jasmine.any(Config));
+        });
+    });
+
+    describe('environment', () => {
+        it('should be instance of `ConfigEnvironment`', () => {
+            expect(environment).toEqual(jasmine.any(ConfigEnvironment));
+        });
+    });
+
+    describe('cache', () => {
+        it('should be instance of `ConfigCache`', () => {
+            expect(cache).toEqual(jasmine.any(ConfigCache));
+        });
+    });
+
+    describe('patternCache', () => {
+        it('should be instance of `ConfigPatternCache`', () => {
+            expect(patternCache).toEqual(jasmine.any(ConfigPatternCache));
         });
     });
 });

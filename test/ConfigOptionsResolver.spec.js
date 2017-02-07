@@ -1,16 +1,11 @@
 import Config from '../src/Config';
 import ConfigOptionsResolver from '../src/ConfigOptionsResolver';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigOptionsResolver', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {Config}
-         */
-        config,
-        /**
-         * @type {ConfigOptionsResolver}
-         */
+    const container = new MockConfigContainer();
+
+    let config,
         optionsResolver,
         environment;
 

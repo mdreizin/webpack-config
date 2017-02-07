@@ -1,12 +1,10 @@
 import ConfigStringResolver from '../src/ConfigStringResolver';
-import MockConfigContainer from './helpers/MockConfigContainer';
+import MockConfigContainer from './MockConfigContainer';
 
 describe('ConfigStringResolver', () => {
-    let container = new MockConfigContainer(),
-        /**
-         * @type {ConfigStringResolver}
-         */
-        stringResolver,
+    const container = new MockConfigContainer();
+
+    let stringResolver,
         environment;
 
     beforeEach(() => {
