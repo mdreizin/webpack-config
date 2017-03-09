@@ -1,5 +1,9 @@
-import yargs from 'yargs';
+import argvParser from 'yargs-parser';
 
-export default yargs.options({
-    env: {}
-}).argv;
+/**
+ * @private
+ * @type {Object}
+ */
+const argv = argvParser(process.argv.slice(2));
+
+export default argv;
