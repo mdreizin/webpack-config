@@ -59,6 +59,38 @@ describe('Config', () => {
                 bar: ['bar1', 'bar2']
             });
         });
+
+        it('should preserve arrays of objects in loader queries', () => {
+            config.merge({
+                module: {
+                    loaders: [{
+                        test: 'foo',
+                        loader: 'bar?' + JSON.stringify({
+                            foo: [
+                                { x: 1 },
+                                { y: 2 },
+                                { z: 3 }
+                            ]
+                        })
+                    }]
+                }
+            });
+
+            expect(config.toObject()).toEqual({
+                module: {
+                    loaders: [{
+                        test: 'foo',
+                        loader: 'bar?' + JSON.stringify({
+                            foo: [
+                                { x: 1 },
+                                { y: 2 },
+                                { z: 3 }
+                            ]
+                        })
+                    }]
+                }
+            });
+        });
     });
 
     describe('#extend()', () => {
