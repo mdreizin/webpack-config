@@ -59,7 +59,7 @@
     "jasmine": "^2.5.3",
     "jasmine-spec-reporter": "^3.2.0",
     "jsdoc": "^3.4.3",
-    "nyc": "^10.1.2",
+    "nyc": "^11.0.1",
     "semantic-release": "^6.3.2",
     "travis-after-all": "^1.4.4"
   },
