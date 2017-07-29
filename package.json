@@ -60,8 +60,7 @@
     "jasmine-spec-reporter": "^4.1.1",
     "jsdoc": "^3.5.3",
     "nyc": "^11.0.3",
-    "semantic-release": "^6.3.6",
-    "travis-after-all": "^1.4.5"
+    "semantic-release": "^6.3.6"
   },
   "dependencies": {
     "babel-runtime": "^6.25.0",

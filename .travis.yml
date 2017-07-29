@@ -18,7 +18,7 @@ notifications:
 branches:
   only:
     - master
-    - /^greenkeeper.*$/
+    - /^greenkeeper/.*$/
   except:
     - gh-pages
 before_install:
@@ -28,5 +28,18 @@ script:
   - yarn run clean
   - yarn run eslint
   - yarn run cover
-after_script:
-  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && .travis/after-all.sh || false'
+  - yarn run build
+jobs:
+  include:
+    - stage: Release
+      node_js: 8
+      deploy:
+        provider: script
+        script:
+          - yarn run build
+          - yarn run codeclimate
+          - yarn run semantic-release
+          - yarn run jsdoc
+          - yarn run gh-pages
+        on:
+          branch: master
