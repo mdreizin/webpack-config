@@ -5,8 +5,10 @@
 [![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/github/Fitbit/webpack-config.svg)](https://codeclimate.com/github/Fitbit/webpack-config)
 [![Dependency Status](https://img.shields.io/david/Fitbit/webpack-config.svg)](https://david-dm.org/Fitbit/webpack-config)
 [![Development Dependency Status](https://img.shields.io/david/dev/Fitbit/webpack-config.svg)](https://david-dm.org/Fitbit/webpack-config#info=devDependencies)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Fitbit/webpack-config.svg)](https://greenkeeper.io/)
 
 # webpack-config
+
 > Helps to load, extend and merge webpack configs
 
 ## Installation
