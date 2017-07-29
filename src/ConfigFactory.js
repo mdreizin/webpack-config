@@ -57,7 +57,7 @@ class ConfigFactory {
         let config;
 
         if (isFunction(value)) {
-            config = value(env);
+            value = value(env);
         }
 
         if (Array.isArray(value)) {
