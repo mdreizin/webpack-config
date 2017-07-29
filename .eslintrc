@@ -6,12 +6,9 @@
     "node": true,
     "es6": true
   },
-  "parser": "babel-eslint",
-  "ecmaFeatures": {
-    "modules": true
-  },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "parser": "babel-eslint"
   },
   "plugins": [
     "babel",
