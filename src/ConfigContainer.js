@@ -103,10 +103,14 @@ class ConfigContainer {
 
     /**
      * @param {*} T
-     * @returns {Function}
+     * @returns {Proxy<T>}
      */
     proxy(T) {
-        return () => this.resolve(T);
+        return new Proxy(function() {}, {
+            construct: () => {
+                return this.resolve(T);
+            }
+        });
     }
 }
 
