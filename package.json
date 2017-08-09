@@ -66,5 +66,8 @@
     "lodash": "^4.17.4",
     "recursive-iterator": "^2.0.3",
     "yargs-parser": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }
