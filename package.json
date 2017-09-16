@@ -60,7 +60,7 @@
     "jasmine-spec-reporter": "^4.1.1",
     "jsdoc": "^3.5.3",
     "nyc": "^11.0.3",
-    "semantic-release": "^7.0.1",
+    "semantic-release": "^8.0.0",
     "semantic-release-conventional-commits": "^1.1.0"
   },
   "dependencies": {
