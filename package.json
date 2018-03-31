@@ -54,7 +54,7 @@
     "babel-register": "^6.24.1",
     "codeclimate-test-reporter": "^0.5.0",
     "eslint": "^4.3.0",
-    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-babel": "^5.0.0",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "jasmine": "^2.7.0",
     "jasmine-spec-reporter": "^4.1.1",
