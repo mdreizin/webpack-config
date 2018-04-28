@@ -2,28 +2,21 @@
   "name": "webpack-config",
   "description": "Helps to load, extend and merge webpack configs",
   "main": "dist/index.js",
-  "files": [
-    "dist/",
-    "src/"
-  ],
+  "files": ["dist/", "src/"],
   "scripts": {
     "clean": "rm -rf dist coverage docs",
-    "eslint": "eslint --ext js,md ./ --cache",
+    "lint": "eslint --ext js,md ./ --cache",
     "build": "babel src --out-dir dist --source-maps",
     "test": "babel-node jasmine.js",
-    "cover": "NODE_ENV=test nyc --reporter=lcov jasmine JASMINE_CONFIG_PATH=jasmine.json",
+    "cover":
+      "NODE_ENV=test nyc --reporter=lcov jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "postcover": "nyc report",
     "codeclimate": "codeclimate-test-reporter < ./coverage/lcov.info",
-    "jsdoc": "jsdoc ./src -c ./jsdoc.json",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "jsdoc": "jsdoc ./src -c ./jsdoc.json"
   },
   "nyc": {
-    "include": [
-      "src/*.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
+    "include": ["src/*.js"],
+    "require": ["babel-register"],
     "sourceMap": false,
     "instrument": false
   },
@@ -34,10 +27,7 @@
     "type": "git",
     "url": "https://github.com/Fitbit/webpack-config.git"
   },
-  "keywords": [
-    "webpack",
-    "webpack-config"
-  ],
+  "keywords": ["webpack", "webpack-config"],
   "author": "Marat Dreizin <marat.dreizin@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
@@ -45,23 +35,22 @@
   },
   "homepage": "https://github.com/Fitbit/webpack-config",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^8.0.0",
-    "babel-plugin-istanbul": "^4.1.4",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-builtin-extend": "^1.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.24.1",
-    "codeclimate-test-reporter": "^0.5.0",
-    "eslint": "^4.3.0",
-    "eslint-plugin-babel": "^4.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
+    "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
-    "jasmine": "^2.7.0",
+    "jasmine": "^3.1.0",
     "jasmine-spec-reporter": "^4.1.1",
     "jsdoc": "^3.5.3",
-    "nyc": "^11.0.3",
-    "semantic-release": "^8.0.0",
-    "semantic-release-conventional-commits": "^1.1.0"
+    "nyc": "^11.7.1",
+    "semantic-release": "^15.1.7",
+    "travis-deploy-once": "^4.4.1"
   },
   "dependencies": {
     "babel-runtime": "^6.25.0",
