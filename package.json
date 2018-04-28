@@ -46,18 +46,18 @@
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "jasmine": "^3.1.0",
-    "jasmine-spec-reporter": "^4.1.1",
-    "jsdoc": "^3.5.3",
+    "jasmine-spec-reporter": "^4.2.1",
+    "jsdoc": "^3.5.5",
     "nyc": "^11.7.1",
     "semantic-release": "^15.1.7",
     "travis-deploy-once": "^4.4.1"
   },
   "dependencies": {
-    "babel-runtime": "^6.25.0",
+    "babel-runtime": "^6.26.0",
     "constitute": "^1.6.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "recursive-iterator": "^3.3.0",
-    "yargs-parser": "^8.0.0"
+    "yargs-parser": "^10.0.0"
   },
   "engines": {
     "node": ">=6.0.0"
