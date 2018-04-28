@@ -1,5 +1,4 @@
 import Config from '../src/Config';
-import ConfigList from '../src/ConfigList';
 import ConfigFactory from '../src/ConfigFactory';
 import MockConfigContainer from './MockConfigContainer';
 
@@ -42,7 +41,7 @@ describe('ConfigFactory', () => {
                 foo: 'foo1'
             }]);
 
-            expect(configs).toEqual(jasmine.any(ConfigList));
+            expect(configs).toEqual(jasmine.any(Array));
             expect(configs.length).toEqual(1);
             expect(configs[0]).toEqual(jasmine.any(Config));
             expect(configs[0].toObject()).toEqual({

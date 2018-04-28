@@ -6,6 +6,12 @@ import DEFAULT_RESOLVERS from './ConfigCacheResolvers';
 
 /**
  * @private
+ * @type {WeakMap}
+ */
+const CACHE = new WeakMap();
+
+/**
+ * @private
  * @type {String}
  */
 const PERSISTENT_KEY = 'WEBPACK_CONFIG_CACHE';
@@ -25,19 +31,17 @@ const VALUE_RESOLVERS = new WeakMap();
 /**
  * Please set `WEBPACK_CONFIG_CACHE` environment variable to `false` to make it non persistent or just use {@link ConfigCache#persistent}
  * @class
- * @extends {Map}
  */
-class ConfigCache extends Map {
+class ConfigCache {
     /**
      * @constructor
      * @param {ConfigEnvironment} environment
      * @param {Function[]} [valueResolvers]
      */
     constructor(environment, valueResolvers = DEFAULT_RESOLVERS) {
-        super();
-
+        CACHE.set(this, new Map());
         ENVIRONMENT.set(this, environment);
-        VALUE_RESOLVERS.set(this, ConfigStrategyList.from(valueResolvers));
+        VALUE_RESOLVERS.set(this, new ConfigStrategyList(valueResolvers));
     }
 
     /**
@@ -53,6 +57,15 @@ class ConfigCache extends Map {
      */
     get persistent() {
         return this.environment.getOrDefault(PERSISTENT_KEY, true) === true;
+    }
+
+    /**
+     * @private
+     * @readonly
+     * @type {Map}
+     */
+    get cache() {
+        return CACHE.get(this);
     }
 
     /**
@@ -79,18 +92,19 @@ class ConfigCache extends Map {
     }
 
     /**
-     * @override
+     * @param {String} key
+     * @returns {*}
      */
     get(key) {
         let value;
 
         if (this.persistent) {
-            if (!this.has(key)) {
+            if (!this.cache.has(key)) {
                 value = require(key);
 
-                this.set(key, value);
+                this.cache.set(key, value);
             } else {
-                value = super.get(key);
+                value = this.cache.get(key);
             }
         } else {
             delete require.cache[key];
@@ -99,6 +113,14 @@ class ConfigCache extends Map {
         }
 
         return this.valueResolvers.resolve(value, x => !isUndefined(x));
+    }
+    /**
+     * @param {String} key
+     * @param {*} value
+     * @returns {void}
+     */
+    set(key, value) {
+        return this.cache.set(key, value);
     }
 }
 

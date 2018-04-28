@@ -3,17 +3,38 @@ import {
 } from 'lodash';
 
 /**
- * @class
- * @extends {Array}
+ * @private
+ * @type {WeakMap}
  */
-class ConfigStrategyList extends Array {
+const RESOLVERS = new WeakMap();
+
+/**
+ * @class
+ */
+class ConfigStrategyList {
+    /**
+     * @constructor
+     * @param {Function[]} resolvers
+     */
+    constructor(resolvers) {
+        RESOLVERS.set(this, resolvers);
+    }
+
+    /**
+     * @readonly
+     * @type {Function[]}
+     */
+    get resolvers() {
+        return RESOLVERS.get(this);
+    }
+
     /**
      * @param {*} value
      * @param {Function} predicate
      * @returns {*}
      */
     resolve(value, predicate) {
-        for (const resolver of this) {
+        for (const resolver of this.resolvers) {
             try {
                 const resolvedValue = resolver(value),
                     throwsError = isError(resolvedValue) || resolvedValue instanceof Error;

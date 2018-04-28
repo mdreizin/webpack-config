@@ -27,7 +27,7 @@ class ConfigPathResolver {
      */
     constructor(stringResolver, pathResolvers = DEFAULT_RESOLVERS) {
         STRING_RESOLVER.set(this, stringResolver);
-        PATH_RESOLVERS.set(this, ConfigStrategyList.from(pathResolvers));
+        PATH_RESOLVERS.set(this, new ConfigStrategyList(pathResolvers));
     }
 
     /**

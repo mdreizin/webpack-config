@@ -62,7 +62,7 @@ class ConfigLoader {
 
     /**
      * @param {String} filename
-     * @returns {Config|ConfigList}
+     * @returns {Config|Config[]}
      */
     loadConfig(filename) {
         filename = this.pathResolver.resolve(filename);

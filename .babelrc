@@ -9,16 +9,11 @@
   "presets": [
     ["env", {
       "targets": {
-        "node": 6
+        "node": true
       }
     }]
   ],
   "plugins": [
-    ["babel-plugin-transform-builtin-extend", {
-      "globals": [
-        "Array"
-      ]
-    }],
     "transform-runtime"
   ],
   "only": [

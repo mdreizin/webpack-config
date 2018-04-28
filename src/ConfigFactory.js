@@ -3,7 +3,6 @@ import {
     isObject
 } from 'lodash';
 import Config from './Config';
-import ConfigList from './ConfigList';
 import { env } from './ConfigArgv';
 
 /**
@@ -51,7 +50,7 @@ class ConfigFactory {
 
     /**
      * @param {Function|Object|Object[]} value
-     * @returns {Config|ConfigList}
+     * @returns {Config|Config[]}
      */
     createConfig(value) {
         let config;
@@ -61,7 +60,7 @@ class ConfigFactory {
         }
 
         if (Array.isArray(value)) {
-            config = ConfigList.from(value, x => this.initWith(x));
+            config = Array.from(value, x => this.initWith(x));
         } else if (isObject(value)) {
             config = this.initWith(value);
         }
