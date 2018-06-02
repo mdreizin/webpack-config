@@ -53,7 +53,7 @@
     "jasmine": "^3.1.0",
     "jasmine-spec-reporter": "^4.2.1",
     "jsdoc": "^3.5.5",
-    "nyc": "^11.7.1",
+    "nyc": "^12.0.1",
     "semantic-release": "^15.1.7",
     "travis-deploy-once": "^4.4.1"
   },
