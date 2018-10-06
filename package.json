@@ -62,7 +62,7 @@
     "constitute": "^1.6.2",
     "lodash": "^4.17.10",
     "recursive-iterator": "^3.3.0",
-    "yargs-parser": "^10.0.0"
+    "yargs-parser": "^11.0.0"
   },
   "engines": {
     "node": ">=8.0.0"
